@@ -1,49 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.collections.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<Pane prefHeight="358.0" prefWidth="535.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.testfx.HelloController">
+<Pane prefHeight="358.0" prefWidth="535.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.testfx.Controller">
     <children>
 
         <ScrollPane fx:id="scrollPaneWithListOfSongs" hbarPolicy="NEVER" layoutX="1.0" layoutY="-2.0" prefHeight="360.0" prefWidth="203.0" vbarPolicy="ALWAYS" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml">
             <content>
-                <VBox fx:id="songContainer" spacing="5">
+                <VBox fx:id="songContainer" spacing="0">
                         <!-- додаємо в коді-->
                 </VBox>
             </content>
         </ScrollPane>
 
-      <ScrollPane fx:id="scrollPaneWithTextOfSong" hbarPolicy="NEVER" layoutX="205.0" layoutY="98.0" prefHeight="258.0" prefWidth="329.0">
+      <ScrollPane fx:id="scrollPaneWithTextOfSong" hbarPolicy="NEVER" layoutX="203.0" layoutY="73.0" prefHeight="283.0" prefWidth="331.0">
          <content>
-            <TextFlow fx:id="lyricsTextArea" maxWidth="330.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="366.0" prefWidth="312.0" style="-fx-border-width: 2;">
+            <TextFlow fx:id="lyricsTextArea" maxWidth="330.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="262.0" prefWidth="322.0" style="-fx-border-width: 2;">
                <padding>
-                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                  <Insets bottom="15.0" left="30.0" right="15.0" top="15.0" />
                </padding>
             </TextFlow>
          </content>
       </ScrollPane>
 
-        <Button layoutX="211.0" layoutY="6.0" onAction="#searchText" prefHeight="25.0" prefWidth="39.0" text="🔍" />
-        <TextField fx:id="searchField" layoutX="440.0" layoutY="5.0" onAction="#searchText" prefHeight="25.0" prefWidth="84.0" />
+        <Pane fx:id="searchPane" layoutX="204.0" prefHeight="73.0" prefWidth="329.0">
+          <ComboBox fx:id="searchTypeComboBox" layoutX="78.0" layoutY="7.0" prefHeight="25.0" prefWidth="84.0" />
+            <TextField fx:id="coupletNumberTextField" layoutX="247.0" layoutY="7.0" prefHeight="25.0" prefWidth="28.0" visible="false" />
+            <Text fx:id="resultLabel" layoutX="7.0" layoutY="55.0" wrappingWidth="309.9999862611294" />
 
-        <ChoiceBox fx:id="searchTypeChoiceBox" layoutX="261.0" layoutY="5.0" prefHeight="25.0" prefWidth="121.0">
-            <items>
-                <FXCollections fx:factory="observableArrayList">
-                    <String fx:value="Пошук у файлі" />
-                    <String fx:value="Пошук у куплеті" />
-                </FXCollections>
-            </items>
-        </ChoiceBox>
+            <Button fx:id="searchButton" layoutX="278.0" layoutY="7.0" onAction="#searchTextClick" prefHeight="16.0" prefWidth="39.0" text="🔍" />
+            <TextField fx:id="searchField" layoutX="172.0" layoutY="7.0" prefHeight="25.0" prefWidth="70.0" />
+        </Pane>
+         <Line endX="230.0" layoutX="305.0" layoutY="73.0" startX="-100.0" />
 
-        <TextField fx:id="coupletNumberTextField" layoutX="392.0" layoutY="5.0" prefHeight="25.0" prefWidth="39.0" visible="false" />
-        <Text fx:id="resultLabel" layoutX="211.0" layoutY="51.0" wrappingWidth="250.00000151991844" />
+      <Pane fx:id="otherFuncPane" layoutX="204.0" layoutY="-100.0" prefHeight="73.0" prefWidth="329.0">
 
-        <Button layoutX="211.0" layoutY="59.0" mnemonicParsing="false" onAction="#lastRowsClick" prefHeight="25.0" prefWidth="84.0" text="Ост. рядки" />
+          <Button fx:id="shuffleButton" layoutX="75.0" layoutY="7.0" mnemonicParsing="false" onAction="#shuffleClick" prefHeight="25.0" prefWidth="54.0" text="Шафл" />
+          <Button fx:id="sortWordsButton" layoutX="218.0" layoutY="8.0" mnemonicParsing="false" onAction="#sortWordsClick" text="Сорт." />
+          <Button fx:id="lastRowsButton" layoutX="134.0" layoutY="7.0" mnemonicParsing="false" onAction="#lastRowsClick" prefHeight="25.0" prefWidth="77.0" text="Ост. рядки" />
+         <Button fx:id="changeRowButton" layoutX="6.0" layoutY="39.0" mnemonicParsing="false" onAction="#changeRowButtonOnClick" text="Зам. ряд." />
+         <TextField fx:id="numberOfCouplet" layoutX="80.0" layoutY="40.0" prefHeight="25.0" prefWidth="28.0" visible="false" />
+         <TextField fx:id="numberOfRow" layoutX="111.0" layoutY="40.0" prefHeight="25.0" prefWidth="28.0" visible="false" />
+         <TextField fx:id="newRow" layoutX="144.0" layoutY="40.0" prefHeight="25.0" prefWidth="121.0" visible="false" />
+         <Button fx:id="changeRowOKButton" layoutX="271.0" layoutY="40.0" mnemonicParsing="false" onAction="#changeRowButtonOKOnClick" prefHeight="25.0" prefWidth="54.0" text="OK" visible="false" />
+         <Button fx:id="sonetButton" layoutX="270.0" layoutY="9.0" mnemonicParsing="false" onAction="#isSonet" text="Сонет?" />
+         <Text fx:id="resultLabel2" layoutX="98.0" layoutY="56.0" visible="false" wrappingWidth="226.0" />
+      </Pane>
+         <Button fx:id="leftArrowButton" disable="true" layoutX="209.0" layoutY="7.0" mnemonicParsing="false" onAction="#leftArrowOnClick" prefHeight="25.0" prefWidth="28.0" text="⮜" />
+         <Button fx:id="rightArrowButton" layoutX="244.0" layoutY="7.0" mnemonicParsing="false" onAction="#rightArrowOnClick" prefHeight="25.0" prefWidth="28.0" text="⮞" />
 
     </children>
 

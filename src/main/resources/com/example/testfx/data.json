@@ -1,0 +1,215 @@
+[
+  {
+    "authorName": "Alice Johnson",
+    "songName": "Summer Love",
+    "couplets": [
+      {
+        "id": 1,
+        "s": "I met you on a sunny day\nUnder the sky so blue\nOur love blossomed in every way\nAnd I knew it was true"
+      },
+      {
+        "id": 2,
+        "s": "We danced under the moonlight\nWith stars as our guide\nYou held me so tight\nIn your arms, I wanted to hide"
+      },
+      {
+        "id": 3,
+        "s": "The waves whispered secrets of the sea\nAs we walked along the shore\nHand in hand, just you and me\nForever, I'll ask for nothing more"
+      }
+    ]
+  },
+  {
+    "authorName": "David Brown",
+    "songName": "Dreams of Tomorrow",
+    "couplets": [
+      {
+        "id": 1,
+        "s": "In my dreams, I fly so high\nAbove the clouds, up in the sky\nWith you, there's no need to cry\nIn this world, I'll never say goodbye"
+      },
+      {
+        "id": 2,
+        "s": "Walking hand in hand through the rain\nOur love, a never-ending chain\nThrough joy and sorrow, we remain\nIn our hearts, the eternal flame"
+      },
+      {
+        "id": 3,
+        "s": "Going hand in hand through the sun\nOur love, a never-ending road\nUnder the stars, we make our way\nIn the night, we find our escape\nIn your love, I long to stay\nIn your arms, there's no need to reshape"
+      }
+    ]
+  },
+  {
+    "authorName": "Emily White",
+    "songName": "City Lights",
+    "couplets": [
+      {
+        "id": 1,
+        "s": "The city lights are shining bright\nAs we stroll through the night\nWith you, everything feels so right\nIn your arms, I found my light"
+      },
+      {
+        "id": 2,
+        "s": "In this urban jungle, we explore\nEvery moment, I want to savor and store\nWith you, life is never a bore\nIn your love, I always want more"
+      },
+      {
+        "id": 3,
+        "s": "Beneath the neon sky so grand\nWe'll walk the streets, hand in hand\nIn your smile, I'll forever stand\nWith you, life is simply grand"
+      }
+    ]
+  },
+  {
+    "authorName": "John Smith",
+    "songName": "Memories of Spring",
+    "couplets": [
+      {
+        "id": 1,
+        "s": "In the meadow, flowers bloom\nUnderneath the bright full moon\nIn your smile, there's no gloom\nTogether, we'll dance and swoon"
+      },
+      {
+        "id": 2,
+        "s": "Hand in hand, we'll chase the breeze\nThrough the forest, under the trees\nIn your love, I find my ease\nForever, I want you to please"
+      },
+      {
+        "id": 3,
+        "s": "As the seasons change and we grow old\nOur memories, like precious gold\nIn your heart, I've found my hold\nWith you, I'll never be cold"
+      }
+    ]
+  },
+  {
+    "authorName": "Olivia Green",
+    "songName": "Under the Stars",
+    "couplets": [
+      {
+        "id": 1,
+        "s": "Beneath the velvet sky so clear\nWith you, I have nothing to fear\nIn your arms, I hold dear\nOur love, forever sincere"
+      },
+      {
+        "id": 2,
+        "s": "In the quiet of the night\nWe find our own delight\nWith you, everything's right\nIn your love, my heart takes flight"
+      }
+    ]
+  },
+  {
+    "authorName": "Michael Anderson",
+    "songName": "Golden Memories",
+    "couplets": [
+      {
+        "id": 1,
+        "s": "In the album of my mind\nGolden memories I find\nWith you, happiness intertwined\nIn your love, my heart's entwined"
+      },
+      {
+        "id": 2,
+        "s": "Through the years, we've grown\nIn your love, I've known\nA life that's truly shown\nWith you, my heart's been sown"
+      },
+      {
+        "id": 3,
+        "s": "In the warmth of your embrace\nI've found my special place\nWith you, there's no need to chase\nOur love, an eternal embrace"
+      }
+    ]
+  },
+  {
+    "authorName": "Sophia Davis",
+    "songName": "Whispers of the Heart",
+    "couplets": [
+      {
+        "id": 1,
+        "s": "In the silence of the night\nOur hearts take their flight\nIn your love, everything's right\nWith you, my dreams are bright"
+      },
+      {
+        "id": 2,
+        "s": "In the whispers of the heart\nOur love's a work of art\nWith you, I never want to depart\nIn your embrace, I'll never be apart"
+      },
+      {
+        "id": 3,
+        "s": "With every beat, our love does grow\nIn your eyes, our future does show\nIn your love, I find my glow\nWith you, my heart's in tow"
+      }
+    ]
+  },
+  {
+    "authorName": "William Turner",
+    "songName": "Sunset Serenade",
+    "couplets": [
+      {
+        "id": 1,
+        "s": "As the sun sets in the west\nIn your love, I'm truly blessed\nWith you, I've passed the test\nIn your arms, I'm at my best"
+      },
+      {
+        "id": 2,
+        "s": "In the colors of the evening sky\nWith you, I'll reach so high\nIn your love, I'll never say goodbye\nWith you, forever I'll comply"
+      }
+    ]
+  },
+  {
+    "authorName": "Ethan Moore",
+    "songName": "Ocean's Embrace",
+    "couplets": [
+      {
+        "id": 1,
+        "s": "In the ocean's gentle tide\nWith you, I want to ride\nIn your love, I'll never hide\nWith you, I'm on this endless glide"
+      },
+      {
+        "id": 2,
+        "s": "As the waves crash on the shore\nWith you, I want nothing more\nIn your love, I'll always soar\nWith you, life's an endless explore"
+      }
+    ]
+  },
+  {
+    "authorName": "Sophia Anderson",
+    "songName": "Moonlit Serenade",
+    "couplets": [
+      {
+        "id": 1,
+        "s": "Beneath the moon's gentle glow\nWe dance where the wildflowers grow\nIn your arms, I want to go\nOur love, like a river, will always flow"
+      },
+      {
+        "id": 2,
+        "s": "Whispers of the night in your ear\nOur love, like music, you'll hear\nWith you, I have nothing to fear\nIn your embrace, I hold you dear"
+      },
+      {
+        "id": 3,
+        "s": "The stars above, a radiant sight\nIn your eyes, I find my light\nWith you, every moment is right\nIn your love, my heart takes flight"
+      }
+    ]
+  },
+  {
+    "authorName": "James Miller",
+    "songName": "Eternal Embrace",
+    "couplets": [
+      {
+        "id": 1,
+        "s": "In your arms, I find my place\nIn the warmth of your embrace\nIn your eyes, I see your grace\nWith you, I've found my eternal chase"
+      },
+      {
+        "id": 2,
+        "s": "Our love, a story to unfold\nIn your heart, my dreams are told\nWith you, I'll never grow old\nIn your love, I'll always hold"
+      },
+      {
+        "id": 3,
+        "s": "In your love, I've found my guide\nWith you, I'll always stay beside\nIn your arms, my fears subside\nIn your love, I'll always confide"
+      },
+      {
+        "id": 4,
+        "s": "Through the storms, we'll find our way\nIn your love, there's nothing to sway\nIn your arms, I want to lay\nWith you, I'll cherish every day"
+      }
+    ]
+  },
+  {
+    "authorName": "Olivia Davis",
+    "songName": "Whispers of the Heart",
+    "couplets": [
+      {
+        "id": 1,
+        "s": "In the quiet of the night\nIn your love, I find my light\nWith you, everything feels so right\nIn your arms, I take flight"
+      },
+      {
+        "id": 2,
+        "s": "Whispers of the heart in the dark\nIn your love, I've found my spark\nWith you, I'll always embark\nIn your embrace, I'll never hark"
+      },
+      {
+        "id": 3,
+        "s": "In the stillness, we find our way\nIn your love, my fears allay\nWith you, I'll forever stay\nIn your arms, come what may"
+      },
+      {
+        "id": 4,
+        "s": "In the silence, our love will swell\nIn your love, all is well\nWith you, every moment is a spell\nIn your embrace, my heart will dwell"
+      }
+    ]
+  }
+]
+

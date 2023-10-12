@@ -1,5 +1,7 @@
 package com.example.testfx;
 
+import java.util.Arrays;
+
 public class Song {
     static class Couplet{
         private int id;
@@ -45,6 +47,15 @@ public class Song {
         this.authorName = authorName;
         this.songName = songName;
         this.couplets = couplets;
+    }
+
+    @Override
+    public String toString() {
+        return "Song{" +
+                "authorName='" + authorName + '\'' +
+                ", songName='" + songName + '\'' +
+                ", couplets=" + Arrays.toString(couplets) +
+                '}';
     }
 
     public String getAuthorName() {
