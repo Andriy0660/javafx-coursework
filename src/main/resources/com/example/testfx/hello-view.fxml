@@ -1,21 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.collections.*?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="351.0" prefWidth="463.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.testfx.HelloController">
-   <children>
-      <Button layoutX="117.0" layoutY="150.0" mnemonicParsing="false" onAction="#onHelloButtonClick" text="Button" />
-      <Label fx:id="welcomeText" layoutX="117.0" layoutY="214.0" text="TExt" />
-      <TableView editable="true" layoutX="199.0" layoutY="22.0" prefHeight="200.0" prefWidth="249.0" tableMenuButtonVisible="true">
-        <columns>
-          <TableColumn prefWidth="75.0" text="C1" />
-          <TableColumn prefWidth="75.0" text="C2" />
-            <TableColumn prefWidth="75.0" text="Column X" />
-        </columns>
-         <columnResizePolicy>
-            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-         </columnResizePolicy>
-      </TableView>
-   </children>
+<Pane prefHeight="358.0" prefWidth="535.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.testfx.HelloController">
+    <children>
+
+        <ScrollPane fx:id="scrollPaneWithListOfSongs" hbarPolicy="NEVER" layoutX="1.0" layoutY="-2.0" prefHeight="360.0" prefWidth="203.0" vbarPolicy="ALWAYS" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml">
+            <content>
+                <VBox fx:id="songContainer" spacing="5">
+                        <!-- додаємо в коді-->
+                </VBox>
+            </content>
+        </ScrollPane>
+
+      <ScrollPane fx:id="scrollPaneWithTextOfSong" hbarPolicy="NEVER" layoutX="205.0" layoutY="98.0" prefHeight="258.0" prefWidth="329.0">
+         <content>
+            <TextFlow fx:id="lyricsTextArea" maxWidth="330.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="366.0" prefWidth="312.0" style="-fx-border-width: 2;">
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+            </TextFlow>
+         </content>
+      </ScrollPane>
+
+        <Button layoutX="211.0" layoutY="6.0" onAction="#searchText" prefHeight="25.0" prefWidth="39.0" text="🔍" />
+        <TextField fx:id="searchField" layoutX="440.0" layoutY="5.0" onAction="#searchText" prefHeight="25.0" prefWidth="84.0" />
+
+        <ChoiceBox fx:id="searchTypeChoiceBox" layoutX="261.0" layoutY="5.0" prefHeight="25.0" prefWidth="121.0">
+            <items>
+                <FXCollections fx:factory="observableArrayList">
+                    <String fx:value="Пошук у файлі" />
+                    <String fx:value="Пошук у куплеті" />
+                </FXCollections>
+            </items>
+        </ChoiceBox>
+
+        <TextField fx:id="coupletNumberTextField" layoutX="392.0" layoutY="5.0" prefHeight="25.0" prefWidth="39.0" visible="false" />
+        <Text fx:id="resultLabel" layoutX="211.0" layoutY="51.0" wrappingWidth="250.00000151991844" />
+
+        <Button layoutX="211.0" layoutY="59.0" mnemonicParsing="false" onAction="#lastRowsClick" prefHeight="25.0" prefWidth="84.0" text="Ост. рядки" />
+
+    </children>
+
 </Pane>
