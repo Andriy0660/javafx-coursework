@@ -5,19 +5,19 @@ import java.util.Arrays;
 public class Song {
     static class Couplet{
         private int id;
-        private String s;
+        private String coupletString;
 
         public Couplet() {
         }
 
-        public Couplet(int id, String s) {
+        public Couplet(int id, String coupletString) {
             this.id = id;
-            this.s = s;
+            this.coupletString = coupletString;
         }
 
         @Override
         public String toString() {
-            return s;
+            return coupletString;
         }
 
         public int getId() {
@@ -28,17 +28,26 @@ public class Song {
             this.id = id;
         }
 
-        public String getS() {
-            return s;
+        public String getCoupletString() {
+            return coupletString;
         }
 
-        public void setS(String s) {
-            this.s = s;
+        public void setCoupletString(String coupletString) {
+            this.coupletString = coupletString;
         }
     }
     String authorName;
     String songName;
     Couplet[] couplets;
+    String mp3 = "";
+
+    public String getMp3() {
+        return mp3;
+    }
+
+    public void setMp3(String mp3) {
+        this.mp3 = mp3;
+    }
 
     public Song() {
     }
