@@ -5,11 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e45bf0ad-58c1-45ed-bc61-57a03735f682" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/testfx/main-view.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/testfx/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/testfx/Application.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/testfx/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/testfx/Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/testfx/Song.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/testfx/Song.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/testfx/Utils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/testfx/Utils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/testfx/hello-view.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/testfx/data.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/testfx/data.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/testfx/main-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/testfx/main-view.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/testfx/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/testfx/styles.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -47,6 +49,11 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\admin-kv\IdeaProjects\testfx" />
+    </key>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -65,7 +72,7 @@
       <workItem from="1697186336106" duration="18605000" />
       <workItem from="1697280437050" duration="3021000" />
       <workItem from="1697283471442" duration="5181000" />
-      <workItem from="1697293616369" duration="18667000" />
+      <workItem from="1697293616369" duration="28650000" />
     </task>
     <servers />
   </component>

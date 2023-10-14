@@ -58,7 +58,7 @@ public class Utils {
     }
     public Song getActualSongByName(String songName){
         for(Song song : songs){
-            if(song.songName.equals(songName)){
+            if(song.getSongName().equals(songName)){
                 return song;
             }
         }
@@ -67,9 +67,9 @@ public class Utils {
 
     public String getTextForSong(Song song) {
         StringBuilder res = new StringBuilder();
-        res.append(song.songName).append("\n\n\t");
-        for(int i=0;i<song.couplets.length;i++) {
-            res.append(song.couplets[i]).append("\n\n\t");
+        res.append(song.getSongName()).append("\n\n\t");
+        for(int i=0;i<song.getCouplets().length;i++) {
+            res.append(song.getCouplets()[i]).append("\n\n\t");
         }
         return new String(res);
     }
@@ -83,24 +83,5 @@ public class Utils {
                 textField.setText(oldValue);
             }
         });
-    }
-
-    public MediaPlayer getNewMediaPlayer(Media media, Slider slider, boolean isSliderBeingDragged, Label endTimeLabel){
-        MediaPlayer mediaPlayer = new MediaPlayer(media);
-        mediaPlayer.currentTimeProperty().addListener((observable, oldValue, newValue) -> {
-            if (!isSliderBeingDragged) {
-                Duration totalTime = mediaPlayer.getTotalDuration();
-                double value = newValue.toSeconds() / totalTime.toSeconds();
-                slider.setValue(value);
-            }
-        });
-        mediaPlayer.setOnReady(()->{
-            long totalSeconds = (long) media.getDuration().toSeconds();
-            long minutes = totalSeconds / 60;
-            long seconds = totalSeconds % 60;
-            String formattedTime = String.format("%02d:%02d", minutes, seconds);
-            endTimeLabel.setText(formattedTime);
-        });
-        return mediaPlayer;
     }
 }

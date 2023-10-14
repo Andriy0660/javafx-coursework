@@ -98,6 +98,9 @@ public class Controller {
     @FXML
     private Button previousSongButton;
 
+    private Label authorLabel;
+    private Label songLabel;
+
     public void initialize() {
         //initialize songs
         try {
@@ -117,6 +120,11 @@ public class Controller {
         utils = new Utils(getAllButtons(), songs);
 
         Song initialSong = songs.get(0);
+        VBox songBox = (VBox)songContainer.getChildren().get(0);
+        authorLabel = (Label) songBox.getChildren().get(0);
+        songLabel = (Label) songBox.getChildren().get(1);
+        authorLabel.setTextFill(Color.RED);
+        songLabel.setTextFill(Color.RED);
 
         //initialize scrollPaneWithTextOfSong with first song
         String initialSongText = utils.getTextForSong(initialSong);
@@ -134,9 +142,8 @@ public class Controller {
         utils.setSingleDigitIntegerListenerForTextField(numberOfRowToBeReplaced);
 
         //initialize media player
-        Media media = new Media(initialSong.mp3);
-        mediaPlayer = utils.getNewMediaPlayer(media, slider, isSliderBeingDragged, endTimeLabel);
-
+        Media media = new Media(initialSong.getMp3());
+        mediaPlayer = getNewMediaPlayer(media);
         slider.setMin(0);
         slider.setMax(1);
         slider.valueProperty().addListener((observable, oldValue, newValue) -> {
@@ -152,6 +159,8 @@ public class Controller {
         authorNameLabel.setText(initialSong.getAuthorName());
         songNameLabel.setText(initialSong.getSongName());
         previousSongButton.setDisable(true);
+        previousSongButton.setFocusTraversable(false);
+
     }
 
     private List<Button> getAllButtons() {
@@ -191,16 +200,32 @@ public class Controller {
         Label songLabel = new Label(song.getSongName());
         songBox.getChildren().addAll(authorLabel, songLabel);
 
-        songBox.setOnMouseClicked((e)->{
-            pauseButton.setVisible(false);
-            playButton.setVisible(true);
+        songBox.setOnMouseClicked( e -> {
+            this.authorLabel.setTextFill(Color.BLACK);
+            this.songLabel.setTextFill(Color.BLACK);
+            this.authorLabel = authorLabel;
+            this.songLabel = songLabel;
+
+            previousSongButton.setDisable(false);
+            nextSongButton.setDisable(false);
+            authorLabel.setTextFill(Color.RED);
+            songLabel.setTextFill(Color.RED);
+
+            int index = songs.indexOf(song);
+            if(index == 0){
+                previousSongButton.setDisable(true);
+            }
+            else if(index + 1 == songs.size()){
+                nextSongButton.setDisable(true);
+            }
+            pauseButton.setVisible(true);
+            playButton.setVisible(false);
             otherFunctionalityResultLabel.setVisible(false);
 
             mediaPlayer.pause();
-            //TODO: change index
-            Media media = new Media(songs.get(0).mp3);
-            mediaPlayer = utils.getNewMediaPlayer(media, slider, isSliderBeingDragged, endTimeLabel);
-
+            Media media = new Media(song.getMp3());
+            mediaPlayer = getNewMediaPlayer(media);
+            mediaPlayer.play();
 
             String textForSong = utils.getTextForSong(song);
             lyricsTextArea.getChildren().clear();
@@ -212,8 +237,9 @@ public class Controller {
             slider.setValue(0);
 
             scrollPaneWithTextOfSong.requestFocus();
-            utils.enableAllButtonsExcept(leftArrowButton, rightArrowButton);
+            utils.enableAllButtonsExcept(playButton,pauseButton,previousSongButton,nextSongButton, rightArrowButton, leftArrowButton);
         });
+
         return songBox;
     }
 
@@ -232,7 +258,6 @@ public class Controller {
         searchPane.setLayoutY(-100);
         paneWithOtherFunctionality.setLayoutY(0);
         paneWithOtherFunctionality.setLayoutX(264);
-
     }
 
     public void searchTypeComboBoxOnAction(){
@@ -274,7 +299,7 @@ public class Controller {
         String textToSearchIn;
         String textToSearchInLowCase;
         try{
-            if(searchFor.length()==0)
+            if(searchFor.length() == 0)
                 throw new IllegalArgumentException();
 
             textToSearchIn = getTextToSearchIn();
@@ -319,7 +344,7 @@ public class Controller {
         } else {
             int numberOfCouplet = Integer.parseInt(coupletNumberTextField.getText()) - 1;
             Song actualSong = utils.getActualSongInTextArea(lyricsTextArea);
-            Song.Couplet couplet = actualSong.couplets[numberOfCouplet];
+            Song.Couplet couplet = actualSong.getCouplets()[numberOfCouplet];
             return couplet.getCoupletString();
         }
     }
@@ -328,7 +353,7 @@ public class Controller {
     public void lastRowsButtonOnAction() {
         Song song = utils.getActualSongInTextArea(lyricsTextArea);
 
-        Song.Couplet[] couplets = song.couplets;
+        Song.Couplet[] couplets = song.getCouplets();
         StringBuilder res = new StringBuilder();
         for (Song.Couplet value : couplets) {
             String[] lines = value.getCoupletString().split("\n");
@@ -350,10 +375,10 @@ public class Controller {
     public void shuffleButtonOnAction(){
         Song song = utils.getActualSongInTextArea(lyricsTextArea);
 
-        List<String> list = Arrays.stream(song.couplets).map(Song.Couplet::getCoupletString).collect(Collectors.toList());
+        List<String> list = Arrays.stream(song.getCouplets()).map(Song.Couplet::getCoupletString).collect(Collectors.toList());
         Collections.shuffle(list);
-        for(int i =0;i< song.couplets.length;i++){
-            song.couplets[i].setCoupletString(list.get(i));
+        for(int i = 0; i < song.getCouplets().length; i++){
+            song.getCouplets()[i].setCoupletString(list.get(i));
         }
         String initialSongText = utils.getTextForSong(song);
         lyricsTextArea.getChildren().clear();
@@ -406,12 +431,12 @@ public class Controller {
         Song song = utils.getActualSongInTextArea(lyricsTextArea);
         String newRow = this.newRowToBeInserted.getText();
         try{
-            if(newRow.length()==0)
+            if(newRow.length() == 0)
                 throw new IllegalArgumentException();
 
             int numberOfCouplet = Integer.parseInt(this.numberOfCoupletToBeReplaced.getText()) - 1;
             int numberOfRow = Integer.parseInt(this.numberOfRowToBeReplaced.getText()) - 1;
-            Song.Couplet couplet = song.couplets[numberOfCouplet];
+            Song.Couplet couplet = song.getCouplets()[numberOfCouplet];
             String[] lines = couplet.getCoupletString().split("\n");
             lines[numberOfRow] = newRow;
             String newCouplet = String.join("\n", lines);
@@ -451,7 +476,7 @@ public class Controller {
         String[] lines;
         for(Song.Couplet couplet : song.getCouplets()){
             lines = couplet.getCoupletString().split("\n");
-            countOfRows+=lines.length;
+            countOfRows += lines.length;
         }
         if (countOfRows == 14) {
             otherFunctionalityResultLabel.setText("Це сонет типу Shakespeare");
@@ -488,26 +513,40 @@ public class Controller {
         mediaPlayer.pause();
     }
 
-
-
     public void changeSongInMP3Player(boolean isNextSong){
         Song song = utils.getActualSongInTextArea(lyricsTextArea);
         int index = songs.indexOf(song);
+        int newIndex;
         Song newSong;
 
         if(isNextSong){
-            newSong = songs.get(index+1);
+            newIndex = index + 1;
+            newSong = songs.get(newIndex);
             previousSongButton.setDisable(false);
             if(index + 2 >= songs.size()){
                 nextSongButton.setDisable(true);
             }
         } else {
-            newSong = songs.get(index-1);
+            newIndex = index - 1;
+            newSong = songs.get(newIndex);
             nextSongButton.setDisable(false);
             if(index - 2 <= -1){
                 previousSongButton.setDisable(true);
             }
         }
+
+        this.authorLabel.setTextFill(Color.BLACK);
+        this.songLabel.setTextFill(Color.BLACK);
+        VBox songBox = (VBox) songContainer.getChildren().get(newIndex);
+        Label authorLabel = (Label)songBox.getChildren().get(0);
+        Label songLabel = (Label)songBox.getChildren().get(1);
+        this.authorLabel = authorLabel;
+        this.songLabel = songLabel;
+
+        authorLabel.setTextFill(Color.RED);
+        songLabel.setTextFill(Color.RED);
+
+
         pauseButton.setVisible(true);
         playButton.setVisible(false);
         mediaPlayer.pause();
@@ -517,9 +556,8 @@ public class Controller {
         Text text = new Text(textForSong);
         lyricsTextArea.getChildren().add(text);
 
-        //TODO: change index
-        Media media = new Media(songs.get(0).mp3);
-        mediaPlayer = utils.getNewMediaPlayer(media, slider, isSliderBeingDragged, endTimeLabel);
+        Media media = new Media(newSong.getMp3());
+        mediaPlayer = getNewMediaPlayer(media);
         mediaPlayer.play();
         authorNameLabel.setText(newSong.getAuthorName());
         songNameLabel.setText(newSong.getSongName());
@@ -533,6 +571,25 @@ public class Controller {
     }
     public void previousSongButtonOnAction() {
         changeSongInMP3Player(false);
+    }
+    private MediaPlayer getNewMediaPlayer(Media media){
+        MediaPlayer mediaPlayer = new MediaPlayer(media);
+        mediaPlayer.currentTimeProperty().addListener((observable, oldValue, newValue) -> {
+            if (!isSliderBeingDragged) {
+                Duration totalTime = mediaPlayer.getTotalDuration();
+                double value = newValue.toSeconds() / totalTime.toSeconds();
+                slider.setValue(value);
+            }
+        });
+        mediaPlayer.setOnReady(() -> {
+            long totalSeconds = (long) media.getDuration().toSeconds();
+            long minutes = totalSeconds / 60;
+            long seconds = totalSeconds % 60;
+            String formattedTime = String.format("%02d:%02d", minutes, seconds);
+            endTimeLabel.setText(formattedTime);
+        });
+        mediaPlayer.setOnEndOfMedia(this::nextSongButtonOnAction);
+        return mediaPlayer;
     }
 
 

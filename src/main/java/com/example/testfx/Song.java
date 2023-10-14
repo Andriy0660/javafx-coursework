@@ -3,43 +3,10 @@ package com.example.testfx;
 import java.util.Arrays;
 
 public class Song {
-    static class Couplet{
-        private int id;
-        private String coupletString;
-
-        public Couplet() {
-        }
-
-        public Couplet(int id, String coupletString) {
-            this.id = id;
-            this.coupletString = coupletString;
-        }
-
-        @Override
-        public String toString() {
-            return coupletString;
-        }
-
-        public int getId() {
-            return id;
-        }
-
-        public void setId(int id) {
-            this.id = id;
-        }
-
-        public String getCoupletString() {
-            return coupletString;
-        }
-
-        public void setCoupletString(String coupletString) {
-            this.coupletString = coupletString;
-        }
-    }
-    String authorName;
-    String songName;
-    Couplet[] couplets;
-    String mp3 = "";
+    private String authorName;
+    private String songName;
+    private Couplet[] couplets;
+    private String mp3;
 
     public String getMp3() {
         return mp3;
@@ -89,5 +56,38 @@ public class Song {
 
     public void setCouplets(Couplet[] couplets) {
         this.couplets = couplets;
+    }
+    static class Couplet{
+        private int id;
+        private String coupletString;
+
+        public Couplet() {
+        }
+
+        public Couplet(int id, String coupletString) {
+            this.id = id;
+            this.coupletString = coupletString;
+        }
+
+        @Override
+        public String toString() {
+            return coupletString;
+        }
+
+        public int getId() {
+            return id;
+        }
+
+        public void setId(int id) {
+            this.id = id;
+        }
+
+        public String getCoupletString() {
+            return coupletString;
+        }
+
+        public void setCoupletString(String coupletString) {
+            this.coupletString = coupletString;
+        }
     }
 }

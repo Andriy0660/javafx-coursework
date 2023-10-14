@@ -60,7 +60,7 @@
         <VBox prefHeight="200.0" prefWidth="45.0">
             <Label fx:id="currentTimeLabel" text="00:00">
                 <VBox.margin>
-                    <Insets left="5.0" top="28.0"/>
+                    <Insets left="5.0" top="28.0" />
                 </VBox.margin>
             </Label>
         </VBox>
@@ -70,28 +70,26 @@
             <HBox maxHeight="30.0" prefHeight="30.0" prefWidth="200.0">
                 <Label fx:id="authorNameLabel" text="Andrii Snovyda">
                     <HBox.margin>
-                        <Insets left="60.0" top="10.0"/>
+                        <Insets left="60.0" top="10.0" />
                     </HBox.margin>
                 </Label>
                 <Label maxHeight="30.0" maxWidth="15.0" prefHeight="0.0" prefWidth="15.0" text="-">
                     <HBox.margin>
-                        <Insets left="20.0"/>
+                        <Insets left="20.0" />
                     </HBox.margin>
                     <font>
-                        <Font size="20.0"/>
+                        <Font size="20.0" />
                     </font>
                 </Label>
                 <Label fx:id="songNameLabel" text="Hello World">
                     <HBox.margin>
-                        <Insets left="20.0" top="10.0"/>
+                        <Insets left="20.0" top="10.0" />
                     </HBox.margin>
                 </Label>
             </HBox>
 
             <HBox prefHeight="30.0">
-                <Slider fx:id="slider" onMouseDragReleased="#sliderOnMouseReleased"
-                        onMousePressed="#sliderOnMousePressed" onMouseReleased="#sliderOnMouseReleased"
-                        prefHeight="15.0" prefWidth="350.0"/>
+                <Slider fx:id="slider" onMousePressed="#sliderOnMousePressed" onMouseReleased="#sliderOnMouseReleased" prefHeight="15.0" prefWidth="350.0" />
             </HBox>
         </VBox>
 
@@ -99,62 +97,58 @@
         <VBox prefHeight="200.0" prefWidth="45.0">
             <Label fx:id="endTimeLabel" text="00:00">
                 <VBox.margin>
-                    <Insets left="5.0" top="28.0"/>
+                    <Insets left="5.0" top="28.0" />
                 </VBox.margin>
             </Label>
         </VBox>
 
         <!--        buttons -->
         <HBox prefHeight="100.0" prefWidth="150.0">
-            <Button fx:id="previousSongButton" mnemonicParsing="false" onAction="#previousSongButtonOnAction"
-                    prefHeight="36.0" prefWidth="45.0" text="⏪">
+            <Button fx:id="previousSongButton" mnemonicParsing="false" onAction="#previousSongButtonOnAction" prefHeight="36.0" prefWidth="45.0" text="⏪">
                 <font>
-                    <Font size="30.0"/>
+                    <Font size="30.0" />
                 </font>
                 <padding>
-                    <Insets bottom="-5.0" left="-8.0" right="-5.0" top="-5.0"/>
+                    <Insets bottom="-5.0" left="-8.0" right="-5.0" top="-5.0" />
                 </padding>
                 <HBox.margin>
-                    <Insets top="15.0"/>
+                    <Insets top="15.0" />
                 </HBox.margin>
             </Button>
 
-            <Button fx:id="playButton" mnemonicParsing="false" onAction="#playButtonOnAction" prefHeight="36.0"
-                    prefWidth="36.0" text="▶">
+            <Button fx:id="playButton" mnemonicParsing="false" onAction="#playButtonOnAction" prefHeight="36.0" prefWidth="36.0" text="▶">
                 <font>
-                    <Font size="30.0"/>
+                    <Font size="30.0" />
                 </font>
                 <padding>
-                    <Insets bottom="-5.0" left="-5.0" right="-5.0" top="-5.0"/>
+                    <Insets bottom="-5.0" left="-5.0" right="-5.0" top="-5.0" />
                 </padding>
                 <HBox.margin>
-                    <Insets left="10.0" top="15.0"/>
+                    <Insets left="10.0" top="15.0" />
                 </HBox.margin>
             </Button>
 
-            <Button fx:id="pauseButton" mnemonicParsing="false" onAction="#pauseButtonOnAction" prefHeight="36.0"
-                    prefWidth="36.0" text="⏸" visible="false">
+            <Button fx:id="pauseButton" mnemonicParsing="false" onAction="#pauseButtonOnAction" prefHeight="36.0" prefWidth="36.0" text="⏸" visible="false">
                 <font>
-                    <Font size="25.0"/>
+                    <Font size="25.0" />
                 </font>
                 <padding>
-                    <Insets bottom="-2.0" left="-5.0" right="-5.0" top="-5.0"/>
+                    <Insets bottom="-2.0" left="-5.0" right="-5.0" top="-5.0" />
                 </padding>
                 <HBox.margin>
-                    <Insets left="-36.0" top="15.0"/>
+                    <Insets left="-36.0" top="15.0" />
                 </HBox.margin>
             </Button>
 
-            <Button fx:id="nextSongButton" mnemonicParsing="false" onAction="#nextSongButtonOnAction" prefHeight="36.0"
-                    prefWidth="45.0" text="⏩">
+            <Button fx:id="nextSongButton" mnemonicParsing="false" onAction="#nextSongButtonOnAction" prefHeight="36.0" prefWidth="45.0" text="⏩">
                 <font>
-                    <Font size="30.0"/>
+                    <Font size="30.0" />
                 </font>
                 <padding>
-                    <Insets bottom="-5.0" left="-5.0" right="-7.0" top="-5.0"/>
+                    <Insets bottom="-5.0" left="-5.0" right="-7.0" top="-5.0" />
                 </padding>
                 <HBox.margin>
-                    <Insets left="10.0" top="15.0"/>
+                    <Insets left="10.0" top="15.0" />
                 </HBox.margin>
             </Button>
         </HBox>

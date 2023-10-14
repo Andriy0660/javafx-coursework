@@ -1,6 +1,7 @@
 .transparentFocus {
     -fx-focus-color: transparent;
     -fx-faint-focus-color: transparent;
+    -fx-focus-traversable: false;
 }
 /*.textflow {*/
 /*    -fx-background-image: url("istockphoto-670055748-612x612.jpg")*/

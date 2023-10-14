@@ -1,216 +1,395 @@
 [
   {
-    "authorName": "Alice Johnson",
-    "songName": "Summer Love",
+    "authorName": "Ілля Найда",
+    "songName": "Як я маю тебе не любити",
     "couplets": [
       {
         "id": 1,
-        "coupletString": "I met you on a sunny day\nUnder the sky so blue\nOur love blossomed in every way\nAnd I knew it was true"
+        "coupletString": "Надоїло усе, вітер небом несе\nПро кохання слова,\nЩо ночами пишу для тебе.\nТак чекаю той день над усе,\nКоли небо до мене тебе поверне!\n"
       },
       {
         "id": 2,
-        "coupletString": "We danced under the moonlight\nWith stars as our guide\nYou held me so tight\nIn your arms, I wanted to hide"
+        "coupletString": "Я не зможу без тебе прожити ніяк!\nЯк я маю тебе не любити?..\nЯ без тебе лечу, як безкрилий літак,\nБоже, дай мені з нею летіти!\nХай ангели на крилах тебе принесуть,\nАбо скажуть як маю забути.\nХай ангели на небі тебе бережуть!\nЯк я маю тебе не любити?..\n"
       },
       {
         "id": 3,
-        "coupletString": "The waves whispered secrets of the sea\nAs we walked along the shore\nHand in hand, just you and me\nForever, I'll ask for nothing more"
+        "coupletString": "Понеділок, вівторок і так кожен день,\nМені треба тебе,\nМені треба пісень про тебе.\nПишу нашій* любові пісні,\nЯ до тебе тулюся у кожному сні!\n"
       }
     ],
-    "mp3": "file:/Users/admin-kv/Downloads/mihaylo-homadzdzo-listopad(mp3gid.me).mp3"
+    "mp3": "file:/Users/admin-kv/IdeaProjects/testfx/src/main/resources/com/example/testfx/songs/illia_naida_2017_jak_ja_maju_tebe_ne_ljubiti.mp3"
   },
   {
-    "authorName": "David Brown",
-    "songName": "Dreams of Tomorrow",
+    "authorName": "Ілля Найда",
+    "songName": "А ти була",
     "couplets": [
       {
         "id": 1,
-        "coupletString": "In my dreams, I fly so high\nAbove the clouds, up in the sky\nWith you, there's no need to cry\nIn this world, I'll never say goodbye"
+        "coupletString": "Хтось малює дороги,\nХтось намалює мости,\nНазиває життя наше долею\nІ не кажи куди нам іти...\nНе знала ти,\nЩо біль буває солодкою...\nНе знав і я,\nЩо будеш ти самотньою...\n"
       },
       {
         "id": 2,
-        "coupletString": "Walking hand in hand through the rain\nOur love, a never-ending chain\nThrough joy and sorrow, we remain\nIn our hearts, the eternal flame"
+        "coupletString": "А ти була мені\nТакою солодкою\nЯк та весна, як небеса... \nТи - для мене принцеса,\nА я знаю, я - твій Аладдін\nТа ніколи не буде, як хочем ми,\nВ нашій казці в кінці я один... \nНе знала ти,\nЧи маєш бути гордою...\nНе знав і я,\nЩо стану твоїм Іудою...\n"
+      }
+    ],
+    "mp3": "file:/Users/admin-kv/IdeaProjects/testfx/src/main/resources/com/example/testfx/songs/illia_naida_a_ty_bula.mp3"
+
+  },
+  {
+    "authorName": "Ілля Найда",
+    "songName": "Білі квіти",
+    "couplets": [
+      {
+        "id": 1,
+        "coupletString":"Знову день на дворі\nІ сонце світить,\nЗнову я принесу\nСніжно-білі квіти,\nТа не знаю,\nЯк подарувати,\nТа не знаю я,\nПро що розказати...\n"
+      },
+      {
+        "id": 2,
+        "coupletString": "Білі квіти навесні,\nЯ принесу їх тобі,\nАле очі мої сумні\nБез тебе...\nБілі квіти навесні,\nПодарую їх тобі,\nТо є серце моє\nДля тебе...\n"
       },
       {
         "id": 3,
-        "coupletString": "Going hand in hand through the sun\nOur love, a never-ending road\nUnder the stars, we make our way\nIn the night, we find our escape\nIn your love, I long to stay\nIn your arms, there's no need to reshape"
+        "coupletString": "Все та ж картинка твоя\nУ мене в уяві\nІ усмішка твоя,\nМов сонце яскраве.\nТа не можу тобі\nПро це розказати,\nБо не знаю я -\nЧи будеш кохати?.."
       }
-    ]
+    ],
+    "mp3": "file:/Users/admin-kv/IdeaProjects/testfx/src/main/resources/com/example/testfx/songs/illia_naida_bili_kviti.mp3"
+
   },
   {
-    "authorName": "Emily White",
-    "songName": "City Lights",
+    "authorName": "Ілля Найда",
+    "songName": "Дівчинка осінь",
     "couplets": [
       {
         "id": 1,
-        "coupletString": "The city lights are shining bright\nAs we stroll through the night\nWith you, everything feels so right\nIn your arms, I found my light"
+        "coupletString": "Літо пройшло, я тобі\nЗмінитись пообіцяв,\nЩо стану кращим, як торік,\nТа напевне збрехав...\nІ ось на порозі ти\nЗнову стоїш, така сумна,\nВ жовтому платті...\nДівчинко осінь,\nТвій плач - моя вина...\n"
       },
       {
         "id": 2,
-        "coupletString": "In this urban jungle, we explore\nEvery moment, I want to savor and store\nWith you, life is never a bore\nIn your love, I always want more"
+        "coupletString": "Осінь, поклич мене на розмову\nІ розкажи про сум і втому!..\nТи розкажи, чому так плачеш\nНочами ти в моєму вікні?..\nОсінь, прийди до мене додому,\nХочеш, наллю тобі чай з лимоном?..\nТи не сумуй!.. Мене пробач!..\nОсінь, не плач!..\n"
       },
       {
         "id": 3,
-        "coupletString": "Beneath the neon sky so grand\nWe'll walk the streets, hand in hand\nIn your smile, I'll forever stand\nWith you, life is simply grand"
+        "coupletString": "Сонячний промінь\nВ ранковім тумані і біла трава,\nЗахмарене небо плаче дощами ,\nБо скоро зима...\nЯк я тебе люблю,\nМені наймиліша хоча й сумна\nВ жовтому платті дівчинка осінь,\nТвій плач - моя вина...\n"
       }
-    ]
+    ],
+    "mp3": "file:/Users/admin-kv/IdeaProjects/testfx/src/main/resources/com/example/testfx/songs/illia_naida_divchinka_osin.mp3"
+
   },
   {
-    "authorName": "John Smith",
-    "songName": "Memories of Spring",
+    "authorName": "Ілля Найда",
+    "songName": "Не залишу тебе",
     "couplets": [
       {
         "id": 1,
-        "coupletString": "In the meadow, flowers bloom\nUnderneath the bright full moon\nIn your smile, there's no gloom\nTogether, we'll dance and swoon"
+        "coupletString": "Я не залишу тебе!..\nСльози не лий - діаманти очей.\nЯ не покину тебе!..\nЗавжди хотів від тебе дітей.\nХай замете всюди сніг\nІ замалює додому сліди,\nВ кожнім куточку землі\nМій Ангел - це ти!..\n"
       },
       {
         "id": 2,
-        "coupletString": "Hand in hand, we'll chase the breeze\nThrough the forest, under the trees\nIn your love, I find my ease\nForever, I want you to please"
+        "coupletString": "Звідки взялась така, хто тебе дав мені?..\nЗвідки в тебе такі, очі блакитно-сумні?..\nТи, немов, подарунок із висоти небес,\nВосьме чудо моє з земних чудес!\n"
       },
       {
         "id": 3,
-        "coupletString": "As the seasons change and we grow old\nOur memories, like precious gold\nIn your heart, I've found my hold\nWith you, I'll never be cold"
+        "coupletString": "Хмуро там за вікном, я зроблю каву з молоком.\nТи приготуєш сніданок і засумуєш раптом.\nЗапитаєш мене: Любиш сьогодні, як колись,\nТільки правду скажи, прошу не злись!.."
       }
-    ]
+    ],
+    "mp3": "file:/Users/admin-kv/IdeaProjects/testfx/src/main/resources/com/example/testfx/songs/illia_naida_ja_ne_zalishu_tebe.mp3"
+
   },
   {
-    "authorName": "Olivia Green",
-    "songName": "Under the Stars",
+    "authorName": "Ілля Найда",
+    "songName": "Вже не той",
     "couplets": [
       {
         "id": 1,
-        "coupletString": "Beneath the velvet sky so clear\nWith you, I have nothing to fear\nIn your arms, I hold dear\nOur love, forever sincere"
+        "coupletString": "Не сталось так, як я того хотів...\nПрийшла біда - минулося кохання.\nА, може, це була лиш гра така,\nДля тебе це гра, для мене - життя,\nДля мене - кохання...\n"
       },
       {
         "id": 2,
-        "coupletString": "In the quiet of the night\nWe find our own delight\nWith you, everything's right\nIn your love, my heart takes flight"
-      }
-    ]
-  },
-  {
-    "authorName": "Michael Anderson",
-    "songName": "Golden Memories",
-    "couplets": [
-      {
-        "id": 1,
-        "coupletString": "In the album of my mind\nGolden memories I find\nWith you, happiness intertwined\nIn your love, my heart's entwined"
-      },
-      {
-        "id": 2,
-        "coupletString": "Through the years, we've grown\nIn your love, I've known\nA life that's truly shown\nWith you, my heart's been sown"
+        "coupletString": "Може, я вже не той,\nМоже, й ти вже не та,\nМоже, й немає у нас того кохання?..\nПитаю знову і знов -\nДе знайти ту любов?\nЩо я дарував, тобі дарував\nІз ночі до рання...\n"
       },
       {
         "id": 3,
-        "coupletString": "In the warmth of your embrace\nI've found my special place\nWith you, there's no need to chase\nOur love, an eternal embrace"
+        "coupletString": "Може, я вже не той,\nМоже, й ти вже не та,\nМоже, й немає у нас того кохання?..\nПитаю знову і знов -\nДе знайти ту любов?\nЩо я дарував, тобі дарував\nІз ночі до рання...\n"
       }
-    ]
+    ],
+    "mp3": "file:/Users/admin-kv/IdeaProjects/testfx/src/main/resources/com/example/testfx/songs/illia_naida_ja_vzhe_ne_toi.mp3"
+
   },
   {
-    "authorName": "Sophia Davis",
-    "songName": "Whispers of the Heart",
+    "authorName": "Ілля Найда",
+    "songName": "Не хочу того снігу",
     "couplets": [
       {
         "id": 1,
-        "coupletString": "In the silence of the night\nOur hearts take their flight\nIn your love, everything's right\nWith you, my dreams are bright"
+        "coupletString": "На дворі сніг лапатий,\nА мені ся не хоче,\nА мені ся не хоче\nНічого робити.\nМені би хоч на вечір,\nМені би хоч на вечір \nПро тебе, мила, позабути.\n"
       },
       {
         "id": 2,
-        "coupletString": "In the whispers of the heart\nOur love's a work of art\nWith you, I never want to depart\nIn your embrace, I'll never be apart"
+        "coupletString": "Не хочу того снігу,\nЩо впав під мої двері,\nЩо впав під мої двері\nТа й не тане.\nВода живе без квітки\nВода живе без квітки,\nА квітка без води зів'яне.\n"
       },
       {
         "id": 3,
-        "coupletString": "With every beat, our love does grow\nIn your eyes, our future does show\nIn your love, I find my glow\nWith you, my heart's in tow"
+        "coupletString": "Якщо у тебе другий,\nЯкщо його ти любиш,\nЯкщо його ти любиш\nІ хочеш з ним бути,\nЛиши мене в спокою,\nЛиши мене в спокою\nІ не ходи у снах за мною\n"
       }
-    ]
+    ,
+      {
+        "id": 4,
+        "coupletString": "Любила, не любила,\nЦе зовсім не важливо,\nТепер вже не важливо,\nМені вже байдуже.\nРоби тепер, що хочеш,\nРоби тепер, що хочеш,\nМене ти більше не побачиш. \n"
+      }
+    ],
+    "mp3": "file:/Users/admin-kv/IdeaProjects/testfx/src/main/resources/com/example/testfx/songs/illia_naida_ne_hochu_togo_snigy.mp3"
+
   },
   {
-    "authorName": "William Turner",
-    "songName": "Sunset Serenade",
+    "authorName": "Ілля Найда",
+    "songName": "Нова весна",
     "couplets": [
       {
         "id": 1,
-        "coupletString": "As the sun sets in the west\nIn your love, I'm truly blessed\nWith you, I've passed the test\nIn your arms, I'm at my best"
+        "coupletString": "Похмурий день добіга кінця,\nЧекаєш знову, стоїш сумна...\nБлукає вітер по сухих гіллях,\nШукає листя у твоїх снах...\n"
       },
       {
         "id": 2,
-        "coupletString": "In the colors of the evening sky\nWith you, I'll reach so high\nIn your love, I'll never say goodbye\nWith you, forever I'll comply"
-      }
-    ]
-  },
-  {
-    "authorName": "Ethan Moore",
-    "songName": "Ocean's Embrace",
-    "couplets": [
-      {
-        "id": 1,
-        "coupletString": "In the ocean's gentle tide\nWith you, I want to ride\nIn your love, I'll never hide\nWith you, I'm on this endless glide"
-      },
-      {
-        "id": 2,
-        "coupletString": "As the waves crash on the shore\nWith you, I want nothing more\nIn your love, I'll always soar\nWith you, life's an endless explore"
-      }
-    ]
-  },
-  {
-    "authorName": "Sophia Anderson",
-    "songName": "Moonlit Serenade",
-    "couplets": [
-      {
-        "id": 1,
-        "coupletString": "Beneath the moon's gentle glow\nWe dance where the wildflowers grow\nIn your arms, I want to go\nOur love, like a river, will always flow"
-      },
-      {
-        "id": 2,
-        "coupletString": "Whispers of the night in your ear\nOur love, like music, you'll hear\nWith you, I have nothing to fear\nIn your embrace, I hold you dear"
+        "coupletString": "Колись була така сама,\nЯк та береза, що стоїть одна...\nКолись була та вже не та,\nТепер у неї нова весна!..\n"
       },
       {
         "id": 3,
-        "coupletString": "The stars above, a radiant sight\nIn your eyes, I find my light\nWith you, every moment is right\nIn your love, my heart takes flight"
-      }
-    ]
+        "coupletString": "А ти все мрієш, як листя ти грієш,\nКоли на дворі буя весна,\nА вітер гуляє і вже не кохає,\nБо зеленого листя вже більш нема...\n"}
+    ],
+    "mp3": "file:/Users/admin-kv/IdeaProjects/testfx/src/main/resources/com/example/testfx/songs/illia_naida_nova_vesna.mp3"
+
   },
   {
-    "authorName": "James Miller",
-    "songName": "Eternal Embrace",
+    "authorName": "Ілля Найда",
+    "songName": "Осінь",
     "couplets": [
       {
         "id": 1,
-        "coupletString": "In your arms, I find my place\nIn the warmth of your embrace\nIn your eyes, I see your grace\nWith you, I've found my eternal chase"
+        "coupletString": "Щось літа, мало так було,\nЯ й не замітив, як пройшло,\nТи залишилась назавжди в моєму серці,\nТак щиро я тебе кохав,\nВірші дарив, пісні писав,\nІ перед Богом ти клялась, що аж до смерті.\n"
       },
       {
         "id": 2,
-        "coupletString": "Our love, a story to unfold\nIn your heart, my dreams are told\nWith you, I'll never grow old\nIn your love, I'll always hold"
+        "coupletString": "А на осінь передають сильні опади,\nА на осінь передають сильні вітри,\nА від літа залишились гарячі спогади,\nА від тебе залишились холодні сни...\n"
       },
       {
         "id": 3,
-        "coupletString": "In your love, I've found my guide\nWith you, I'll always stay beside\nIn your arms, my fears subside\nIn your love, I'll always confide"
+        "coupletString": "Бажаю щастя я тобі,\nІ, незважаючи на біль,\nЯ буду жити, як тоді, що був без тебе.\nА літа мало так було,\nЯ не хотів - та все пройшло,\nТа біль лишилась назавжди в моєму серці...\n"
+      }
+    ],
+    "mp3": "file:/Users/admin-kv/IdeaProjects/testfx/src/main/resources/com/example/testfx/songs/illia_naida_osin.mp3"
+
+  },
+  {
+    "authorName": "Ілля Найда",
+    "songName": "Ти одна така",
+    "couplets": [
+      {
+        "id": 1,
+        "coupletString": "Не прийшла –\nЯ без тебе ночую знов,\nТи приснись мені\nКазкою про любов...\nМоже, не проснусь,\nМоже, я залишусь у сні, -\nБуду жити в нім\nІ для тебе співати пісні.\n"
+      },
+      {
+        "id": 2,
+        "coupletString": "Ти одна така!\nЯ любуюсь тобою!\nТи одна така!\nПоловину душі забрала собі...\nТи одна така!\nЗалишайся собою!\nТи одна така!\nНе кажи мені Ні!\n"
+      },
+      {
+        "id": 3,
+        "coupletString": "Ти - гроза і цунамі\nВ душі моїй.\nНе втікай!\nЗалишати мене не смій!\nНе пали за собою усі мости!\nХай дочка моя буде\nТочно така, як ти!"}
+    ],
+    "mp3": "file:/Users/admin-kv/IdeaProjects/testfx/src/main/resources/com/example/testfx/songs/illia_naida_ti_odna_taka.mp3"
+
+  },
+  {
+    "authorName": "Ілля Найда",
+    "songName": "Твої очі",
+    "couplets": [
+      {
+        "id": 1,
+        "coupletString": "Вітром теплим тихо промайнуло\nЯк побачив я тебе.\nЗа собою сильно потягнула,\nЩо ніхто не поверне.\nЗасвітила ти, як сонце, ночі,\nБільше я не бачу вже.\nНе засну цієї ночі,\nСерце вже віддав своє, своє, своє...\n"
+      },
+      {
+        "id": 2,
+        "coupletString": "Твої очі голубі, як небо,\nТільки посмішка така у тебе.\nЗачарує, за собою манить,\nСтрілами Амура в серце ранить.\nНе дивись на мене, вже не треба,\nЦе тебе подарувало небо.\nТо мені воно тебе прислало -\nШанс мені один в житті надало...\n"
+      },
+      {
+        "id": 3,
+        "coupletString": "Ти тепер для мене - світло в небі,\nСвітиш, як ясна зоря,\nВсе життя шукав одну тебе я,\nЗнаю, ти тепер моя!\nБільше я не зможу просто жити,\nВкрала серце ти моє,\nДав Всевишній полюбити,\nТи - усе, що в мене є, в мене є...\n"
+      }
+    ],
+    "mp3": "file:/Users/admin-kv/IdeaProjects/testfx/src/main/resources/com/example/testfx/songs/illia_naida_tvo_ochi.mp3"
+
+  },
+  {
+    "authorName": "Ілля Найда",
+    "songName": "Жаль не знала вона",
+    "couplets": [
+      {
+        "id": 1,
+        "coupletString": "Вона була як весна,\nЩо коханням жила,\nНіби сонце, зігрівала\nВсе навколо - собою.\nЯк ромашка цвіла,\nЯк дитина мала,\nТак тулилась, до всього,\nЩо манило красою.\n"
+      },
+      {
+        "id": 2,
+        "coupletString": "Жаль не знала вона,\nЩо любові нема.\nЩо немає кохання,\nВ твоїм серці тане жаль.\nА ти зрадив її,\nполюбив би і тоді,\nТи побачив, що немає,\nКраще в небі і на землі.\n"
+      },
+      {
+        "id": 3,
+        "coupletString": "Встало сонце чуже,\nСтало небо не те,\nНіжне серденько ромашки,\nРозбивалось від болю.\nТа вона, розцвіте,\nІ забуде тебе,\nНе роби так, як не хочеш,\nЩоб зробили з тобою.\n"
+      }
+    ],
+    "mp3": "file:/Users/admin-kv/IdeaProjects/testfx/src/main/resources/com/example/testfx/songs/illia_naida_zhal_ne_znala_vona.mp3"
+  },
+  {
+    "authorName": "Ілля Найда",
+    "songName": "Золотава осінь",
+    "couplets": [
+      {
+        "id": 1,
+        "coupletString": "Осінній жовтий лист\nКружляє зверху вниз,\nСвої наспівує пісні.\nТи кажеш - не журись,\nЯ повернусь колись -\nНе обіцяй цього мені.\nІ марно не кажи,\nІ не тривож душі,\nМені лишилися пісні.\nБо знаю я сама,\nЩо йде до нас зима,\nІ так далеко до весни.\n"
+      },
+      {
+        "id": 2,
+        "coupletString": "Золотава осінь\nРозпустила коси\nІ птахом у небо летить.\nЗа тобою буду\nВсе життя жаліти\nІ серденько буде боліть.\nЗолотава осінь\nЙде простоволоса,\nШепоче мені - зупинись...\nІ питає вітра,\nДе так довго він баривсь?..\n"},
+      {
+        "id": 3,
+        "coupletString": "І знову жовтий лист -\nВід осені сюрприз -\nДарує усміх золотий,\nКажу слова не ті,\nГублюсь на самоті,\nЛиш на прощання погляд твій.\nІ марно не кажи,\nІ не тривож душі,\nМені лишилися пісні,\nБо знаю я сама,\nЩо йде до нас зима\nІ так далеко до весни...\n"
+      }
+    ],
+    "mp3": "file:/Users/admin-kv/IdeaProjects/testfx/src/main/resources/com/example/testfx/songs/illia_naida_zolotava_osin.mp3"
+  },
+  {
+    "authorName": "Ілля Найда",
+    "songName": "Тебе одну",
+    "couplets": [
+      {
+        "id": 1,
+        "coupletString": "В небі синім хмари,\nПо вулицях туман...\nВ очах твоїх є чари,\nЯкий я зву обман.\nЯ в них хотів купатись,\nТа ледь не потонув,\nКоли сказала ти мені,\nЩоб я тебе забув...\nА я не забув!\nТебе я не забув!\n"
+      },
+      {
+        "id": 2,
+        "coupletString": "Знаєш,\nЯ хотів лише тебе одну!\nЗнаєш,\nЯ казав: Я так тебе люблю\nНочами цілував лише твої вуста,\nА тепер, де я - там пустота..\n"
+      },
+      {
+        "id": 3,
+        "coupletString": "Давно тебе на бачу,\nЯ з розуму зійду,\nВ душі я тихо плачу,\nА може за все плачу:\nЗа те, що не змінився,\nЗа те, що відпустив,\nКоли сказала ти мені,\nЩоб я тебе забув...\nА я не забув!\nТебе я не забув!\n"
+      }
+    ],
+    "mp3": "file:/Users/admin-kv/IdeaProjects/testfx/src/main/resources/com/example/testfx/songs/illja_najda_-_tebe_odnu.mp3"
+  },
+  {
+    "authorName": "Ілля Найда",
+    "songName": "Не зімкнути очей",
+    "couplets": [
+      {
+        "id": 1,
+        "coupletString": "Не зімкнути очей, не заснути мені,\nДоки бачу я в пам'яті образ.\nТвоїх губ ідеальних, як крапель очей,\nХочу знову відчути твій погляд.\nЯ не знаю, чому я так хочу тебе,\nЩось в тобі ідеальне для мене.\nПам'ятаю казав, що це очі твої,\nТа манить щось незнане й шалене...\n"
+      },
+      {
+        "id": 2,
+        "coupletString": "Я хочу ту,\nЩо ніколи не буде моєю, -\nЯ знаю.\nЯ хочу ту,\nЩо являється так часто\nВві сні мені.\nХочу її,\nТа не хочуть на синьому небі\nЗорі ясні,\nЩо б'ють долі моєї стежки.\n"
+      },
+      {
+        "id": 3,
+        "coupletString": "Не зімкнути очей, не заснути мені,\nЩо це не* пояснити словами.\nЗакохався, влюбився чи може щось ше,\nЩо за вроки навела на мене.\nТи сидиш і мовчиш загадкова така,\nТільки зрідка поглянеш на мене,\nА я швидко вдаю, що вдивляюсь в вікно,\nХоч дивився я тільки на тебе.\n"
       },
       {
         "id": 4,
-        "coupletString": "Through the storms, we'll find our way\nIn your love, there's nothing to sway\nIn your arms, I want to lay\nWith you, I'll cherish every day"
+        "coupletString": "Який у неї голос?\nТа я ж її і не чув...\nЧому не підійшов?\nЧого не привітався?\nБуло б хоч запитатись,\nЯк її зовуть...\nА я як завжди просто забоявся...\n"
       }
-    ]
+    ],
+    "mp3": "file:/Users/admin-kv/IdeaProjects/testfx/src/main/resources/com/example/testfx/songs/illja_najda_ne_zimknuti_ochej_2016.mp3"
   },
   {
-    "authorName": "Olivia Davis",
-    "songName": "Whispers of the Heart",
+    "authorName": "Ілля Найда",
+    "songName": "Більше не приходи",
     "couplets": [
       {
         "id": 1,
-        "coupletString": "In the quiet of the night\nIn your love, I find my light\nWith you, everything feels so right\nIn your arms, I take flight"
+        "coupletString": "Минулось кохання. його вже немає,\nА ти все чекаєш на нього, чекаєш,\nТа він не прийде...\nСтоїш над обривом і дивишся в пропасть,\nТам юність твоя, кохання твоє\nНагадує про нього...\n"
       },
       {
         "id": 2,
-        "coupletString": "Whispers of the heart in the dark\nIn your love, I've found my spark\nWith you, I'll always embark\nIn your embrace, I'll never hark"
+        "coupletString": "Більше до неї не приходи,\nБільше троянди не приноси,\nГуби не цілуй, якщо не любиш її.\nБільше до неї не приходи,\nБільше троянди не приноси,\nГуби не цілуй, якщо не любиш...\n"
       },
       {
         "id": 3,
-        "coupletString": "In the stillness, we find our way\nIn your love, my fears allay\nWith you, I'll forever stay\nIn your arms, come what may"
+        "coupletString": "Так боляче знати - без нього прожити\nІ вже не почути цілющі три слова:\nЯ люблю тебе!\nБоятись кохати, як боятися жити,\nКохання - це дар, кохання - талант,\nЩо треба заслужити."
+      }
+    ],
+    "mp3": "file:/Users/admin-kv/IdeaProjects/testfx/src/main/resources/com/example/testfx/songs/naida_illia_bilshe_ne_prihodi.mp3"
+  },
+  {
+    "authorName": "Ілля Найда",
+    "songName": "Моє серце",
+    "couplets": [
+      {
+        "id": 1,
+        "coupletString": "Ти п'янка, як міцне вино,\nЯк міцний дурман.\nП'ю тебе я усю до дна,\nЧи нап'юсь - не знаю сам.\nЗакохала мене назавжди,\nЗакрила на свій замок,\nКоли ж з тобою я загублюсь,\nТи - ж кохання пелюсток.\n"
       },
       {
-        "id": 4,
-        "coupletString": "In the silence, our love will swell\nIn your love, all is well\nWith you, every moment is a spell\nIn your embrace, my heart will dwell"
+        "id": 2,
+        "coupletString": "Моє серце, чуєш мила,\nТи забрала собі.\nМою душу, чуєш мила,\nПолонила навік.\nВсе, що маю в цьому світі,\nВсе віддам тобі,\nБо не можу без тебе\nНавіть дня прожити!\n"
+      },
+      {
+        "id": 3,
+        "coupletString": "Щоб не сталось в твоєму житті\nНе журись, не плач.\nМоже я щось зроблю не так,\nТи мені пробач.\nЯ горджусь, що зі мною ти,\nДобра і смішна.\nІ не треба ніяких висот,\nТільки будь моя!\n"
       }
-    ]
+    ],
+    "mp3": "file:/Users/admin-kv/IdeaProjects/testfx/src/main/resources/com/example/testfx/songs/naida_illia_mo_serce.mp3"
+  },
+  {
+    "authorName": "Ілля Найда",
+    "songName": "Просто не забувай",
+    "couplets": [
+      {
+        "id": 1,
+        "coupletString": "Усе минає рано а чи пізно,\nУсе проходить - і лихо, і добро.\nТа не проходять всі ці спогади, що дійсно,\nЛишились в серці, як засіяне зерно...\n"
+      },
+      {
+        "id": 2,
+        "coupletString": "Просто не забувай, як я тебе кохаю...\nПросто запам'ятай цей час зі мною...\nПросто не забувай мої зелені очі...\nПросто запам'ятай мене таким навік...\n"
+      },
+      {
+        "id": 3,
+        "coupletString": "Для щастя часто достатньо лиш зустріти\nОдну людину, що десь далеко в світі,\nЄдине місце, де я хочу зараз бути,\nЦе твоє серце, бо воно мене так жде"
+      }
+    ],
+    "mp3": "file:/Users/admin-kv/IdeaProjects/testfx/src/main/resources/com/example/testfx/songs/naida_illia_prosto_ne_zabuvaj.mp3"
+  },
+  {
+    "authorName": "Ілля Найда",
+    "songName": "Ти моє небо",
+    "couplets": [
+      {
+        "id": 1,
+        "coupletString": "Я за тебе мила помолюсь,\nЗапитаю в Бога, як ти там,\nСподіваюсь, скоро повернусь,\nВірю, посміхнуться зорі нам\n"
+      },
+      {
+        "id": 2,
+        "coupletString": "Ти - моє небо і земля\nТи - мої вітер і вода\nТи та єдина дорога\nТи - моя мрія, ти моя!\n"
+      },
+      {
+        "id": 3,
+        "coupletString": "Я тебе так сильно покохав,\nДвічі не закохуються так,\nЯ на тебе довго так чекав,\nДо щастя залишається ще крок."
+      }
+    ],
+    "mp3": "file:/Users/admin-kv/IdeaProjects/testfx/src/main/resources/com/example/testfx/songs/naida_illia_ti_mo_nebo.mp3"
+  },
+  {
+    "authorName": "Ілля Найда",
+    "songName": "Запах квітів",
+    "couplets": [
+      {
+        "id": 1,
+        "coupletString": "Не одна вже минула зима та сніг мете,\nНе одна щебетала весна та дощ паде,\nЯ на гору високу піду, знайду тебе,\nБо кохання у серці моїм не пройде,\nНе пройде...\n"
+      },
+      {
+        "id": 2,
+        "coupletString": "Запах квітів нам приносить кохання,\nА кохання нам приносить страждання.\nТи для мене\nВ цьому світі остання,\nТи остання...\n"
+      },
+      {
+        "id": 3,
+        "coupletString": "Хоч роки, як вода, пропливуть і дощ пройде,\nХоч багато в житті я зроблю - та все мине,\nТільки ти не забудь, як люблю одну тебе,\nІ кохання у серці моїм не пройде, не пройде...\n"
+      }
+    ],
+    "mp3": "file:/Users/admin-kv/IdeaProjects/testfx/src/main/resources/com/example/testfx/songs/naida_illia_zapah_kvitiv.mp3"
   }
 ]
 
