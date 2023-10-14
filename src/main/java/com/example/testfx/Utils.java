@@ -1,10 +1,14 @@
 package com.example.testfx;
 
-import javafx.beans.value.ChangeListener;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
+import javafx.util.Duration;
 
 import java.util.List;
 
@@ -79,5 +83,24 @@ public class Utils {
                 textField.setText(oldValue);
             }
         });
+    }
+
+    public MediaPlayer getNewMediaPlayer(Media media, Slider slider, boolean isSliderBeingDragged, Label endTimeLabel){
+        MediaPlayer mediaPlayer = new MediaPlayer(media);
+        mediaPlayer.currentTimeProperty().addListener((observable, oldValue, newValue) -> {
+            if (!isSliderBeingDragged) {
+                Duration totalTime = mediaPlayer.getTotalDuration();
+                double value = newValue.toSeconds() / totalTime.toSeconds();
+                slider.setValue(value);
+            }
+        });
+        mediaPlayer.setOnReady(()->{
+            long totalSeconds = (long) media.getDuration().toSeconds();
+            long minutes = totalSeconds / 60;
+            long seconds = totalSeconds % 60;
+            String formattedTime = String.format("%02d:%02d", minutes, seconds);
+            endTimeLabel.setText(formattedTime);
+        });
+        return mediaPlayer;
     }
 }

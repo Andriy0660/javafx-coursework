@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<Pane prefHeight="659.0" prefWidth="951.0" styleClass="transparentFocus" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.testfx.Controller">
+    <stylesheets>
+        <URL value="@styles.css" />
+    </stylesheets>
+
+    <ScrollPane fx:id="scrollPaneWithListOfSongs" hbarPolicy="NEVER" layoutX="1.0" layoutY="-2.0" prefHeight="360.0" prefWidth="263.0" vbarPolicy="ALWAYS" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml">
+        <VBox fx:id="songContainer" prefHeight="360.0" prefWidth="248.0">
+
+        </VBox>
+    </ScrollPane>
+
+    <ScrollPane fx:id="scrollPaneWithTextOfSong" hbarPolicy="NEVER" layoutX="263.0" layoutY="73.0" prefHeight="285.0" prefWidth="331.0">
+        <TextFlow fx:id="lyricsTextArea" maxWidth="330.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="262.0" prefWidth="322.0" style="-fx-border-width: 2;">
+            <padding>
+                <Insets bottom="15.0" left="30.0" right="15.0" top="15.0" />
+            </padding>
+        </TextFlow>
+    </ScrollPane>
+
+    <Pane fx:id="searchPane" layoutX="264.0" prefHeight="73.0" prefWidth="329.0">
+        <ComboBox fx:id="searchTypeComboBox" layoutX="78.0" layoutY="7.0" onAction="#searchTypeComboBoxOnAction" prefHeight="25.0" prefWidth="84.0" />
+        <TextField fx:id="coupletNumberTextField" layoutX="247.0" layoutY="7.0" prefHeight="25.0" prefWidth="28.0" visible="false" />
+        <Text fx:id="searchResultLabel" layoutX="7.0" layoutY="55.0" visible="false" wrappingWidth="309.9999862611294" />
+
+        <Button fx:id="searchButton" layoutX="278.0" layoutY="7.0" onAction="#searchButtonOnAction" prefHeight="16.0" prefWidth="39.0" text="🔍" />
+        <TextField fx:id="searchField" layoutX="172.0" layoutY="7.0" prefHeight="25.0" prefWidth="70.0" promptText="пошук" />
+    </Pane>
+
+    <Line endX="230.0" layoutX="365.0" layoutY="73.0" startX="-100.0" />
+
+    <Pane fx:id="paneWithOtherFunctionality" layoutX="264.0" layoutY="450.0" prefHeight="73.0" prefWidth="329.0">
+        <Button fx:id="shuffleButton" layoutX="75.0" layoutY="7.0" mnemonicParsing="false" onAction="#shuffleButtonOnAction" prefHeight="25.0" prefWidth="54.0" text="Шафл" />
+        <Button fx:id="sortWordsButton" layoutX="218.0" layoutY="8.0" mnemonicParsing="false" onAction="#sortWordsButtonOnAction" text="Сорт." />
+        <Button fx:id="lastRowsButton" layoutX="134.0" layoutY="7.0" mnemonicParsing="false" onAction="#lastRowsButtonOnAction" prefHeight="25.0" prefWidth="77.0" text="Ост. рядки" />
+        <Button fx:id="changeRowButton" layoutX="6.0" layoutY="39.0" mnemonicParsing="false" onAction="#changeRowButtonOnAction" text="Зам. ряд." />
+        <TextField fx:id="numberOfCoupletToBeReplaced" layoutX="80.0" layoutY="40.0" prefHeight="25.0" prefWidth="28.0" visible="false" />
+        <TextField fx:id="numberOfRowToBeReplaced" layoutX="111.0" layoutY="40.0" prefHeight="25.0" prefWidth="28.0" visible="false" />
+        <TextField fx:id="newRowToBeInserted" layoutX="144.0" layoutY="40.0" prefHeight="25.0" prefWidth="121.0" visible="false" />
+        <Button fx:id="changeRowOKButton" layoutX="271.0" layoutY="40.0" mnemonicParsing="false" onAction="#changeRowButtonOKOnAction" prefHeight="25.0" prefWidth="54.0" text="OK" visible="false" />
+        <Button fx:id="sonetButton" layoutX="270.0" layoutY="9.0" mnemonicParsing="false" onAction="#isSonnetButtonOnAction" text="Сонет?" />
+        <Text fx:id="otherFunctionalityResultLabel" layoutX="98.0" layoutY="56.0" visible="false" wrappingWidth="226.0" />
+    </Pane>
+
+    <Button fx:id="leftArrowButton" disable="true" layoutX="269.0" layoutY="7.0" mnemonicParsing="false" onAction="#leftArrowButtonOnAction" prefHeight="25.0" prefWidth="28.0" text="⮜" />
+    <Button fx:id="rightArrowButton" layoutX="304.0" layoutY="7.0" mnemonicParsing="false" onAction="#rightArrowButtonOnAction" prefHeight="25.0" prefWidth="28.0" text="⮞" />
+
+    <!--        media player -->
+    <HBox layoutY="360.0" prefHeight="60.0" prefWidth="594.0">
+
+        <!--        current time -->
+        <VBox prefHeight="200.0" prefWidth="45.0">
+            <Label fx:id="currentTimeLabel" text="00:00">
+                <VBox.margin>
+                    <Insets left="5.0" top="28.0"/>
+                </VBox.margin>
+            </Label>
+        </VBox>
+
+        <!--        song slider, info about song -->
+        <VBox prefHeight="60.0" prefWidth="360.0">
+            <HBox maxHeight="30.0" prefHeight="30.0" prefWidth="200.0">
+                <Label fx:id="authorNameLabel" text="Andrii Snovyda">
+                    <HBox.margin>
+                        <Insets left="60.0" top="10.0"/>
+                    </HBox.margin>
+                </Label>
+                <Label maxHeight="30.0" maxWidth="15.0" prefHeight="0.0" prefWidth="15.0" text="-">
+                    <HBox.margin>
+                        <Insets left="20.0"/>
+                    </HBox.margin>
+                    <font>
+                        <Font size="20.0"/>
+                    </font>
+                </Label>
+                <Label fx:id="songNameLabel" text="Hello World">
+                    <HBox.margin>
+                        <Insets left="20.0" top="10.0"/>
+                    </HBox.margin>
+                </Label>
+            </HBox>
+
+            <HBox prefHeight="30.0">
+                <Slider fx:id="slider" onMouseDragReleased="#sliderOnMouseReleased"
+                        onMousePressed="#sliderOnMousePressed" onMouseReleased="#sliderOnMouseReleased"
+                        prefHeight="15.0" prefWidth="350.0"/>
+            </HBox>
+        </VBox>
+
+        <!--        end time -->
+        <VBox prefHeight="200.0" prefWidth="45.0">
+            <Label fx:id="endTimeLabel" text="00:00">
+                <VBox.margin>
+                    <Insets left="5.0" top="28.0"/>
+                </VBox.margin>
+            </Label>
+        </VBox>
+
+        <!--        buttons -->
+        <HBox prefHeight="100.0" prefWidth="150.0">
+            <Button fx:id="previousSongButton" mnemonicParsing="false" onAction="#previousSongButtonOnAction"
+                    prefHeight="36.0" prefWidth="45.0" text="⏪">
+                <font>
+                    <Font size="30.0"/>
+                </font>
+                <padding>
+                    <Insets bottom="-5.0" left="-8.0" right="-5.0" top="-5.0"/>
+                </padding>
+                <HBox.margin>
+                    <Insets top="15.0"/>
+                </HBox.margin>
+            </Button>
+
+            <Button fx:id="playButton" mnemonicParsing="false" onAction="#playButtonOnAction" prefHeight="36.0"
+                    prefWidth="36.0" text="▶">
+                <font>
+                    <Font size="30.0"/>
+                </font>
+                <padding>
+                    <Insets bottom="-5.0" left="-5.0" right="-5.0" top="-5.0"/>
+                </padding>
+                <HBox.margin>
+                    <Insets left="10.0" top="15.0"/>
+                </HBox.margin>
+            </Button>
+
+            <Button fx:id="pauseButton" mnemonicParsing="false" onAction="#pauseButtonOnAction" prefHeight="36.0"
+                    prefWidth="36.0" text="⏸" visible="false">
+                <font>
+                    <Font size="25.0"/>
+                </font>
+                <padding>
+                    <Insets bottom="-2.0" left="-5.0" right="-5.0" top="-5.0"/>
+                </padding>
+                <HBox.margin>
+                    <Insets left="-36.0" top="15.0"/>
+                </HBox.margin>
+            </Button>
+
+            <Button fx:id="nextSongButton" mnemonicParsing="false" onAction="#nextSongButtonOnAction" prefHeight="36.0"
+                    prefWidth="45.0" text="⏩">
+                <font>
+                    <Font size="30.0"/>
+                </font>
+                <padding>
+                    <Insets bottom="-5.0" left="-5.0" right="-7.0" top="-5.0"/>
+                </padding>
+                <HBox.margin>
+                    <Insets left="10.0" top="15.0"/>
+                </HBox.margin>
+            </Button>
+        </HBox>
+    </HBox>
+
+
+</Pane>
