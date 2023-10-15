@@ -24,11 +24,14 @@
                 <Insets bottom="15.0" left="30.0" right="15.0" top="15.0" />
             </padding>
         </TextFlow>
+      <padding>
+         <Insets bottom="15.0" top="15.0" />
+      </padding>
     </ScrollPane>
 
     <Pane fx:id="searchPane" layoutX="264.0" prefHeight="73.0" prefWidth="329.0">
         <ComboBox fx:id="searchTypeComboBox" layoutX="78.0" layoutY="7.0" onAction="#searchTypeComboBoxOnAction" prefHeight="25.0" prefWidth="84.0" />
-        <TextField fx:id="coupletNumberTextField" layoutX="247.0" layoutY="7.0" prefHeight="25.0" prefWidth="28.0" visible="false" />
+        <TextField fx:id="coupletNumberTextField" layoutX="247.0" layoutY="7.0" prefHeight="25.0" prefWidth="28.0" promptText="id" visible="false" />
         <Text fx:id="searchResultLabel" layoutX="7.0" layoutY="55.0" visible="false" wrappingWidth="309.9999862611294" />
 
         <Button fx:id="searchButton" layoutX="278.0" layoutY="7.0" onAction="#searchButtonOnAction" prefHeight="16.0" prefWidth="39.0" text="🔍" />
@@ -42,9 +45,9 @@
         <Button fx:id="sortWordsButton" layoutX="218.0" layoutY="8.0" mnemonicParsing="false" onAction="#sortWordsButtonOnAction" text="Сорт." />
         <Button fx:id="lastRowsButton" layoutX="134.0" layoutY="7.0" mnemonicParsing="false" onAction="#lastRowsButtonOnAction" prefHeight="25.0" prefWidth="77.0" text="Ост. рядки" />
         <Button fx:id="changeRowButton" layoutX="6.0" layoutY="39.0" mnemonicParsing="false" onAction="#changeRowButtonOnAction" text="Зам. ряд." />
-        <TextField fx:id="numberOfCoupletToBeReplaced" layoutX="80.0" layoutY="40.0" prefHeight="25.0" prefWidth="28.0" visible="false" />
-        <TextField fx:id="numberOfRowToBeReplaced" layoutX="111.0" layoutY="40.0" prefHeight="25.0" prefWidth="28.0" visible="false" />
-        <TextField fx:id="newRowToBeInserted" layoutX="144.0" layoutY="40.0" prefHeight="25.0" prefWidth="121.0" visible="false" />
+        <TextField fx:id="numberOfCoupletToBeReplaced" layoutX="80.0" layoutY="40.0" prefHeight="25.0" prefWidth="28.0" promptText="id" visible="false" />
+        <TextField fx:id="numberOfRowToBeReplaced" layoutX="111.0" layoutY="40.0" prefHeight="25.0" prefWidth="28.0" promptText="id" visible="false" />
+        <TextField fx:id="newRowToBeInserted" layoutX="144.0" layoutY="40.0" prefHeight="25.0" prefWidth="121.0" promptText="стрічка" visible="false" />
         <Button fx:id="changeRowOKButton" layoutX="271.0" layoutY="40.0" mnemonicParsing="false" onAction="#changeRowButtonOKOnAction" prefHeight="25.0" prefWidth="54.0" text="OK" visible="false" />
         <Button fx:id="sonetButton" layoutX="270.0" layoutY="9.0" mnemonicParsing="false" onAction="#isSonnetButtonOnAction" text="Сонет?" />
         <Text fx:id="otherFunctionalityResultLabel" layoutX="98.0" layoutY="56.0" visible="false" wrappingWidth="226.0" />
@@ -57,11 +60,14 @@
     <HBox layoutY="360.0" prefHeight="60.0" prefWidth="594.0">
 
         <!--        current time -->
-        <VBox prefHeight="200.0" prefWidth="45.0">
+        <VBox prefHeight="200.0" prefWidth="50.0">
             <Label fx:id="currentTimeLabel" text="00:00">
                 <VBox.margin>
                     <Insets left="5.0" top="28.0" />
                 </VBox.margin>
+            <font>
+               <Font name="System Bold" size="14.0" />
+            </font>
             </Label>
         </VBox>
 
@@ -70,21 +76,27 @@
             <HBox maxHeight="30.0" prefHeight="30.0" prefWidth="200.0">
                 <Label fx:id="authorNameLabel" text="Andrii Snovyda">
                     <HBox.margin>
-                        <Insets left="60.0" top="10.0" />
+                        <Insets left="20.0" top="5.0" />
                     </HBox.margin>
+               <font>
+                  <Font name="Cambria Bold" size="17.0" />
+               </font>
                 </Label>
                 <Label maxHeight="30.0" maxWidth="15.0" prefHeight="0.0" prefWidth="15.0" text="-">
                     <HBox.margin>
-                        <Insets left="20.0" />
+                        <Insets left="10.0" />
                     </HBox.margin>
                     <font>
-                        <Font size="20.0" />
+                        <Font name="System Bold" size="22.0" />
                     </font>
                 </Label>
                 <Label fx:id="songNameLabel" text="Hello World">
                     <HBox.margin>
-                        <Insets left="20.0" top="10.0" />
+                        <Insets left="10.0" top="5.0" />
                     </HBox.margin>
+               <font>
+                  <Font name="Cambria Bold" size="17.0" />
+               </font>
                 </Label>
             </HBox>
 
@@ -97,8 +109,11 @@
         <VBox prefHeight="200.0" prefWidth="45.0">
             <Label fx:id="endTimeLabel" text="00:00">
                 <VBox.margin>
-                    <Insets left="5.0" top="28.0" />
+                    <Insets top="28.0" />
                 </VBox.margin>
+            <font>
+               <Font name="System Bold" size="14.0" />
+            </font>
             </Label>
         </VBox>
 

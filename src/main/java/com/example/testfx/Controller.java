@@ -15,12 +15,11 @@ import javafx.scene.text.TextFlow;
 import javafx.util.Duration;
 
 import java.io.File;
-import java.lang.reflect.Field;
 import java.util.*;
 import java.util.stream.Collectors;
 
 public class Controller {
-    private Utils utils;
+    private Utils utils = new Utils();
 
     @FXML
     private VBox songContainer;
@@ -32,11 +31,10 @@ public class Controller {
     private Button rightArrowButton;
 
     @FXML
-    private ScrollPane scrollPaneWithListOfSongs;
-    @FXML
     private ScrollPane scrollPaneWithTextOfSong;
     @FXML
     private TextFlow lyricsTextArea;
+    private int currentSongIndex;
 
     //searching
     @FXML
@@ -55,14 +53,6 @@ public class Controller {
     // other functionality
     @FXML
     private Pane paneWithOtherFunctionality;
-    @FXML
-    private Button lastRowsButton;
-    @FXML
-    private Button shuffleButton;
-    @FXML
-    private Button sortWordsButton;
-    @FXML
-    private Button changeRowButton;
     @FXML
     private Button changeRowOKButton;
     @FXML
@@ -116,10 +106,9 @@ public class Controller {
             songContainer.getChildren().add(songBlock);
         }
 
-        //initialize utils
-        utils = new Utils(getAllButtons(), songs);
 
         Song initialSong = songs.get(0);
+        currentSongIndex = 0;
         VBox songBox = (VBox)songContainer.getChildren().get(0);
         authorLabel = (Label) songBox.getChildren().get(0);
         songLabel = (Label) songBox.getChildren().get(1);
@@ -163,24 +152,6 @@ public class Controller {
 
     }
 
-    private List<Button> getAllButtons() {
-        List<Button> allButtonsList = new ArrayList<>();
-        Field[] fields = this.getClass().getDeclaredFields();
-        for (Field field : fields) {
-            if (field.getType() == Button.class) {
-                try {
-                    field.setAccessible(true);
-                    Button button = (Button) field.get(this);
-                    if (button != null) {
-                        allButtonsList.add(button);
-                    }
-                } catch (IllegalAccessException ignored) {
-                    System.out.println("IllegalAccess to one of the buttons");
-                }
-            }
-        }
-        return allButtonsList;
-    }
     private VBox createSongBlock(Song song) {
         VBox songBox = new VBox();
         songBox.setStyle("-fx-background-color: #f0f0f0;" +
@@ -212,6 +183,8 @@ public class Controller {
             songLabel.setTextFill(Color.RED);
 
             int index = songs.indexOf(song);
+            currentSongIndex  = index;
+
             if(index == 0){
                 previousSongButton.setDisable(true);
             }
@@ -237,7 +210,6 @@ public class Controller {
             slider.setValue(0);
 
             scrollPaneWithTextOfSong.requestFocus();
-            utils.enableAllButtonsExcept(playButton,pauseButton,previousSongButton,nextSongButton, rightArrowButton, leftArrowButton);
         });
 
         return songBox;
@@ -343,7 +315,7 @@ public class Controller {
             return ((Text)lyricsTextArea.getChildren().get(0)).getText();
         } else {
             int numberOfCouplet = Integer.parseInt(coupletNumberTextField.getText()) - 1;
-            Song actualSong = utils.getActualSongInTextArea(lyricsTextArea);
+            Song actualSong = songs.get(currentSongIndex);
             Song.Couplet couplet = actualSong.getCouplets()[numberOfCouplet];
             return couplet.getCoupletString();
         }
@@ -351,9 +323,9 @@ public class Controller {
 
     // other functionality
     public void lastRowsButtonOnAction() {
-        Song song = utils.getActualSongInTextArea(lyricsTextArea);
+        Song actualSong = songs.get(currentSongIndex);
 
-        Song.Couplet[] couplets = song.getCouplets();
+        Song.Couplet[] couplets = actualSong.getCouplets();
         StringBuilder res = new StringBuilder();
         for (Song.Couplet value : couplets) {
             String[] lines = value.getCoupletString().split("\n");
@@ -365,15 +337,9 @@ public class Controller {
         lyricsTextArea.getChildren().add(newText);
 
         scrollPaneWithTextOfSong.requestFocus();
-
-        utils.disableAllButtonsExcept(playButton,pauseButton, rightArrowButton, leftArrowButton);
-
-        otherFunctionalityResultLabel.setText("Виберіть пісню щоб продовжити");
-        otherFunctionalityResultLabel.setFill(Color.ORANGE);
-        otherFunctionalityResultLabel.setVisible(true);
     }
     public void shuffleButtonOnAction(){
-        Song song = utils.getActualSongInTextArea(lyricsTextArea);
+        Song song = songs.get(currentSongIndex);
 
         List<String> list = Arrays.stream(song.getCouplets()).map(Song.Couplet::getCoupletString).collect(Collectors.toList());
         Collections.shuffle(list);
@@ -388,30 +354,28 @@ public class Controller {
         scrollPaneWithTextOfSong.requestFocus();
     }
     public void sortWordsButtonOnAction(){
-        Song song = utils.getActualSongInTextArea(lyricsTextArea);
+        Song song = songs.get(currentSongIndex);
 
         List<String> listOfWords = new ArrayList<>();
         for (Song.Couplet couplet : song.getCouplets()){
             for(String word : couplet.getCoupletString().split("[,\\s]+")){
-                if(word.toLowerCase().charAt(0) == 'a' || word.toLowerCase().charAt(0) == 'o' ||
-                        word.toLowerCase().charAt(0) == 'e' || word.toLowerCase().charAt(0) == 'y' ||
-                        word.toLowerCase().charAt(0) == 'i' || word.toLowerCase().charAt(0) == 'u')
-                    listOfWords.add(word);
+                if(word.toLowerCase().charAt(0) == 'а' || word.toLowerCase().charAt(0) == 'о' ||
+                        word.toLowerCase().charAt(0) == 'е' || word.toLowerCase().charAt(0) == 'у' ||
+                        word.toLowerCase().charAt(0) == 'і' || word.toLowerCase().charAt(0) == 'и')
+                    listOfWords.add(word.toLowerCase());
             }
         }
         listOfWords.sort(Comparator.naturalOrder());
-        String res = String.join(" ", listOfWords);
+        listOfWords = listOfWords.stream()
+                .map(s -> s.substring(0,1).toUpperCase()+s.substring(1).toLowerCase())
+                .collect(Collectors.toList());
+
+        String res = String.join("\n", listOfWords);
         lyricsTextArea.getChildren().clear();
         Text newText = new Text(res);
         lyricsTextArea.getChildren().add(newText);
 
         scrollPaneWithTextOfSong.requestFocus();
-
-        utils.disableAllButtonsExcept(playButton,pauseButton, rightArrowButton, leftArrowButton);
-
-        otherFunctionalityResultLabel.setText("Виберіть пісню щоб продовжити");
-        otherFunctionalityResultLabel.setFill(Color.ORANGE);
-        otherFunctionalityResultLabel.setVisible(true);
     }
 
     public void changeRowButtonOnAction(){
@@ -420,7 +384,9 @@ public class Controller {
         numberOfCoupletToBeReplaced.setVisible(true);
         numberOfRowToBeReplaced.setVisible(true);
         changeRowOKButton.setVisible(true);
-        utils.disableButtons(sortWordsButton,lastRowsButton,sonetButton);
+
+        //to avoid conflict in otherFuncResultLabel
+        sonetButton.setDisable(true);
     }
     public void changeRowButtonOKOnAction() {
         newRowToBeInserted.setVisible(false);
@@ -428,7 +394,8 @@ public class Controller {
         numberOfRowToBeReplaced.setVisible(false);
         changeRowOKButton.setVisible(false);
 
-        Song song = utils.getActualSongInTextArea(lyricsTextArea);
+        Song song = songs.get(currentSongIndex);
+
         String newRow = this.newRowToBeInserted.getText();
         try{
             if(newRow.length() == 0)
@@ -466,12 +433,13 @@ public class Controller {
                 otherFunctionalityResultLabel.setFill(Color.RED);
 
             otherFunctionalityResultLabel.setVisible(true);
-            utils.enableButtons(sortWordsButton,lastRowsButton,sonetButton);
+            sonetButton.setDisable(false);
         }
     }
 
     public void isSonnetButtonOnAction(){
-        Song song = utils.getActualSongInTextArea(lyricsTextArea);
+        Song song = songs.get(currentSongIndex);
+
         int countOfRows = 0;
         String[] lines;
         for(Song.Couplet couplet : song.getCouplets()){
@@ -512,9 +480,10 @@ public class Controller {
         playButton.setVisible(true);
         mediaPlayer.pause();
     }
-
+    //TODO: export some code to new util func
     public void changeSongInMP3Player(boolean isNextSong){
-        Song song = utils.getActualSongInTextArea(lyricsTextArea);
+        Song song = songs.get(currentSongIndex);
+
         int index = songs.indexOf(song);
         int newIndex;
         Song newSong;
@@ -534,7 +503,7 @@ public class Controller {
                 previousSongButton.setDisable(true);
             }
         }
-
+        currentSongIndex = newIndex;
         this.authorLabel.setTextFill(Color.BLACK);
         this.songLabel.setTextFill(Color.BLACK);
         VBox songBox = (VBox) songContainer.getChildren().get(newIndex);
@@ -564,7 +533,6 @@ public class Controller {
         slider.setValue(0);
 
         scrollPaneWithTextOfSong.requestFocus();
-        utils.enableAllButtonsExcept(leftArrowButton, rightArrowButton,previousSongButton,nextSongButton);
     }
     public void nextSongButtonOnAction() {
         changeSongInMP3Player(true);
