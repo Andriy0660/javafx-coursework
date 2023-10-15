@@ -1,8 +1,14 @@
 package com.example.testfx;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectWriter;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.application.Platform;
+import javafx.beans.binding.Bindings;
+import javafx.beans.binding.BooleanBinding;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -15,21 +21,32 @@ import javafx.scene.text.TextFlow;
 import javafx.util.Duration;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.*;
+import java.util.concurrent.Semaphore;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class Controller {
     private Utils utils = new Utils();
+    @FXML
+    private Pane mainPane;
 
     @FXML
     private VBox songContainer;
     private List<Song> songs = new ArrayList<>();
+    private Label currentAuthorLabel;
+    private Label currentSongLabel;
 
     @FXML
     private Button leftArrowButton;
     @FXML
     private Button rightArrowButton;
 
+    @FXML
+    private ScrollPane scrollPaneWithListOfSongs;
     @FXML
     private ScrollPane scrollPaneWithTextOfSong;
     @FXML
@@ -88,8 +105,24 @@ public class Controller {
     @FXML
     private Button previousSongButton;
 
-    private Label authorLabel;
-    private Label songLabel;
+
+
+    @FXML
+    private Pane addSongPane;
+    @FXML
+    private Button addSongOKButton;
+    @FXML
+    private Button addSongCancelButton;
+    @FXML
+    private TextField addSongAuthorName;
+    @FXML
+    private TextField addSongSongName;
+    @FXML
+    private TextField addSongMP3;
+    @FXML
+    private TextArea addSongTextOfSong;
+    @FXML
+    private Label addSongErrorMessage;
 
     public void initialize() {
         //initialize songs
@@ -110,10 +143,10 @@ public class Controller {
         Song initialSong = songs.get(0);
         currentSongIndex = 0;
         VBox songBox = (VBox)songContainer.getChildren().get(0);
-        authorLabel = (Label) songBox.getChildren().get(0);
-        songLabel = (Label) songBox.getChildren().get(1);
-        authorLabel.setTextFill(Color.RED);
-        songLabel.setTextFill(Color.RED);
+        currentAuthorLabel = (Label) songBox.getChildren().get(0);
+        currentSongLabel = (Label) songBox.getChildren().get(1);
+        currentAuthorLabel.setTextFill(Color.RED);
+        currentSongLabel.setTextFill(Color.RED);
 
         //initialize scrollPaneWithTextOfSong with first song
         String initialSongText = utils.getTextForSong(initialSong);
@@ -150,6 +183,30 @@ public class Controller {
         previousSongButton.setDisable(true);
         previousSongButton.setFocusTraversable(false);
 
+        //initialize add song
+        BooleanBinding isButtonActive = Bindings.createBooleanBinding(() ->
+                        !addSongAuthorName.getText().trim().isEmpty() &&
+                                !addSongSongName.getText().trim().isEmpty() &&
+                                !addSongTextOfSong.getText().trim().isEmpty() &&
+                                addSongMP3.getText().matches("^C:\\\\.*\\.mp3$"),
+                addSongAuthorName.textProperty(), addSongSongName.textProperty(),
+                addSongTextOfSong.textProperty(),addSongMP3.textProperty());
+
+        addSongOKButton.disableProperty().bind(isButtonActive.not());
+
+
+        addSongMP3.textProperty().addListener((observable, oldValue, mp3Path) -> {
+            addSongErrorMessage.setVisible(true);
+            if(mp3Path.length()>0){
+            if (Pattern.matches("^C:\\\\.*\\.mp3$", mp3Path)) {
+                addSongErrorMessage.setText("");
+            } else {
+                addSongErrorMessage.setText("Неправильний формат");
+                addSongErrorMessage.setTextFill(Color.RED);
+            }}
+        });
+
+
     }
 
     private VBox createSongBlock(Song song) {
@@ -172,10 +229,10 @@ public class Controller {
         songBox.getChildren().addAll(authorLabel, songLabel);
 
         songBox.setOnMouseClicked( e -> {
-            this.authorLabel.setTextFill(Color.BLACK);
-            this.songLabel.setTextFill(Color.BLACK);
-            this.authorLabel = authorLabel;
-            this.songLabel = songLabel;
+            this.currentAuthorLabel.setTextFill(Color.BLACK);
+            this.currentSongLabel.setTextFill(Color.BLACK);
+            this.currentAuthorLabel = authorLabel;
+            this.currentSongLabel = songLabel;
 
             previousSongButton.setDisable(false);
             nextSongButton.setDisable(false);
@@ -504,13 +561,13 @@ public class Controller {
             }
         }
         currentSongIndex = newIndex;
-        this.authorLabel.setTextFill(Color.BLACK);
-        this.songLabel.setTextFill(Color.BLACK);
+        this.currentAuthorLabel.setTextFill(Color.BLACK);
+        this.currentSongLabel.setTextFill(Color.BLACK);
         VBox songBox = (VBox) songContainer.getChildren().get(newIndex);
         Label authorLabel = (Label)songBox.getChildren().get(0);
         Label songLabel = (Label)songBox.getChildren().get(1);
-        this.authorLabel = authorLabel;
-        this.songLabel = songLabel;
+        this.currentAuthorLabel = authorLabel;
+        this.currentSongLabel = songLabel;
 
         authorLabel.setTextFill(Color.RED);
         songLabel.setTextFill(Color.RED);
@@ -559,6 +616,61 @@ public class Controller {
         mediaPlayer.setOnEndOfMedia(this::nextSongButtonOnAction);
         return mediaPlayer;
     }
+
+    public void addSongCancelButtonOnAction(){
+        addSongPane.setLayoutY(600);
+        scrollPaneWithListOfSongs.setDisable(false);
+        scrollPaneWithTextOfSong.setDisable(false);
+    }
+    public void addSongOKButtonOnAction(){
+        String authorName = addSongAuthorName.getText();
+        String songName = addSongSongName.getText();
+        String mp3Path = addSongMP3.getText();
+        String textOfSong = addSongTextOfSong.getText();
+
+        mp3Path = mp3Path.trim().substring(2);
+        mp3Path = "file:" + mp3Path;
+        mp3Path = mp3Path.replace("\\","/");
+
+        File file = new File(addSongMP3.getText());
+
+        if (file.exists()) {
+            Song song = new Song(authorName,songName, new Song.Couplet[]{new Song.Couplet(1, textOfSong)},mp3Path);
+            songs.add(song);
+
+            ObjectMapper objectMapper = new ObjectMapper();
+            ObjectWriter objectWriter = objectMapper.writer().withDefaultPrettyPrinter();
+
+            try {
+                objectWriter.writeValue(new File("src/main/resources/com/example/testfx/data.json"), songs);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+
+            VBox newSongBox = createSongBlock(song);
+            songContainer.getChildren().add(newSongBox);
+            addSongErrorMessage.setText("Пісню додано");
+            addSongErrorMessage.setTextFill(Color.GREEN);
+            addSongTextOfSong.setText("");
+            addSongAuthorName.setText("");
+            addSongSongName.setText("");
+
+        } else {
+            addSongErrorMessage.setText("Немає пісні за цим шляхом");
+            addSongErrorMessage.setTextFill(Color.RED);
+        }
+        addSongMP3.setText("");
+    }
+
+
+    public void addSongButtonOnAction(){
+        scrollPaneWithTextOfSong.setDisable(true);
+        scrollPaneWithListOfSongs.setDisable(true);
+        addSongPane.setLayoutY(100);
+    }
+
+
+
 
 
     //TODO: selection sort

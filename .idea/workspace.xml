@@ -7,6 +7,7 @@
     <list default="true" id="e45bf0ad-58c1-45ed-bc61-57a03735f682" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/testfx/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/testfx/Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/testfx/Song.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/testfx/Song.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/testfx/Utils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/testfx/Utils.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/testfx/main-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/testfx/main-view.fxml" afterDir="false" />
     </list>
@@ -70,7 +71,8 @@
       <workItem from="1697283471442" duration="5181000" />
       <workItem from="1697293616369" duration="29127000" />
       <workItem from="1697325150567" duration="2000" />
-      <workItem from="1697358825595" duration="2442000" />
+      <workItem from="1697358825595" duration="2815000" />
+      <workItem from="1697381773083" duration="18117000" />
     </task>
     <servers />
   </component>

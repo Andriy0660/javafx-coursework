@@ -16,9 +16,9 @@ public class Utils {
 
     public String getTextForSong(Song song) {
         StringBuilder res = new StringBuilder();
-        res.append(song.getSongName()).append("\n\n\t");
+        res.append(song.getSongName()).append("\n\n");
         for(int i=0;i<song.getCouplets().length;i++) {
-            res.append(song.getCouplets()[i]).append("\n\n\t");
+            res.append(song.getCouplets()[i]).append("\n\n");
         }
         return new String(res);
     }

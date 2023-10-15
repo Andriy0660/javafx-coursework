@@ -8,21 +8,14 @@ public class Song {
     private Couplet[] couplets;
     private String mp3;
 
-    public String getMp3() {
-        return mp3;
-    }
-
-    public void setMp3(String mp3) {
-        this.mp3 = mp3;
-    }
-
     public Song() {
     }
 
-    public Song(String authorName, String songName, Couplet[] couplets) {
+    public Song(String authorName, String songName, Couplet[] couplets, String mp3) {
         this.authorName = authorName;
         this.songName = songName;
         this.couplets = couplets;
+        this.mp3 = mp3;
     }
 
     @Override
@@ -56,6 +49,13 @@ public class Song {
 
     public void setCouplets(Couplet[] couplets) {
         this.couplets = couplets;
+    }
+    public String getMp3() {
+        return mp3;
+    }
+
+    public void setMp3(String mp3) {
+        this.mp3 = mp3;
     }
     static class Couplet{
         private int id;
