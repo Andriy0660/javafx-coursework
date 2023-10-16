@@ -7,15 +7,17 @@ public class Song {
     private String songName;
     private Couplet[] couplets;
     private String mp3;
+    private String playlistName;
 
     public Song() {
     }
 
-    public Song(String authorName, String songName, Couplet[] couplets, String mp3) {
+    public Song(String authorName, String songName, Couplet[] couplets, String mp3, String playlistName) {
         this.authorName = authorName;
         this.songName = songName;
         this.couplets = couplets;
         this.mp3 = mp3;
+        this.playlistName = playlistName;
     }
 
     @Override
@@ -57,6 +59,15 @@ public class Song {
     public void setMp3(String mp3) {
         this.mp3 = mp3;
     }
+
+    public String getPlaylistName() {
+        return playlistName;
+    }
+
+    public void setPlaylistName(String playlistName) {
+        this.playlistName = playlistName;
+    }
+
     static class Couplet{
         private int id;
         private String coupletString;

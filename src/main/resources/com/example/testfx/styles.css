@@ -3,6 +3,15 @@
     -fx-faint-focus-color: transparent;
     -fx-focus-traversable: false;
 }
+.text-area .scroll-pane {
+    -fx-background-color: transparent;
+}
+.text-area .scroll-pane .viewport{
+    -fx-background-color: transparent;
+}
+.text-area .scroll-pane .content{
+    -fx-background-color: transparent;
+}
 /*.textflow {*/
 /*    -fx-background-image: url("istockphoto-670055748-612x612.jpg")*/
 /*}*/

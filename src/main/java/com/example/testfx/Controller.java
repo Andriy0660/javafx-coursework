@@ -4,7 +4,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.BooleanBinding;
 import javafx.beans.value.ChangeListener;
@@ -18,15 +17,13 @@ import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
-import java.util.concurrent.Semaphore;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
-import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class Controller {
@@ -59,7 +56,7 @@ public class Controller {
     @FXML
     private Button searchButton;
     @FXML
-    private Text searchResultLabel;
+    private Label searchResultLabel;
     @FXML
     private TextField searchField;
     @FXML
@@ -105,24 +102,43 @@ public class Controller {
     @FXML
     private Button previousSongButton;
 
-
+    //add song
 
     @FXML
     private Pane addSongPane;
     @FXML
     private Button addSongOKButton;
     @FXML
-    private Button addSongCancelButton;
-    @FXML
     private TextField addSongAuthorName;
     @FXML
     private TextField addSongSongName;
     @FXML
-    private TextField addSongMP3;
-    @FXML
     private TextArea addSongTextOfSong;
     @FXML
-    private Label addSongErrorMessage;
+    private Label addSongChooseSongLabel;
+    @FXML
+    private Label addSongChoosePlaylistLabel;
+    @FXML
+    private Label addSongSuccessLabel;
+    @FXML
+    private ComboBox<String> addSongChoosePlaylist;
+    @FXML
+    private String playlistNameForNewSong = null;
+    private String filePath = null;
+
+    private Set<String> playlistNamesSet = new HashSet<>();
+    @FXML
+    private ComboBox<String> playlistsComboBox;
+    @FXML
+    private Pane addPlaylistPane;
+    @FXML
+    private Button addPlaylistButton;
+    @FXML
+    private Button addPlaylistOKButton;
+    @FXML
+    private Button addPlaylistCancelButton;
+    @FXML
+    private TextField addPlaylistName;
 
     public void initialize() {
         //initialize songs
@@ -134,7 +150,10 @@ public class Controller {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        playlistNamesSet.add("Всі плейлисти");
         for (Song song : songs) {
+            playlistNamesSet.add(song.getPlaylistName());
             VBox songBlock = createSongBlock(song);
             songContainer.getChildren().add(songBlock);
         }
@@ -153,7 +172,32 @@ public class Controller {
         Text text = new Text(initialSongText);
         lyricsTextArea.getChildren().add(text);
 
-        //initialize search section and combo box
+        //initialize playlists combo box
+        playlistsComboBox.setItems(FXCollections.observableList(new ArrayList<>(playlistNamesSet)));
+        playlistsComboBox.getSelectionModel().select(0);
+        playlistsComboBox.setVisibleRowCount(7);
+
+        playlistsComboBox.valueProperty().addListener((observable, oldValue, newValue) -> {
+            String value = playlistsComboBox.getValue();
+            songContainer.getChildren().clear();
+            if(value == null) return;
+            if(value.equals("Всі плейлисти")){
+                for (Song song : songs) {
+                    VBox songBlock = createSongBlock(song);
+                    songContainer.getChildren().add(songBlock);
+                }
+            }
+            else {
+                for (Song song : songs) {
+                    if(!song.getPlaylistName().equals(value))
+                        continue;
+                    VBox songBlock = createSongBlock(song);
+                    songContainer.getChildren().add(songBlock);
+                }
+            }
+
+        });
+        //initialize search section and search combo box
         searchTypeComboBox.setItems(FXCollections.observableArrayList("Пісня", "Куплет"));
         searchTypeComboBox.getSelectionModel().select(0);
         searchTypeComboBox.setVisibleRowCount(2);
@@ -184,28 +228,42 @@ public class Controller {
         previousSongButton.setFocusTraversable(false);
 
         //initialize add song
+        List<String> newList = new ArrayList<>(playlistNamesSet);
+        newList.set(0,"Вибрати плейлист");
+
+        addSongChoosePlaylist.setItems(FXCollections.observableList(newList));
+        addSongChoosePlaylist.getSelectionModel().select(0);
+        addSongChoosePlaylist.setVisibleRowCount(4);
+        addSongChoosePlaylist.valueProperty().addListener((observable, oldValue, newValue) -> {
+            String value = addSongChoosePlaylist.getValue();
+            if(value == null) return;
+            if(value.equals("Вибрати плейлист")){
+                addSongChoosePlaylistLabel.setText("Виберіть плейлист");
+                addSongChoosePlaylistLabel.setTextFill(Color.RED);
+            }
+            else {
+                addSongSuccessLabel.setVisible(false);
+                playlistNameForNewSong = value;
+                addSongChoosePlaylistLabel.setText("Вибрано");
+                addSongChoosePlaylistLabel.setTextFill(Color.GREEN);
+            }
+        });
+
         BooleanBinding isButtonActive = Bindings.createBooleanBinding(() ->
                         !addSongAuthorName.getText().trim().isEmpty() &&
                                 !addSongSongName.getText().trim().isEmpty() &&
                                 !addSongTextOfSong.getText().trim().isEmpty() &&
-                                addSongMP3.getText().matches("^C:\\\\.*\\.mp3$"),
+                                addSongChooseSongLabel.getText().equals("Вибрано") &&
+                                addSongChoosePlaylistLabel.getText().equals("Вибрано"),
+
                 addSongAuthorName.textProperty(), addSongSongName.textProperty(),
-                addSongTextOfSong.textProperty(),addSongMP3.textProperty());
+                addSongTextOfSong.textProperty(),addSongChooseSongLabel.textProperty(),addSongChoosePlaylistLabel.textProperty());
 
         addSongOKButton.disableProperty().bind(isButtonActive.not());
 
-
-        addSongMP3.textProperty().addListener((observable, oldValue, mp3Path) -> {
-            addSongErrorMessage.setVisible(true);
-            if(mp3Path.length()>0){
-            if (Pattern.matches("^C:\\\\.*\\.mp3$", mp3Path)) {
-                addSongErrorMessage.setText("");
-            } else {
-                addSongErrorMessage.setText("Неправильний формат");
-                addSongErrorMessage.setTextFill(Color.RED);
-            }}
+        addPlaylistName.textProperty().addListener((observable, oldValue, newValue) -> {
+            addPlaylistOKButton.setDisable(newValue.isEmpty());
         });
-
 
     }
 
@@ -291,9 +349,17 @@ public class Controller {
 
     public void searchTypeComboBoxOnAction(){
         String selectedValue = searchTypeComboBox.getValue();
-        coupletNumberTextField.setVisible(selectedValue.equals("Куплет"));
+        if(selectedValue.equals("Куплет")) {
+            coupletNumberTextField.setVisible(true);
+            searchField.setPrefWidth(70);
+        } else {
+            coupletNumberTextField.setVisible(false);
+
+            searchField.setPrefWidth(102);
+        }
     }
     public void searchButtonOnAction(){
+        addPlaylistButton.setVisible(false);
         searchButton.setDisable(true);
 
         Timeline timelineDisableButton = new Timeline(new KeyFrame(Duration.seconds(2), e2 -> {
@@ -308,20 +374,31 @@ public class Controller {
 
         searchResultLabel.setText(resOfSearching);
         if(resOfSearching.equals("Знайдено")) {
-            searchResultLabel.setFill(Color.GREEN);
-            Timeline timelineSetTextBeforeSearching = new Timeline(
+            searchResultLabel.setTextFill(Color.GREEN);
+//            Timeline timelineSetTextBeforeSearching = new Timeline(
+//                new KeyFrame(Duration.seconds(2), event -> {
+//                    lyricsTextArea.getChildren().clear();
+//                    lyricsTextArea.getChildren().add(new Text(allTextInTextArea));
+//                })
+//            );
+//            timelineSetTextBeforeSearching.setCycleCount(1);
+//            timelineSetTextBeforeSearching.play();
+        }
+        else
+            searchResultLabel.setTextFill(Color.RED);
+
+        searchResultLabel.setVisible(true);
+        Timeline timelineSetTextBeforeSearching = new Timeline(
                 new KeyFrame(Duration.seconds(2), event -> {
                     lyricsTextArea.getChildren().clear();
                     lyricsTextArea.getChildren().add(new Text(allTextInTextArea));
-                })
-            );
-            timelineSetTextBeforeSearching.setCycleCount(1);
-            timelineSetTextBeforeSearching.play();
-        }
-        else
-            searchResultLabel.setFill(Color.RED);
+                    searchResultLabel.setVisible(false);
+                    addPlaylistButton.setVisible(true);
 
-        searchResultLabel.setVisible(true);
+                })
+        );
+        timelineSetTextBeforeSearching.setCycleCount(1);
+        timelineSetTextBeforeSearching.play();
     }
 
     private String highlightTextAndReturnResultOfSearching(String searchFor) {
@@ -617,52 +694,7 @@ public class Controller {
         return mediaPlayer;
     }
 
-    public void addSongCancelButtonOnAction(){
-        addSongPane.setLayoutY(600);
-        scrollPaneWithListOfSongs.setDisable(false);
-        scrollPaneWithTextOfSong.setDisable(false);
-    }
-    public void addSongOKButtonOnAction(){
-        String authorName = addSongAuthorName.getText();
-        String songName = addSongSongName.getText();
-        String mp3Path = addSongMP3.getText();
-        String textOfSong = addSongTextOfSong.getText();
-
-        mp3Path = mp3Path.trim().substring(2);
-        mp3Path = "file:" + mp3Path;
-        mp3Path = mp3Path.replace("\\","/");
-
-        File file = new File(addSongMP3.getText());
-
-        if (file.exists()) {
-            Song song = new Song(authorName,songName, new Song.Couplet[]{new Song.Couplet(1, textOfSong)},mp3Path);
-            songs.add(song);
-
-            ObjectMapper objectMapper = new ObjectMapper();
-            ObjectWriter objectWriter = objectMapper.writer().withDefaultPrettyPrinter();
-
-            try {
-                objectWriter.writeValue(new File("src/main/resources/com/example/testfx/data.json"), songs);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-
-            VBox newSongBox = createSongBlock(song);
-            songContainer.getChildren().add(newSongBox);
-            addSongErrorMessage.setText("Пісню додано");
-            addSongErrorMessage.setTextFill(Color.GREEN);
-            addSongTextOfSong.setText("");
-            addSongAuthorName.setText("");
-            addSongSongName.setText("");
-
-        } else {
-            addSongErrorMessage.setText("Немає пісні за цим шляхом");
-            addSongErrorMessage.setTextFill(Color.RED);
-        }
-        addSongMP3.setText("");
-    }
-
-
+    // add song
     public void addSongButtonOnAction(){
         scrollPaneWithTextOfSong.setDisable(true);
         scrollPaneWithListOfSongs.setDisable(true);
@@ -670,8 +702,98 @@ public class Controller {
     }
 
 
+    public void addSongOKButtonOnAction(){
+        String authorName = addSongAuthorName.getText();
+        String songName = addSongSongName.getText();
+        String textOfSong = addSongTextOfSong.getText();
+        String mp3PathForMedia = filePath.trim().substring(2);
+        mp3PathForMedia = "file:" + mp3PathForMedia;
+        mp3PathForMedia = mp3PathForMedia.replace("\\","/");
 
+        Song song = new Song(authorName,songName, new Song.Couplet[]{new Song.Couplet(1, textOfSong)},mp3PathForMedia, playlistNameForNewSong);
+        songs.add(song);
 
+        ObjectMapper objectMapper = new ObjectMapper();
+        ObjectWriter objectWriter = objectMapper.writer().withDefaultPrettyPrinter();
 
+        try {
+            objectWriter.writeValue(new File("src/main/resources/com/example/testfx/data.json"), songs);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        VBox newSongBox = createSongBlock(song);
+        songContainer.getChildren().add(newSongBox);
+
+        addSongSuccessLabel.setVisible(true);
+
+        resetValueInAddSongBox();
+
+    }
+    public void addSongCancelButtonOnAction(){
+        addSongPane.setLayoutY(600);
+        scrollPaneWithListOfSongs.setDisable(false);
+        scrollPaneWithTextOfSong.setDisable(false);
+
+        addSongSuccessLabel.setVisible(false);
+
+        resetValueInAddSongBox();
+    }
+    private void resetValueInAddSongBox() {
+        addSongChooseSongLabel.setText("Виберіть пісню");
+        addSongChooseSongLabel.setTextFill(Color.RED);
+        addSongChoosePlaylistLabel.setText("Виберіть плейлист");
+        addSongChoosePlaylistLabel.setTextFill(Color.RED);
+
+        addSongTextOfSong.setText("");
+        addSongAuthorName.setText("");
+        addSongSongName.setText("");
+        addSongChoosePlaylist.getSelectionModel().select(0);
+    }
+
+    public void chooseFileButtonOnAction() {
+        addSongSuccessLabel.setVisible(false);
+
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("MP3 Files", "*.mp3"));
+        File selectedFile = fileChooser.showOpenDialog(new Stage());
+
+        if (selectedFile != null) {
+            filePath = selectedFile.getAbsolutePath();
+            System.out.println(filePath);
+            addSongChooseSongLabel.setText("Вибрано");
+            addSongChooseSongLabel.setTextFill(Color.GREEN);
+        } else {
+            addSongChooseSongLabel.setText("Вибір скасовано.");
+            addSongChooseSongLabel.setTextFill(Color.RED);
+        }
+    }
+
+    public void addPlaylistButtonOnAction(){
+        scrollPaneWithTextOfSong.setDisable(true);
+        addPlaylistPane.setLayoutY(150);
+
+    }
+    public void addPlaylistCancelButtonOnAction(){
+        scrollPaneWithTextOfSong.setDisable(false);
+        addPlaylistPane.setLayoutY(900);
+        addPlaylistName.setText("");
+    }
+    public void addPlaylistOKButtonOnAction(){
+        playlistNamesSet.add(addPlaylistName.getText());
+        playlistsComboBox.setItems(FXCollections.observableList(new ArrayList<>(playlistNamesSet)));
+        playlistsComboBox.getSelectionModel().select(0);
+        playlistsComboBox.setVisibleRowCount(7);
+
+        List<String> newList = new ArrayList<>(playlistNamesSet);
+        newList.set(0,"Вибрати плейлист");
+        addSongChoosePlaylist.setItems(FXCollections.observableList(newList));
+        addSongChoosePlaylist.getSelectionModel().select(0);
+        addSongChoosePlaylist.setVisibleRowCount(4);
+
+        scrollPaneWithTextOfSong.setDisable(false);
+        addPlaylistPane.setLayoutY(900);
+        addPlaylistName.setText("");
+    }
     //TODO: selection sort
 }
