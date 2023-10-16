@@ -1,9 +1,6 @@
 package com.example.testfx;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Trie {
     static class TrieNode {
@@ -20,12 +17,23 @@ public class Trie {
     public Trie() {
         root = new TrieNode();
     }
-    public void insertWord(Song song) {
-        String songName = song.getSongName();
-        String[] words = songName.toLowerCase().split("\\s+"); // Розбиття рядку на слова, використовуючи пробіли як роздільник
+    public void insertSong(Song song) {
+        List<String> allWordsToSave = new ArrayList<>();
+        String songName = song.getSongName().toLowerCase();
+        allWordsToSave.add(songName);
+        String[] words = songName.split("\\s+");
+        Collections.addAll(allWordsToSave, words);
+
+        for(int i = 1; i < words.length - 1; i++) {
+            StringBuilder word = new StringBuilder(words[i]);
+            for(int j = i + 1; j < words.length; j++){
+                word.append(" ").append(words[j]);
+            }
+            allWordsToSave.add(word.toString());
+        }
 
         TrieNode current = root;
-        for (String word : words) {
+        for (String word : allWordsToSave) {
             for (int i = 0; i < word.length(); i++) {
                 char ch = word.charAt(i);
                 TrieNode node = current.children.get(ch);
@@ -36,87 +44,19 @@ public class Trie {
                 current = node;
             }
             current.endOfString = true;
-            current.listOfSongs.add(song); // Зберігайте інформацію про пісню в TrieNode
-            current = root; // Почніть спочатку для наступного слова
+            current.listOfSongs.add(song);
+            current = root;
         }
     }
 
-    public void insert(String word) {
-        TrieNode current = root;
-        for (int i=0; i<word.length(); i++) {
-            char ch = word.charAt(i);
-            TrieNode node = current.children.get(ch);
-            if (node == null) {
-                node = new TrieNode();
-                current.children.put(ch, node);
-            }
-            current = node;
-        }
-        current.endOfString = true;
-    }
-    public boolean search(String word) {
-        TrieNode currentNode = root;
-        for (int i =0; i<word.length(); i++) {
-            char ch = word.charAt(i);
-            TrieNode node = currentNode.children.get(ch);
-            if (node == null) {
-                return false;
-            }
-            currentNode = node;
-        }
-        return currentNode.endOfString;
-    }
-    public boolean delete(String word) {
-        if (!search(word)) {
-            return false;
-        }
-        delete(root, word, 0);
-        return true;
-    }
-
-    private boolean delete(TrieNode node, String word, int index) {
-        if (index == word.length()) {
-            node.endOfString = false;
-            return node.children.isEmpty(); // Повертаємо true, якщо вузол порожній
-        }
-
-        char ch = word.charAt(index);
-        TrieNode childNode = node.children.get(ch);
-        boolean shouldDeleteChild = delete(childNode, word, index + 1);
-        if (shouldDeleteChild) {
-            node.children.remove(ch);
-            return node.children.isEmpty() && !node.endOfString;
-        }
-        return false;
-    }
-    public List<String> getAllWords() {
-        List<String> words = new ArrayList<>();
-        StringBuilder currentWord = new StringBuilder();
-        getAllWords(root, currentWord, words);
-        return words;
-    }
-
-    private void getAllWords(TrieNode current, StringBuilder currentWord, List<String> words) {
-        if (current.endOfString) {
-            words.add(currentWord.toString());
-        }
-
-        for (char ch : current.children.keySet()) {
-            TrieNode childNode = current.children.get(ch);
-            currentWord.append(ch);
-            getAllWords(childNode, currentWord, words);
-            currentWord.deleteCharAt(currentWord.length() - 1);
-        }
-    }
     public List<Song> findWordsWithPrefix(String prefix) {
         List<Song> words = new ArrayList<>();
         TrieNode node = root;
-        // Перейти до останнього вузла префікса
         for (char c : prefix.toCharArray()) {
             if (node.children.containsKey(c)) {
                 node = node.children.get(c);
             } else {
-                return words; // Префікс не знайдено
+                return words;
             }
         }
         findAllWordsWithPrefix(node, prefix, words);

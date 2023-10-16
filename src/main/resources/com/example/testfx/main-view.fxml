@@ -29,13 +29,13 @@
       </padding>
     </ScrollPane>
 
-    <Pane fx:id="searchPane" layoutX="264.0" prefHeight="73.0" prefWidth="329.0">
-        <ComboBox fx:id="searchTypeComboBox" layoutX="78.0" layoutY="7.0" onAction="#searchTypeComboBoxOnAction" prefHeight="25.0" prefWidth="84.0" />
+    <Pane fx:id="searchWordPane" layoutX="264.0" prefHeight="73.0" prefWidth="329.0">
+        <ComboBox fx:id="searchWordTypeComboBox" layoutX="78.0" layoutY="7.0" onAction="#searchTypeComboBoxOnAction" prefHeight="25.0" prefWidth="84.0" />
         <TextField fx:id="coupletNumberTextField" layoutX="247.0" layoutY="7.0" prefHeight="25.0" prefWidth="28.0" promptText="id" visible="false" />
-        <Label fx:id="searchResultLabel" layoutX="1.0" layoutY="47.0" nodeOrientation="LEFT_TO_RIGHT" visible="false" />
+        <Label fx:id="searchWordResultLabel" layoutX="1.0" layoutY="47.0" nodeOrientation="LEFT_TO_RIGHT" visible="false" />
 
-        <Button fx:id="searchButton" layoutX="278.0" layoutY="7.0" onAction="#searchButtonOnAction" prefHeight="16.0" prefWidth="39.0" text="🔍" />
-        <TextField fx:id="searchField" layoutX="172.0" layoutY="7.0" prefHeight="25.0" prefWidth="102.0" promptText="пошук" />
+        <Button fx:id="searchWordButton" layoutX="278.0" layoutY="7.0" onAction="#searchButtonOnAction" prefHeight="16.0" prefWidth="39.0" text="🔍" />
+        <TextField fx:id="searchWordField" layoutX="172.0" layoutY="7.0" prefHeight="25.0" prefWidth="102.0" promptText="пошук" />
       <Button fx:id="addPlaylistButton" layoutX="5.0" layoutY="43.0" mnemonicParsing="false" onAction="#addPlaylistButtonOnAction" prefHeight="26.0" prefWidth="150.0" text="Додати плейлист" />
       <Button layoutX="167.0" layoutY="43.0" mnemonicParsing="false" onAction="#addSongButtonOnAction" prefHeight="26.0" prefWidth="150.0" text="Додати пісню" />
     </Pane>
@@ -59,11 +59,11 @@
     <Button fx:id="rightArrowButton" layoutX="304.0" layoutY="7.0" mnemonicParsing="false" onAction="#rightArrowButtonOnAction" prefHeight="25.0" prefWidth="28.0" text="⮞" />
 
     <!--        media player -->
-    <HBox layoutY="360.0" prefHeight="60.0" prefWidth="594.0">
+    <HBox fx:id="mediaPlayerBox" layoutY="360.0" prefHeight="60.0" prefWidth="594.0">
 
         <!--        current time -->
         <VBox prefHeight="200.0" prefWidth="50.0">
-            <Label fx:id="currentTimeLabel" text="00:00">
+            <Label fx:id="currentTimeOfMediaLabel" text="00:00">
                 <VBox.margin>
                     <Insets left="5.0" top="28.0" />
                 </VBox.margin>
@@ -109,7 +109,7 @@
 
         <!--        end time -->
         <VBox prefHeight="200.0" prefWidth="45.0">
-            <Label fx:id="endTimeLabel" text="00:00">
+            <Label fx:id="endTimeOfMediaLabel" text="00:00">
                 <VBox.margin>
                     <Insets top="28.0" />
                 </VBox.margin>
@@ -170,7 +170,7 @@
             </Button>
         </HBox>
     </HBox>
-    <VBox prefHeight="75.0" prefWidth="263.0">
+    <VBox fx:id="searchSongBox" prefHeight="75.0" prefWidth="263.0">
         <HBox prefHeight="100.0" prefWidth="200.0">
             <Label text="Плейлист">
                 <font>
@@ -187,7 +187,7 @@
             </ComboBox>
         </HBox>
         <HBox prefHeight="100.0" prefWidth="200.0">
-            <TextField fx:id="songSongTextField" prefHeight="26.0" prefWidth="206.0" promptText="введіть назву пісні                           🔍">
+            <TextField fx:id="searchSongTextField" prefHeight="26.0" prefWidth="206.0" promptText="введіть назву пісні                       🔍">
                 <HBox.margin>
                     <Insets left="10.0" top="5.0" />
                 </HBox.margin>
@@ -218,7 +218,7 @@
         <Label fx:id="addSongChoosePlaylistLabel" layoutX="180.0" layoutY="163.0" text="Виберіть плейлист" textFill="RED" />
         <Label fx:id="addSongSuccessLabel" layoutX="181.0" layoutY="212.0" text="Пісню успішно додано" textFill="GREEN" visible="false" />
     </Pane>
-    <Pane fx:id="addPlaylistPane" layoutX="338.0" layoutY="900.0" prefHeight="92.0" prefWidth="179.0" style="-fx-border-color: black; -fx-border-radius: 20; -fx-background-color: #8a9196; -fx-background-radius: 20;">
+    <Pane fx:id="addPlaylistPane" layoutX="235.0" layoutY="900.0" prefHeight="92.0" prefWidth="179.0" style="-fx-border-color: black; -fx-border-radius: 20; -fx-background-color: #8a9196; -fx-background-radius: 20;">
         <TextField fx:id="addPlaylistName" layoutX="13.0" layoutY="13.0" prefHeight="25.0" prefWidth="151.0" promptText="Введіть назву плейлиста" />
         <Button layoutX="14.0" layoutY="50.0" mnemonicParsing="false" onAction="#addPlaylistCancelButtonOnAction" prefHeight="25.0" prefWidth="70.0" text="Назад" />
         <Button fx:id="addPlaylistOKButton" layoutX="96.0" layoutY="50.0" mnemonicParsing="false" onAction="#addPlaylistOKButtonOnAction" prefHeight="25.0" prefWidth="70.0" text="Додати" />
