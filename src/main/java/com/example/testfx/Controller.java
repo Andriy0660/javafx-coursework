@@ -135,6 +135,11 @@ public class Controller {
     @FXML
     private TextField addPlaylistName;
 
+    Trie trie = new Trie();
+    @FXML
+    private TextField songSongTextField;
+
+
     public void initialize() {
         //initialize songs and playlists
         try {
@@ -145,6 +150,10 @@ public class Controller {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+
+        allSongs.forEach(i -> trie.insertWord(i));
+        System.out.println(trie.findWordsWithPrefix("осінь").stream().map(i->i.getSongName()).collect(Collectors.toList()));
 
         allSongsByPlaylists = allSongs.stream().collect(Collectors.groupingBy(Song::getPlaylistName));
 
@@ -179,6 +188,7 @@ public class Controller {
         playlistsComboBox.setVisibleRowCount(7);
 
         playlistsComboBox.valueProperty().addListener((observable, oldValue, newValue) -> {
+            songSongTextField.setText("");
             String value = playlistsComboBox.getValue();
             songContainer.getChildren().clear();
             if(value == null) return;
@@ -264,8 +274,25 @@ public class Controller {
             addPlaylistOKButton.setDisable(newValue.isEmpty());
         });
 
+        songSongTextField.textProperty().addListener((observable, oldValue, newValue) -> {
+            List<Song> searchedSongs = trie.findWordsWithPrefix(newValue.toLowerCase());
+            String currentPlaylist = playlistsComboBox.getValue();
+            songContainer.getChildren().clear();
+            if(!currentPlaylist.equals("Всі плейлисти")){
+                List<Song> listOfSongsInCurrentPlaylist = allSongsByPlaylists.get(currentPlaylist);
+                searchedSongs = searchedSongs.stream().filter(i->listOfSongsInCurrentPlaylist.contains(i)).toList();
+            }
+            for (Song song : searchedSongs) {
+                VBox songBlock = createSongBlock(song);
+                songContainer.getChildren().add(songBlock);
+            }
+        });
+
     }
 
+    public void searchSongCancelOnAction(){
+        songSongTextField.setText("");
+    }
     private VBox createSongBlock(Song song) {
         VBox songBox = new VBox();
         songBox.setStyle("-fx-background-color: #f0f0f0;" +
@@ -713,6 +740,7 @@ public class Controller {
         Song song = new Song(authorName,songName, new Song.Couplet[]{new Song.Couplet(1, textOfSong)},mp3PathForMedia, playlistNameForNewSong);
         allSongs.add(song);
         allSongsByPlaylists.get(playlistNameForNewSong).add(song);
+        trie.insertWord(song);
 
         ObjectMapper objectMapper = new ObjectMapper();
         ObjectWriter objectWriter = objectMapper.writer().withDefaultPrettyPrinter();
