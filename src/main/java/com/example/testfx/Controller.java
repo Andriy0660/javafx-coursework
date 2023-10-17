@@ -292,6 +292,8 @@ public class Controller {
         playlistsComboBox.setVisibleRowCount(7);
 
         playlistsComboBox.valueProperty().addListener((observable, oldValue, newValue) -> {
+            nextSongButton.setDisable(true);
+            previousSongButton.setDisable(true);
             searchSongTextField.setText("");
             String value = playlistsComboBox.getValue();
             songContainer.getChildren().clear();
