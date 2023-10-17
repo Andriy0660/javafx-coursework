@@ -12,6 +12,33 @@
 .text-area .scroll-pane .content{
     -fx-background-color: transparent;
 }
+/* Styling the slider track */
+.jfx-slider > .track {
+    -fx-background-color: white;
+}
+
+/* Styling the slider thumb */
+.jfx-slider > .thumb {
+    -fx-background-color: black;
+}
+
+/* Styling the filled track */
+.jfx-slider > .colored-track {
+    -fx-background-color: black;
+}
+
+/* Styling the animated thumb */
+.jfx-slider > .animated-thumb {
+    visibility: false;
+
+    -fx-background-color: green;
+}
+
+/* Styling the slider value text inside animated thumb */
+.jfx-slider .slider-value {
+    -fx-fill: white;
+    -fx-stroke: white;
+}
 /*.textflow {*/
 /*    -fx-background-image: url("istockphoto-670055748-612x612.jpg")*/
 /*}*/

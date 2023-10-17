@@ -2,14 +2,18 @@ package com.example.testfx;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
+import com.jfoenix.controls.JFXSlider;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.BooleanBinding;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.*;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -38,6 +42,8 @@ public class Controller {
     private Label currentSongLabel;
 
 
+    @FXML
+    private Pane mainPane;
     @FXML
     private VBox songContainer;
     @FXML
@@ -84,7 +90,7 @@ public class Controller {
     // media player
     private MediaPlayer mediaPlayer;
     @FXML
-    private Slider slider;
+    private JFXSlider slider;
     private boolean isSliderBeingDragged = false;
     @FXML
     private Label authorNameLabel;
@@ -490,6 +496,7 @@ public class Controller {
         lyricsTextArea.getChildren().add(newText);
 
         scrollPaneWithTextOfSong.requestFocus();
+        mainPane.requestFocus();
     }
     public void shuffleButtonOnAction(){
         Song currentSong = currentListOfSongs.get(currentSongIndex);
@@ -511,6 +518,8 @@ public class Controller {
         lyricsTextArea.getChildren().add(newText);
 
         scrollPaneWithTextOfSong.requestFocus();
+        mainPane.requestFocus();
+
     }
     public void sortWordsButtonOnAction(){
         Song currentSong = currentListOfSongs.get(currentSongIndex);
@@ -536,6 +545,8 @@ public class Controller {
         lyricsTextArea.getChildren().add(newText);
 
         scrollPaneWithTextOfSong.requestFocus();
+        mainPane.requestFocus();
+
     }
 
     public void changeRowButtonOnAction(){
@@ -683,6 +694,8 @@ public class Controller {
         slider.setValue(0);
 
         scrollPaneWithTextOfSong.requestFocus();
+        mainPane.requestFocus();
+
     }
 
     private void configureAuthorAndSongLabelsForNewSong(Label authorLabel, Label songLabel) {

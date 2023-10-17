@@ -7,7 +7,8 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<Pane prefHeight="1152.0" prefWidth="951.0" style="-fx-border-radius: 10;" styleClass="transparentFocus" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.testfx.Controller">
+<?import com.jfoenix.controls.JFXSlider?>
+<Pane fx:id="mainPane" prefHeight="1152.0" prefWidth="951.0" style="-fx-border-radius: 10;" styleClass="transparentFocus" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.testfx.Controller">
     <stylesheets>
         <URL value="@styles.css" />
     </stylesheets>
@@ -103,7 +104,7 @@
             </HBox>
 
             <HBox prefHeight="30.0">
-                <Slider fx:id="slider" onMousePressed="#sliderOnMousePressed" onMouseReleased="#sliderOnMouseReleased" prefHeight="15.0" prefWidth="350.0" />
+                <JFXSlider fx:id="slider" onMousePressed="#sliderOnMousePressed" onMouseReleased="#sliderOnMouseReleased" prefHeight="15.0" prefWidth="350.0" />
             </HBox>
         </VBox>
 
