@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.*?>
 <?import java.net.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
@@ -7,7 +8,6 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<?import com.jfoenix.controls.JFXSlider?>
 <Pane fx:id="mainPane" prefHeight="1152.0" prefWidth="951.0" style="-fx-border-radius: 10;" styleClass="transparentFocus" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.testfx.Controller">
     <stylesheets>
         <URL value="@styles.css" />
@@ -188,12 +188,12 @@
             </ComboBox>
         </HBox>
         <HBox prefHeight="100.0" prefWidth="200.0">
-            <TextField fx:id="searchSongTextField" prefHeight="26.0" prefWidth="206.0" promptText="введіть назву пісні                       🔍">
+            <TextField fx:id="searchSongTextField" prefHeight="26.0" prefWidth="206.0" promptText="введіть назву пісні                        🔍">
                 <HBox.margin>
                     <Insets left="10.0" top="5.0" />
                 </HBox.margin>
             </TextField>
-            <Button mnemonicParsing="false" onAction="#searchSongCancelOnAction" prefWidth="25.0" text="x">
+            <Button fx:id="searchSongCancelButton" mnemonicParsing="false" onAction="#searchSongCancelOnAction" prefWidth="25.0" text="x">
                 <font>
                     <Font name="System Bold" size="12.0" />
                 </font>

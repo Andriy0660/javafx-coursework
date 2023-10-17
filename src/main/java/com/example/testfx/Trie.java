@@ -13,7 +13,7 @@ public class Trie {
             endOfString = false;
         }
     }
-    private TrieNode root;
+    private final TrieNode root;
     public Trie() {
         root = new TrieNode();
     }

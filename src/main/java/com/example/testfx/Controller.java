@@ -32,14 +32,12 @@ import java.util.stream.Collectors;
 public class Controller {
     private final Utils utils = new Utils();
     private final Trie trie = new Trie();
+
     private List<Song> allSongs = new ArrayList<>();
     private Map<String, List<Song>> allSongsByPlaylists = new HashMap<>();
-    private List<Song> currentListOfSongs = new ArrayList<>();
-    ObservableList<String> playlistNamesObsList;
-
-    private int currentSongIndex;
-    private Label currentAuthorLabel;
-    private Label currentSongLabel;
+    private ObservableList<String> playlistNamesObsList;
+    private int currentSongBoxIndex;
+    private VBoxCustom currentSongBox;
 
 
     @FXML
@@ -56,6 +54,28 @@ public class Controller {
     private ScrollPane scrollPaneWithTextOfSong;
     @FXML
     private TextFlow lyricsTextArea;
+
+    // search song
+    @FXML
+    private VBox searchSongBox;
+    @FXML
+    private TextField searchSongTextField;
+    @FXML
+    private HBox mediaPlayerBox;
+    @FXML
+    private Button searchSongCancelButton;
+
+    // playlist
+    @FXML
+    private ComboBox<String> playlistsComboBox;
+    @FXML
+    private Pane addPlaylistPane;
+    @FXML
+    private Button addPlaylistButton;
+    @FXML
+    private Button addPlaylistOKButton;
+    @FXML
+    private TextField addPlaylistName;
 
     // search word
     @FXML
@@ -131,27 +151,6 @@ public class Controller {
     private ComboBox<String> addSongChoosePlaylist;
     private String playlistNameForNewSong = null;
 
-    // playlist
-    @FXML
-    private ComboBox<String> playlistsComboBox;
-    @FXML
-    private Pane addPlaylistPane;
-    @FXML
-    private Button addPlaylistButton;
-    @FXML
-    private Button addPlaylistOKButton;
-    @FXML
-    private TextField addPlaylistName;
-
-    // search song
-    @FXML
-    private VBox searchSongBox;
-    @FXML
-    private TextField searchSongTextField;
-    @FXML
-    private HBox mediaPlayerBox;
-
-
     public void initialize() {
         //initialize songs and playlists
         try {
@@ -168,23 +167,21 @@ public class Controller {
 
         allSongsByPlaylists = allSongs.stream().collect(Collectors.groupingBy(Song::getPlaylistName));
 
-        for (Song song : allSongs) {
-            VBox songBlock = createSongBlock(song);
+        playlistNamesObsList = FXCollections.observableArrayList(allSongsByPlaylists.keySet());
+        playlistNamesObsList.add(0,"Всі плейлисти");
+
+        for (int i =0;i<allSongs.size();i++) {
+            Song song = allSongs.get(i);
+            VBoxCustom songBlock = createSongBlock(song,i);
             songContainer.getChildren().add(songBlock);
         }
-
-        currentListOfSongs = allSongs;
-
-        List<String> playlistNamesList = new ArrayList<>();
-        playlistNamesList.add("Всі плейлисти");
-        playlistNamesList.addAll(allSongsByPlaylists.keySet());
-        playlistNamesObsList = FXCollections.observableArrayList(playlistNamesList);
-
         Song initialSong = allSongs.get(0);
-        currentSongIndex = 0;
-        VBox songBox = (VBox)songContainer.getChildren().get(0);
-        currentAuthorLabel = (Label) songBox.getChildren().get(0);
-        currentSongLabel = (Label) songBox.getChildren().get(1);
+
+        currentSongBoxIndex = 0;
+        currentSongBox = (VBoxCustom) songContainer.getChildren().get(0);
+
+        Label currentAuthorLabel = (Label) currentSongBox.getChildren().get(0);
+        Label currentSongLabel = (Label) currentSongBox.getChildren().get(1);
         currentAuthorLabel.setTextFill(Color.RED);
         currentSongLabel.setTextFill(Color.RED);
 
@@ -194,8 +191,11 @@ public class Controller {
         lyricsTextArea.getChildren().add(text);
 
         //initialize search song
+        searchSongCancelButton.setDisable(true);
         searchSongTextField.textProperty().addListener((observable, oldValue, newValue) -> {
             newValue = newValue.toLowerCase();
+            if (newValue.length()>0)
+                searchSongCancelButton.setDisable(false);
             List<Song> foundedSongs = trie.findWordsWithPrefix(newValue.toLowerCase()).stream()
                     .distinct()
                     .toList();
@@ -209,8 +209,9 @@ public class Controller {
                         .filter(listOfSongsInCurrentPlaylist::contains)
                         .toList();
             }
-            for (Song song : foundedSongs) {
-                VBox songBlock = createSongBlock(song);
+            for (int i =0;i<foundedSongs.size();i++) {
+                Song song = foundedSongs.get(i);
+                VBoxCustom songBlock = createSongBlock(song,i);
                 songContainer.getChildren().add(songBlock);
             }
         });
@@ -231,6 +232,7 @@ public class Controller {
         mediaPlayer = getNewMediaPlayer(media);
         slider.setMin(0);
         slider.setMax(1);
+        slider.setValue(0);
         slider.valueProperty().addListener((observable, oldValue, newValue) -> {
             Duration totalTime = mediaPlayer.getTotalDuration();
             double value = (double)newValue*totalTime.toSeconds();
@@ -294,23 +296,24 @@ public class Controller {
             String value = playlistsComboBox.getValue();
             songContainer.getChildren().clear();
             if(value == null) return;
-            List<Song> currentListOfSongs;
 
+            List<Song> newListOfSongs;
             if(value.equals("Всі плейлисти")){
-                currentListOfSongs = allSongs;
+                newListOfSongs = allSongs;
             } else {
-                currentListOfSongs = allSongsByPlaylists.get(value);
+                newListOfSongs = allSongsByPlaylists.get(value);
             }
 
-            for (Song song : currentListOfSongs ) {
-                VBox songBlock = createSongBlock(song);
+            for (int i = 0; i<newListOfSongs.size();i++) {
+                Song song = newListOfSongs.get(i);
+                VBoxCustom songBlock = createSongBlock(song,i);
                 songContainer.getChildren().add(songBlock);
             }
-
         });
     }
-    private VBox createSongBlock(Song song) {
-        VBox songBox = new VBox();
+    private VBoxCustom createSongBlock(Song song, int id) {
+        VBoxCustom songBox = new VBoxCustom(id,song);
+
         songBox.setStyle("-fx-background-color: #f0f0f0;" +
                 " -fx-padding: 10;");
         songBox.setPrefWidth(songContainer.getPrefWidth());
@@ -332,24 +335,18 @@ public class Controller {
             previousSongButton.setDisable(false);
             nextSongButton.setDisable(false);
 
-            String currentPlayList = playlistsComboBox.getValue();
-            if(currentPlayList.equals("Всі плейлисти")){
-                currentListOfSongs = allSongs;
-            } else {
-                currentListOfSongs = allSongsByPlaylists.get(currentPlayList);
-            }
-
-            int index = currentListOfSongs.indexOf(song);
-            currentSongIndex  = index;
+            int index = songBox.getCustomId();
+            currentSongBoxIndex  = index;
+            configureAuthorAndSongLabelsForNewSong(currentSongBox,songBox);
+            currentSongBox = songBox;
 
             if(index == 0){
                 previousSongButton.setDisable(true);
             }
 
-            if(index + 1 == currentListOfSongs.size()){
+            if(index + 1 == songContainer.getChildren().size()){
                 nextSongButton.setDisable(true);
             }
-            configureAuthorAndSongLabelsForNewSong(authorLabel,songLabel);
             configureMediaAndTextAreaForNewSong(song);
         });
 
@@ -393,7 +390,7 @@ public class Controller {
         addPlaylistButton.setVisible(false);
         searchWordButton.setDisable(true);
 
-        Song currentSong = currentListOfSongs.get(currentSongIndex);
+        Song currentSong = currentSongBox.getSong();
 
         Timeline timelineDisableButton = new Timeline(new KeyFrame(Duration.seconds(2), e2 -> {
             searchWordButton.setDisable(false);
@@ -470,7 +467,8 @@ public class Controller {
         }
     }
     private String getTextToSearchIn() throws NumberFormatException, IndexOutOfBoundsException{
-        Song currentSong = currentListOfSongs.get(currentSongIndex);
+        Song currentSong = currentSongBox.getSong();
+
         if(searchWordTypeComboBox.getSelectionModel().isSelected(0)){
             return utils.getTextForSong(currentSong);
         } else {
@@ -482,7 +480,7 @@ public class Controller {
 
     // other functionality
     public void lastRowsButtonOnAction() {
-        Song currentSong = currentListOfSongs.get(currentSongIndex);
+        Song currentSong = currentSongBox.getSong();
 
         Song.Couplet[] couplets = currentSong.getCouplets();
         StringBuilder res = new StringBuilder();
@@ -499,7 +497,7 @@ public class Controller {
         mainPane.requestFocus();
     }
     public void shuffleButtonOnAction(){
-        Song currentSong = currentListOfSongs.get(currentSongIndex);
+        Song currentSong = currentSongBox.getSong();
 
         List<String> list = Arrays.stream(currentSong.getCouplets())
                 .map(Song.Couplet::getCoupletString)
@@ -522,7 +520,7 @@ public class Controller {
 
     }
     public void sortWordsButtonOnAction(){
-        Song currentSong = currentListOfSongs.get(currentSongIndex);
+        Song currentSong = currentSongBox.getSong();
 
         List<String> listOfWords = new ArrayList<>();
         for (Song.Couplet couplet : currentSong.getCouplets()){
@@ -565,7 +563,7 @@ public class Controller {
         numberOfRowToBeReplaced.setVisible(false);
         changeRowOKButton.setVisible(false);
 
-        Song currentSong = currentListOfSongs.get(currentSongIndex);
+        Song currentSong = currentSongBox.getSong();
 
         String newRow = this.newRowToBeInserted.getText();
         try{
@@ -607,7 +605,7 @@ public class Controller {
     }
 
     public void isSonnetButtonOnAction(){
-        Song currentSong = currentListOfSongs.get(currentSongIndex);
+        Song currentSong = currentSongBox.getSong();
 
         int countOfRows = 0;
         String[] lines;
@@ -653,26 +651,25 @@ public class Controller {
         int newIndex;
         Song song;
         if(isNextSong){
-            newIndex = currentSongIndex + 1;
+            newIndex = currentSongBoxIndex + 1;
             previousSongButton.setDisable(false);
-            if(currentSongIndex + 2 >= currentListOfSongs.size()){
+            if(currentSongBoxIndex + 2 >= songContainer.getChildren().size()){
                 nextSongButton.setDisable(true);
             }
         } else {
-            newIndex = currentSongIndex - 1;
+            newIndex = currentSongBoxIndex - 1;
             nextSongButton.setDisable(false);
-            if(currentSongIndex - 2 <= -1){
+            if(currentSongBoxIndex - 2 <= -1){
                 previousSongButton.setDisable(true);
             }
         }
-        song = currentListOfSongs.get(newIndex);
 
-        currentSongIndex = newIndex;
+        currentSongBoxIndex = newIndex;
+        VBoxCustom newCurrentSongBox = (VBoxCustom) songContainer.getChildren().get(currentSongBoxIndex);
+        configureAuthorAndSongLabelsForNewSong(currentSongBox,newCurrentSongBox);
+        currentSongBox = newCurrentSongBox;
 
-        VBox songBox = (VBox) songContainer.getChildren().get(newIndex);
-        Label authorLabel = (Label)songBox.getChildren().get(0);
-        Label songLabel = (Label)songBox.getChildren().get(1);
-        configureAuthorAndSongLabelsForNewSong(authorLabel,songLabel);
+        song = currentSongBox.getSong();
         configureMediaAndTextAreaForNewSong(song);
     }
 
@@ -698,13 +695,11 @@ public class Controller {
 
     }
 
-    private void configureAuthorAndSongLabelsForNewSong(Label authorLabel, Label songLabel) {
-        this.currentAuthorLabel.setTextFill(Color.BLACK);
-        this.currentSongLabel.setTextFill(Color.BLACK);
-        this.currentAuthorLabel = authorLabel;
-        this.currentSongLabel = songLabel;
-        authorLabel.setTextFill(Color.RED);
-        songLabel.setTextFill(Color.RED);
+    private void configureAuthorAndSongLabelsForNewSong(VBoxCustom oldCurrentSongBox, VBoxCustom newCurrentSongBox) {
+        ((Label)oldCurrentSongBox.getChildren().get(0)).setTextFill(Color.BLACK);
+        ((Label)oldCurrentSongBox.getChildren().get(1)).setTextFill(Color.BLACK);
+        ((Label)newCurrentSongBox.getChildren().get(0)).setTextFill(Color.RED);
+        ((Label)newCurrentSongBox.getChildren().get(1)).setTextFill(Color.RED);
     }
 
     public void nextSongButtonOnAction() {
@@ -755,6 +750,12 @@ public class Controller {
         allSongsByPlaylists.get(playlistNameForNewSong).add(newSong);
         trie.insertSong(newSong);
 
+        //updating songs in playlist (need if selected playlist == playlist of new song)
+        int currentSelectedIndex = playlistsComboBox.getSelectionModel().getSelectedIndex();
+        playlistsComboBox.getSelectionModel().select(0);
+        playlistsComboBox.getSelectionModel().select(currentSelectedIndex);
+
+
         ObjectMapper objectMapper = new ObjectMapper();
         ObjectWriter objectWriter = objectMapper.writer().withDefaultPrettyPrinter();
         try {
@@ -762,9 +763,6 @@ public class Controller {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
-        VBox newSongBox = createSongBlock(newSong);
-        songContainer.getChildren().add(newSongBox);
 
         addSongChooseSongLabel.setVisible(false);
         addSongChoosePlaylistLabel.setVisible(false);
