@@ -6,6 +6,7 @@ import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import javafx.util.Duration;
@@ -32,5 +33,11 @@ public class Utils {
                 textField.setText(oldValue);
             }
         });
+    }
+    public void configureAuthorAndSongLabelsForNewSong(VBoxCustom oldCurrentSongBox, VBoxCustom newCurrentSongBox) {
+        ((Label)oldCurrentSongBox.getChildren().get(0)).setTextFill(Color.BLACK);
+        ((Label)oldCurrentSongBox.getChildren().get(1)).setTextFill(Color.BLACK);
+        ((Label)newCurrentSongBox.getChildren().get(0)).setTextFill(Color.RED);
+        ((Label)newCurrentSongBox.getChildren().get(1)).setTextFill(Color.RED);
     }
 }

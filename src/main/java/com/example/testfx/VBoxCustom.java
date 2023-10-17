@@ -1,6 +1,5 @@
 package com.example.testfx;
 
-import javafx.scene.Node;
 import javafx.scene.layout.VBox;
 
 public class VBoxCustom extends VBox {

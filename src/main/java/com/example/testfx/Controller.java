@@ -7,13 +7,10 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.BooleanBinding;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.input.KeyCode;
 import javafx.scene.layout.*;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -40,8 +37,6 @@ public class Controller {
     private VBoxCustom currentSongBox;
 
 
-    @FXML
-    private Pane mainPane;
     @FXML
     private VBox songContainer;
     @FXML
@@ -103,9 +98,13 @@ public class Controller {
     @FXML
     private TextField newRowToBeInserted;
     @FXML
-    private Button sonetButton;
+    private Button sonnetButton;
     @FXML
-    private Text otherFunctionalityResultLabel;
+    private Label otherFunctionalityResultLabel;
+    @FXML
+    private Pane changeRowPane;
+    @FXML
+    private Label newRowResultLabel;
 
     // media player
     private MediaPlayer mediaPlayer;
@@ -162,15 +161,15 @@ public class Controller {
             e.printStackTrace();
         }
 
-
-        allSongs.forEach(i -> trie.insertSong(i));
+        allSongs.forEach(trie::insertSong);
 
         allSongsByPlaylists = allSongs.stream().collect(Collectors.groupingBy(Song::getPlaylistName));
 
         playlistNamesObsList = FXCollections.observableArrayList(allSongsByPlaylists.keySet());
         playlistNamesObsList.add(0,"Всі плейлисти");
 
-        for (int i =0;i<allSongs.size();i++) {
+
+        for (int i = 0; i < allSongs.size(); i++) {
             Song song = allSongs.get(i);
             VBoxCustom songBlock = createSongBlock(song,i);
             songContainer.getChildren().add(songBlock);
@@ -209,7 +208,7 @@ public class Controller {
                         .filter(listOfSongsInCurrentPlaylist::contains)
                         .toList();
             }
-            for (int i =0;i<foundedSongs.size();i++) {
+            for (int i = 0; i < foundedSongs.size(); i++) {
                 Song song = foundedSongs.get(i);
                 VBoxCustom songBlock = createSongBlock(song,i);
                 songContainer.getChildren().add(songBlock);
@@ -221,6 +220,9 @@ public class Controller {
         searchWordTypeComboBox.setItems(FXCollections.observableArrayList("Пісня", "Куплет"));
         searchWordTypeComboBox.getSelectionModel().select(0);
         searchWordTypeComboBox.setVisibleRowCount(2);
+        searchWordField.textProperty().addListener((observable, oldValue, newValue) -> {
+            searchWordButton.setDisable(newValue.length() == 0);
+        });
 
         //initialize index text fields
         utils.setSingleDigitIntegerListenerForTextField(coupletNumberTextField);
@@ -268,7 +270,7 @@ public class Controller {
             }
         });
 
-        BooleanBinding isButtonActive = Bindings.createBooleanBinding(() ->
+        BooleanBinding isAddSongButtonActive = Bindings.createBooleanBinding(() ->
 
                                 !addSongAuthorName.getText().trim().isEmpty() &&
                                 !addSongSongName.getText().trim().isEmpty() &&
@@ -280,9 +282,10 @@ public class Controller {
                 addSongTextOfSong.textProperty(),addSongChooseSongLabel.textProperty(),
                 addSongChoosePlaylistLabel.textProperty());
 
-        addSongOKButton.disableProperty().bind(isButtonActive.not());
+        addSongOKButton.disableProperty().bind(isAddSongButtonActive.not());
 
         //initialize playlist
+
         addPlaylistName.textProperty().addListener((observable, oldValue, newValue) -> {
             addPlaylistOKButton.setDisable(newValue.isEmpty());
         });
@@ -306,12 +309,25 @@ public class Controller {
                 newListOfSongs = allSongsByPlaylists.get(value);
             }
 
-            for (int i = 0; i<newListOfSongs.size();i++) {
+            for (int i = 0; i < newListOfSongs.size(); i++) {
                 Song song = newListOfSongs.get(i);
                 VBoxCustom songBlock = createSongBlock(song,i);
                 songContainer.getChildren().add(songBlock);
             }
         });
+
+        //initialize change row pane
+        BooleanBinding isChangeRowButtonActive = Bindings.createBooleanBinding(() ->
+
+                        !numberOfCoupletToBeReplaced.getText().trim().isEmpty() &&
+                                !numberOfRowToBeReplaced.getText().trim().isEmpty() &&
+                                !newRowToBeInserted.getText().trim().isEmpty() ,
+
+                numberOfCoupletToBeReplaced.textProperty(),
+                numberOfRowToBeReplaced.textProperty(),
+                newRowToBeInserted.textProperty());
+
+        changeRowOKButton.disableProperty().bind(isChangeRowButtonActive.not());
     }
     private VBoxCustom createSongBlock(Song song, int id) {
         VBoxCustom songBox = new VBoxCustom(id,song);
@@ -339,7 +355,7 @@ public class Controller {
 
             int index = songBox.getCustomId();
             currentSongBoxIndex  = index;
-            configureAuthorAndSongLabelsForNewSong(currentSongBox,songBox);
+            utils.configureAuthorAndSongLabelsForNewSong(currentSongBox,songBox);
             currentSongBox = songBox;
 
             if(index == 0){
@@ -356,7 +372,6 @@ public class Controller {
     }
 
     public void leftArrowButtonOnAction(){
-        otherFunctionalityResultLabel.setVisible(false);
         rightArrowButton.setDisable(false);
         leftArrowButton.setDisable(true);
         paneWithOtherFunctionality.setLayoutY(-100);
@@ -436,9 +451,7 @@ public class Controller {
             textToSearchInLowCase = textToSearchIn.toLowerCase();
 
         } catch (IndexOutOfBoundsException | NumberFormatException e){
-            return "Некоректний номер куплету";
-        }catch (IllegalArgumentException e){
-            return "Введіть в пошук стрічку";
+            return "Некоректний індекс";
         }
 
         int fromIndex = 0;
@@ -495,8 +508,16 @@ public class Controller {
         Text newText = new Text(res.toString());
         lyricsTextArea.getChildren().add(newText);
 
+        Timeline timelineSetTextBeforeSearching = new Timeline(
+                new KeyFrame(Duration.seconds(2), event -> {
+                    lyricsTextArea.getChildren().clear();
+                    Text textOfSong = new Text(utils.getTextForSong(currentSong));
+                    lyricsTextArea.getChildren().add(textOfSong);
+                })
+        );
+        timelineSetTextBeforeSearching.setCycleCount(1);
+        timelineSetTextBeforeSearching.play();
         scrollPaneWithTextOfSong.requestFocus();
-        mainPane.requestFocus();
     }
     public void shuffleButtonOnAction(){
         Song currentSong = currentSongBox.getSong();
@@ -518,7 +539,7 @@ public class Controller {
         lyricsTextArea.getChildren().add(newText);
 
         scrollPaneWithTextOfSong.requestFocus();
-        mainPane.requestFocus();
+
 
     }
     public void sortWordsButtonOnAction(){
@@ -543,34 +564,32 @@ public class Controller {
         lyricsTextArea.getChildren().clear();
         Text newText = new Text(res);
         lyricsTextArea.getChildren().add(newText);
+        Timeline timelineSetTextBeforeSearching = new Timeline(
+                new KeyFrame(Duration.seconds(2), event -> {
+                    lyricsTextArea.getChildren().clear();
+                    Text textOfSong = new Text(utils.getTextForSong(currentSong));
+                    lyricsTextArea.getChildren().add(textOfSong);
+                })
+        );
+        timelineSetTextBeforeSearching.setCycleCount(1);
+        timelineSetTextBeforeSearching.play();
 
         scrollPaneWithTextOfSong.requestFocus();
-        mainPane.requestFocus();
-
     }
 
     public void changeRowButtonOnAction(){
-        otherFunctionalityResultLabel.setVisible(false);
-        newRowToBeInserted.setVisible(true);
-        numberOfCoupletToBeReplaced.setVisible(true);
-        numberOfRowToBeReplaced.setVisible(true);
-        changeRowOKButton.setVisible(true);
-
-        //to avoid conflict in otherFuncResultLabel
-        sonetButton.setDisable(true);
+        disableAllBackElements(true);
+        changeRowPane.setLayoutY(150);
     }
-    public void changeRowButtonOKOnAction() {
-        newRowToBeInserted.setVisible(false);
-        numberOfCoupletToBeReplaced.setVisible(false);
-        numberOfRowToBeReplaced.setVisible(false);
-        changeRowOKButton.setVisible(false);
-
+    public void changeRowCancelButtonOnAction(){
+        disableAllBackElements(false);
+        changeRowPane.setLayoutY(1200);
+    }
+    public void changeRowOKButtonOnAction() {
         Song currentSong = currentSongBox.getSong();
 
         String newRow = this.newRowToBeInserted.getText();
         try{
-            if(newRow.length() == 0)
-                throw new IllegalArgumentException();
 
             int numberOfCouplet = Integer.parseInt(this.numberOfCoupletToBeReplaced.getText()) - 1;
             int numberOfRow = Integer.parseInt(this.numberOfRowToBeReplaced.getText()) - 1;
@@ -586,24 +605,27 @@ public class Controller {
             Text text = new Text(newSongText);
             lyricsTextArea.getChildren().add(text);
 
-            otherFunctionalityResultLabel.setText("Змінено успішно");
-
-        }catch (NullPointerException e){
-            otherFunctionalityResultLabel.setText("Сталась помилка. Виберіть пісню і спробуйте ще раз");
+            newRowResultLabel.setText("Змінено успішно");
+            newRowResultLabel.setTextFill(Color.GREEN);
         }catch (IndexOutOfBoundsException | NumberFormatException e){
-            otherFunctionalityResultLabel.setText("Некоректний номер куплету або рядка");
-        }catch (IllegalArgumentException e){
-            otherFunctionalityResultLabel.setText("Введіть стрічку");
+            newRowResultLabel.setText("Некоректний індекс");
+            newRowResultLabel.setTextFill(Color.RED);
         }
 
-        if(otherFunctionalityResultLabel.getText().equals("Змінено успішно")){
-            otherFunctionalityResultLabel.setFill(Color.GREEN);
-        }
-        else
-            otherFunctionalityResultLabel.setFill(Color.RED);
+        changeRowPane.setPrefHeight(107);
+        sonnetButton.setDisable(false);
+        numberOfCoupletToBeReplaced.setText("");
+        numberOfRowToBeReplaced.setText("");
+        newRowToBeInserted.setText("");
 
-        otherFunctionalityResultLabel.setVisible(true);
-        sonetButton.setDisable(false);
+        Timeline timelineSetTextBeforeSearching = new Timeline(
+                new KeyFrame(Duration.seconds(2), event -> {
+                    newRowResultLabel.setText("");
+                    changeRowPane.setPrefHeight(92);
+                })
+        );
+        timelineSetTextBeforeSearching.setCycleCount(1);
+        timelineSetTextBeforeSearching.play();
     }
 
     public void isSonnetButtonOnAction(){
@@ -616,18 +638,27 @@ public class Controller {
             countOfRows += lines.length;
         }
         if (countOfRows == 14) {
-            otherFunctionalityResultLabel.setText("Це сонет типу Shakespeare");
-            otherFunctionalityResultLabel.setFill(Color.GREEN);
+            otherFunctionalityResultLabel.setText("Shakespeare");
+            otherFunctionalityResultLabel.setTextFill(Color.GREEN);
 
         } else if (countOfRows == 12) {
-            otherFunctionalityResultLabel.setText("Це сонет типу Spencerian");
-            otherFunctionalityResultLabel.setFill(Color.GREEN);
+            otherFunctionalityResultLabel.setText("Spencerian");
+            otherFunctionalityResultLabel.setTextFill(Color.GREEN);
 
         } else {
-            otherFunctionalityResultLabel.setText("Ця пісня не є сонетом");
-            otherFunctionalityResultLabel.setFill(Color.RED);
+            otherFunctionalityResultLabel.setText("Не є сонетом");
+            otherFunctionalityResultLabel.setTextFill(Color.RED);
         }
         otherFunctionalityResultLabel.setVisible(true);
+        sonnetButton.setVisible(false);
+        Timeline timelineSetTextBeforeSearching = new Timeline(
+                new KeyFrame(Duration.seconds(1), event -> {
+                    otherFunctionalityResultLabel.setVisible(false);
+                    sonnetButton.setVisible(true);
+                })
+        );
+        timelineSetTextBeforeSearching.setCycleCount(1);
+        timelineSetTextBeforeSearching.play();
     }
 
     // media player
@@ -668,7 +699,7 @@ public class Controller {
 
         currentSongBoxIndex = newIndex;
         VBoxCustom newCurrentSongBox = (VBoxCustom) songContainer.getChildren().get(currentSongBoxIndex);
-        configureAuthorAndSongLabelsForNewSong(currentSongBox,newCurrentSongBox);
+        utils.configureAuthorAndSongLabelsForNewSong(currentSongBox,newCurrentSongBox);
         currentSongBox = newCurrentSongBox;
 
         song = currentSongBox.getSong();
@@ -693,15 +724,6 @@ public class Controller {
         slider.setValue(0);
 
         scrollPaneWithTextOfSong.requestFocus();
-        mainPane.requestFocus();
-
-    }
-
-    private void configureAuthorAndSongLabelsForNewSong(VBoxCustom oldCurrentSongBox, VBoxCustom newCurrentSongBox) {
-        ((Label)oldCurrentSongBox.getChildren().get(0)).setTextFill(Color.BLACK);
-        ((Label)oldCurrentSongBox.getChildren().get(1)).setTextFill(Color.BLACK);
-        ((Label)newCurrentSongBox.getChildren().get(0)).setTextFill(Color.RED);
-        ((Label)newCurrentSongBox.getChildren().get(1)).setTextFill(Color.RED);
     }
 
     public void nextSongButtonOnAction() {
@@ -801,7 +823,7 @@ public class Controller {
         addSongChoosePlaylist.getSelectionModel().select(0);
     }
 
-    public void chooseFileButtonOnAction() {
+    public void addSongChooseFileButtonOnAction() {
         addSongSuccessLabel.setVisible(false);
 
         FileChooser fileChooser = new FileChooser();
@@ -849,6 +871,7 @@ public class Controller {
         leftArrowButton.setDisable(isDisabled);
         rightArrowButton.setDisable(isDisabled);
         searchWordPane.setDisable(isDisabled);
+        paneWithOtherFunctionality.setDisable(isDisabled);
         searchSongBox.setDisable(isDisabled);
         mediaPlayerBox.setDisable(isDisabled);
     }

@@ -6,8 +6,12 @@
   <component name="ChangeListManager">
     <list default="true" id="e45bf0ad-58c1-45ed-bc61-57a03735f682" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/testfx/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/testfx/Application.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/testfx/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/testfx/Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/testfx/data.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/testfx/data.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/testfx/Utils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/testfx/Utils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/testfx/VBoxCustom.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/testfx/VBoxCustom.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/testfx/main-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/testfx/main-view.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/testfx/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/testfx/styles.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,26 +32,27 @@
   <component name="ProjectViewState">
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;extract.method.default.visibility&quot;: &quot;private&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/admin-kv/IdeaProjects/testfx/src/main/java/com/example/testfx&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.JavaFX&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "extract.method.default.visibility": "private",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "C:/Users/admin-kv/IdeaProjects/testfx/src/main/resources/com/example/testfx",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.JavaFX",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\admin-kv\IdeaProjects\testfx\src\main\resources\com\example\testfx" />
       <recent name="C:\Users\admin-kv\IdeaProjects\testfx\src\main\java\com\example\testfx" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
@@ -84,6 +89,7 @@
       <workItem from="1697491550917" duration="6444000" />
       <workItem from="1697527266660" duration="1520000" />
       <workItem from="1697530563693" duration="300000" />
+      <workItem from="1697560456566" duration="11024000" />
     </task>
     <servers />
   </component>
@@ -100,6 +106,13 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="XDebuggerManager">
+    <watches-manager>
+      <configuration name="Application">
+        <watch expression="playlistNamesObsList" language="JAVA" />
+      </configuration>
+    </watches-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

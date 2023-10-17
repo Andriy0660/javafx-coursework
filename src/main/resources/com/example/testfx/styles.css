@@ -3,6 +3,7 @@
     -fx-faint-focus-color: transparent;
     -fx-focus-traversable: false;
 }
+
 .text-area .scroll-pane {
     -fx-background-color: transparent;
 }
