@@ -150,6 +150,18 @@ public class Controller {
     private ComboBox<String> addSongChoosePlaylist;
     private String playlistNameForNewSong = null;
 
+    //delete song
+    @FXML
+    private Pane deleteSongPane;
+    @FXML
+    private Button deleteSongButton;
+    @FXML
+    private Label deleteSongInformLabel;
+    @FXML
+    private Button deleteSongCancelButton;
+    @FXML
+    private Button deleteSongOKButton;
+
     public void initialize() {
         //initialize songs and playlists
         try {
@@ -163,7 +175,9 @@ public class Controller {
 
         allSongs.forEach(trie::insertSong);
 
-        allSongsByPlaylists = allSongs.stream().collect(Collectors.groupingBy(Song::getPlaylistName));
+        allSongsByPlaylists = allSongs.stream()
+                .filter(i -> i.getPlaylistName() != null)
+                .collect(Collectors.groupingBy(Song::getPlaylistName));
 
         playlistNamesObsList = FXCollections.observableArrayList(allSongsByPlaylists.keySet());
         playlistNamesObsList.add(0,"Всі плейлисти");
@@ -195,6 +209,9 @@ public class Controller {
             newValue = newValue.toLowerCase();
             if (newValue.length()>0)
                 searchSongCancelButton.setDisable(false);
+            else
+                searchSongCancelButton.setDisable(true);
+
             List<Song> foundedSongs = trie.findWordsWithPrefix(newValue.toLowerCase()).stream()
                     .distinct()
                     .toList();
@@ -350,25 +367,30 @@ public class Controller {
         songBox.getChildren().addAll(authorLabel, songLabel);
 
         songBox.setOnMouseClicked( e -> {
-            previousSongButton.setDisable(false);
-            nextSongButton.setDisable(false);
 
-            int index = songBox.getCustomId();
-            currentSongBoxIndex  = index;
-            utils.configureAuthorAndSongLabelsForNewSong(currentSongBox,songBox);
-            currentSongBox = songBox;
-
-            if(index == 0){
-                previousSongButton.setDisable(true);
-            }
-
-            if(index + 1 == songContainer.getChildren().size()){
-                nextSongButton.setDisable(true);
-            }
-            configureMediaAndTextAreaForNewSong(song);
+            songBoxOnClick(songBox);
         });
 
         return songBox;
+    }
+    private void songBoxOnClick(VBoxCustom songBox){
+        Song song = songBox.getSong();
+        previousSongButton.setDisable(false);
+        nextSongButton.setDisable(false);
+
+        int index = songBox.getCustomId();
+        currentSongBoxIndex  = index;
+        utils.configureAuthorAndSongLabelsForNewSong(currentSongBox,songBox);
+        currentSongBox = songBox;
+
+        if(index == 0){
+            previousSongButton.setDisable(true);
+        }
+
+        if(index + 1 == songContainer.getChildren().size()){
+            nextSongButton.setDisable(true);
+        }
+        configureMediaAndTextAreaForNewSong(song);
     }
 
     public void leftArrowButtonOnAction(){
@@ -403,7 +425,7 @@ public class Controller {
             searchWordField.setPrefWidth(102);
         }
     }
-    public void searchButtonOnAction(){
+    public void searchWordButtonOnAction(){
         addPlaylistButton.setVisible(false);
         searchWordButton.setDisable(true);
 
@@ -681,20 +703,21 @@ public class Controller {
         mediaPlayer.pause();
     }
     public void changeSongInMP3Player(boolean isNextSong){
+        previousSongButton.setDisable(false);
+        nextSongButton.setDisable(false);
         int newIndex;
         Song song;
         if(isNextSong){
             newIndex = currentSongBoxIndex + 1;
-            previousSongButton.setDisable(false);
-            if(currentSongBoxIndex + 2 >= songContainer.getChildren().size()){
-                nextSongButton.setDisable(true);
-            }
         } else {
             newIndex = currentSongBoxIndex - 1;
-            nextSongButton.setDisable(false);
-            if(currentSongBoxIndex - 2 <= -1){
-                previousSongButton.setDisable(true);
-            }
+        }
+        if(newIndex == 0){
+            previousSongButton.setDisable(true);
+        }
+
+        if(newIndex + 1 == songContainer.getChildren().size()){
+            nextSongButton.setDisable(true);
         }
 
         currentSongBoxIndex = newIndex;
@@ -832,7 +855,6 @@ public class Controller {
 
         if (selectedFile != null) {
             filePath = selectedFile.getAbsolutePath();
-            System.out.println(filePath);
             addSongChooseSongLabel.setText("Вибрано");
             addSongChooseSongLabel.setTextFill(Color.GREEN);
         } else {
@@ -874,5 +896,74 @@ public class Controller {
         paneWithOtherFunctionality.setDisable(isDisabled);
         searchSongBox.setDisable(isDisabled);
         mediaPlayerBox.setDisable(isDisabled);
+    }
+
+    // delete song
+    public void deleteSongButtonOnAction(){
+        String currentPlayListName = playlistsComboBox.getValue();
+        if(currentPlayListName.equals("Всі плейлисти")){
+            deleteSongInformLabel.setText("Ви впевнені, що хочете повністю видалити поточну пісню?");
+        } else {
+            deleteSongInformLabel.setText("Ви впевнені, що хочете видалити поточну пісню з плейлисту " +
+                    currentPlayListName + "?" );
+        }
+        disableAllBackElements(true);
+        deleteSongPane.setLayoutY(150);
+    }
+    public void deleteSongCancelButtonOnAction(){
+        disableAllBackElements(false);
+        deleteSongPane.setLayoutY(1300);
+    }
+    public void deleteSongOKButtonOnAction(){
+        disableAllBackElements(false);
+        deleteSongPane.setLayoutY(1300);
+
+        String currentPlayListName = playlistsComboBox.getValue();
+        Song songToBeDeleted = currentSongBox.getSong();
+
+        List<Song> newListOfSongs;
+        songContainer.getChildren().clear();
+        if(!currentPlayListName.equals("Всі плейлисти")) {
+            allSongsByPlaylists.get(songToBeDeleted.getPlaylistName()).remove(songToBeDeleted);
+            newListOfSongs = allSongsByPlaylists.get(songToBeDeleted.getPlaylistName());
+            Song songWithoutPlayList = new Song(songToBeDeleted.getAuthorName(),
+                    songToBeDeleted.getSongName(),
+                    songToBeDeleted.getCouplets(),
+                    songToBeDeleted.getMp3(),
+                    null);
+
+            allSongs.set(allSongs.indexOf(songToBeDeleted), songWithoutPlayList);
+        }
+        else {
+            allSongs.remove(songToBeDeleted);
+            newListOfSongs = allSongs;
+        }
+        for (int i = 0; i < newListOfSongs.size(); i++) {
+            Song song = newListOfSongs.get(i);
+            VBoxCustom songBlock = createSongBlock(song,i);
+            songContainer.getChildren().add(songBlock);
+        }
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        ObjectWriter objectWriter = objectMapper.writer().withDefaultPrettyPrinter();
+        try {
+            objectWriter.writeValue(new File("src/main/resources/com/example/testfx/data.json"), allSongs);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        if(songContainer.getChildren().size() == 0) {
+            playlistsComboBox.getSelectionModel().select(0);
+            currentSongBoxIndex = 0;
+        }
+        else if(songContainer.getChildren().size() == 1){
+            currentSongBoxIndex = 0;
+        }
+        else if(currentSongBoxIndex == songContainer.getChildren().size()) {
+            currentSongBoxIndex--;
+        }
+
+        currentSongBox = (VBoxCustom) songContainer.getChildren().get(currentSongBoxIndex);
+        songBoxOnClick(currentSongBox);
     }
 }
