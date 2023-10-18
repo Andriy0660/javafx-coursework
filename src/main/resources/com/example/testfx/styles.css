@@ -43,3 +43,19 @@
 /*.textflow {*/
 /*    -fx-background-image: url("istockphoto-670055748-612x612.jpg")*/
 /*}*/
+
+
+
+.myDialog > *.label.content{
+    -fx-font-size: 20px;
+}
+
+.myDialog *.header-panel *.label{
+    -fx-font-size: 30px;
+}
+.red {
+    -fx-text-fill: red;
+}
+.green {
+    -fx-text-fill: green;
+}

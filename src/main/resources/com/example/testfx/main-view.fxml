@@ -33,13 +33,13 @@
 
     <Pane fx:id="searchWordPane" layoutX="264.0" prefHeight="73.0" prefWidth="345.0">
         <ComboBox fx:id="searchWordTypeComboBox" layoutX="78.0" layoutY="7.0" onAction="#searchTypeComboBoxOnAction" prefHeight="25.0" prefWidth="84.0" />
-        <TextField fx:id="coupletNumberTextField" layoutX="247.0" layoutY="7.0" prefHeight="25.0" prefWidth="28.0" promptText="id" visible="false" />
+        <TextField fx:id="searchWordNumberOfCoupletTextField" layoutX="247.0" layoutY="7.0" prefHeight="25.0" prefWidth="28.0" promptText="id" visible="false" />
         <Label fx:id="searchWordResultLabel" layoutX="220.0" layoutY="47.0" nodeOrientation="LEFT_TO_RIGHT" text="некоректний індекс" visible="false" />
 
         <Button fx:id="searchWordButton" disable="true" layoutX="289.0" layoutY="7.0" onAction="#searchWordButtonOnAction" prefHeight="16.0" prefWidth="39.0" text="🔍" />
-        <TextField fx:id="searchWordField" layoutX="172.0" layoutY="7.0" prefHeight="25.0" prefWidth="102.0" promptText="пошук" />
+        <TextField fx:id="searchWordTargetField" layoutX="172.0" layoutY="7.0" prefHeight="25.0" prefWidth="102.0" promptText="пошук" />
       <Button layoutX="6.0" layoutY="43.0" mnemonicParsing="false" onAction="#addSongButtonOnAction" prefHeight="26.0" prefWidth="157.0" text="Додати пісню" />
-      <Button fx:id="addPlaylistButton" layoutX="172.0" layoutY="43.0" mnemonicParsing="false" onAction="#addPlaylistButtonOnAction" prefHeight="26.0" prefWidth="157.0" text="Додати плейлист" />
+      <Button fx:id="createPlaylistButton" layoutX="172.0" layoutY="43.0" mnemonicParsing="false" onAction="#addPlaylistButtonOnAction" prefHeight="26.0" prefWidth="157.0" text="Додати плейлист" />
     </Pane>
 
     <Line endX="-79.0" layoutX="341.0" layoutY="75.0" startX="-79.0" startY="-80.0" stroke="#9e9e9e" strokeWidth="2.0" />
@@ -226,10 +226,10 @@
         <Label fx:id="addSongSuccessLabel" layoutX="181.0" layoutY="173.0" text="Пісню успішно додано" textFill="GREEN" visible="false" />
     </Pane>
 
-    <Pane fx:id="addPlaylistPane" layoutX="211.0" layoutY="869.0" prefHeight="92.0" prefWidth="179.0" style="-fx-border-color: black; -fx-border-radius: 20; -fx-background-color: #8a9196; -fx-background-radius: 20;">
-        <TextField fx:id="addPlaylistName" layoutX="13.0" layoutY="13.0" prefHeight="25.0" prefWidth="151.0" promptText="Введіть назву плейлиста" />
+    <Pane fx:id="createPlaylistPane" layoutX="211.0" layoutY="869.0" prefHeight="92.0" prefWidth="179.0" style="-fx-border-color: black; -fx-border-radius: 20; -fx-background-color: #8a9196; -fx-background-radius: 20;">
+        <TextField fx:id="createPlaylistNameOfPlaylist" layoutX="13.0" layoutY="13.0" prefHeight="25.0" prefWidth="151.0" promptText="Введіть назву плейлиста" />
         <Button layoutX="14.0" layoutY="50.0" mnemonicParsing="false" onAction="#addPlaylistCancelButtonOnAction" prefHeight="25.0" prefWidth="70.0" text="Назад" />
-        <Button fx:id="addPlaylistOKButton" disable="true" layoutX="96.0" layoutY="50.0" mnemonicParsing="false" onAction="#addPlaylistOKButtonOnAction" prefHeight="25.0" prefWidth="70.0" text="Додати" />
+        <Button fx:id="createPlaylistOKButton" disable="true" layoutX="96.0" layoutY="50.0" mnemonicParsing="false" onAction="#addPlaylistOKButtonOnAction" prefHeight="25.0" prefWidth="70.0" text="Створити" />
     </Pane>
 
    <Line endX="500.0" layoutX="203.0" layoutY="76.0" startX="-230.0" stroke="#9e9e9e" strokeWidth="2.0" />
@@ -240,7 +240,7 @@
        <TextField fx:id="newRowToBeInserted" layoutX="94.0" layoutY="17.0" prefHeight="25.0" prefWidth="134.0" promptText="стрічка" />
        <Button layoutX="24.0" layoutY="53.0" mnemonicParsing="false" onAction="#changeRowCancelButtonOnAction" prefHeight="25.0" prefWidth="96.0" text="Назад" />
       <Button fx:id="changeRowOKButton" layoutX="132.0" layoutY="53.0" mnemonicParsing="false" onAction="#changeRowOKButtonOnAction" prefHeight="25.0" prefWidth="96.0" text="OK" />
-      <Label fx:id="newRowResultLabel" layoutX="75.0" layoutY="83.0" textFill="WHITE" />
+      <Label fx:id="changeRowResultLabel" layoutX="75.0" layoutY="83.0" textFill="WHITE" />
 
    </Pane>
    <Pane fx:id="deleteSongPane" layoutX="172.0" layoutY="1194.0" prefHeight="92.0" prefWidth="277.0" style="-fx-border-color: black; -fx-border-radius: 20; -fx-background-radius: 20; -fx-background-color: #8a9196;">
@@ -251,18 +251,18 @@
          <Label fx:id="deleteSongInformLabel" layoutX="24.0" layoutY="10.0" prefWidth="230.0" text="Ви впевнені що хочете видалити поточну пісню з плейлисту Ілля Нацда?" wrapText="true" />
       </children>
    </Pane>
-   <Pane fx:id="songSettingsPane" layoutX="67.0" layoutY="459.0" prefHeight="112.0" prefWidth="125.0" style="-fx-border-color: black; -fx-border-radius: 15; -fx-background-color: #8a9196; -fx-background-radius: 15;">
+   <Pane fx:id="songSettingsPane" layoutX="13.0" layoutY="459.0" prefHeight="112.0" prefWidth="125.0" style="-fx-border-color: black; -fx-border-radius: 15; -fx-background-color: #8a9196; -fx-background-radius: 15;">
       <children>
          <Button fx:id="deleteSongButton" layoutX="9.0" layoutY="42.0" mnemonicParsing="false" onAction="#deleteSongButtonOnAction" prefWidth="105.0" style="-fx-background-color: #8a9196; -fx-border-color: black; -fx-border-radius: 10;" text="Видалити пісню" />
-         <Button fx:id="toPlaylistButton" layoutX="10.0" layoutY="77.0" mnemonicParsing="false" prefWidth="105.0" style="-fx-background-color: #8a9196; -fx-border-color: black; -fx-border-radius: 10;" text="В плейлист" />
-         <Button fx:id="settingsCancelButton" layoutX="9.0" layoutY="6.0" mnemonicParsing="false" onAction="#deleteSongButtonOnAction" prefWidth="105.0" style="-fx-background-color: #8a9196; -fx-border-color: black; -fx-border-radius: 10;" text="Назад" />
+         <Button fx:id="addSongToPlaylistButton" layoutX="10.0" layoutY="77.0" mnemonicParsing="false" onAction="#addSongToPlaylistButtonOnAction" prefWidth="105.0" style="-fx-background-color: #8a9196; -fx-border-color: black; -fx-border-radius: 10;" text="В плейлист" />
+         <Button fx:id="settingsCancelButton" layoutX="9.0" layoutY="6.0" mnemonicParsing="false" onAction="#settingsCancelButtonOnAction" prefWidth="105.0" style="-fx-background-color: #8a9196; -fx-border-color: black; -fx-border-radius: 10;" text="Назад" />
       </children></Pane>
-   <Pane fx:id="toPlaylistPane" layoutX="221.0" layoutY="970.0" prefHeight="78.0" prefWidth="179.0" style="-fx-border-color: black; -fx-border-radius: 20; -fx-background-color: #8a9196; -fx-background-radius: 20;">
+   <Pane fx:id="addSongToPlaylistPane" layoutX="221.0" layoutY="970.0" prefHeight="78.0" prefWidth="179.0" style="-fx-border-color: black; -fx-border-radius: 20; -fx-background-color: #8a9196; -fx-background-radius: 20;">
       <children>
-         <ComboBox fx:id="toPlaylistComboBox" layoutX="18.0" layoutY="9.0" prefHeight="25.0" prefWidth="143.0" promptText="Вибрати плейлист" />
-         <Button fx:id="toPlaylistCancelButton" layoutX="17.0" layoutY="41.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="70.0" text="Назад" />
-         <Button fx:id="toPlaylistOKButton" disable="true" layoutX="91.0" layoutY="41.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="70.0" text="Додати" />
-         <Label fx:id="toPlaylistErrorLabel" layoutX="19.0" layoutY="70.0" prefWidth="143.0" textFill="RED" wrapText="true" />
+         <ComboBox fx:id="addSongToPlaylistComboBox" layoutX="18.0" layoutY="9.0" prefHeight="25.0" prefWidth="143.0" promptText="Вибрати плейлист" />
+         <Button fx:id="addSongToPlaylistCancelButton" layoutX="17.0" layoutY="41.0" mnemonicParsing="false" onAction="#addSongToPlaylistCancelButtonOnAction" prefHeight="25.0" prefWidth="70.0" text="Назад" />
+         <Button fx:id="addSongToPlaylistOKButton" disable="true" layoutX="91.0" layoutY="41.0" mnemonicParsing="false" onAction="#addSongToPlaylistOKButtonOnAction" prefHeight="25.0" prefWidth="70.0" text="Додати" />
+         <Label fx:id="addSongToPlaylistErrorLabel" layoutX="19.0" layoutY="70.0" prefWidth="143.0" textFill="RED" wrapText="true" />
       </children>
    </Pane>
 

@@ -12,7 +12,8 @@
     "coupletString" : "Понеділок, вівторок і так кожен день,\nМені треба тебе,\nМені треба пісень про тебе.\nПишу нашій* любові пісні,\nЯ до тебе тулюся у кожному сні!\n"
   } ],
   "mp3" : "file:/Users/admin-kv/IdeaProjects/testfx/src/main/resources/com/example/testfx/songs/illia_naida_2017_jak_ja_maju_tebe_ne_ljubiti.mp3",
-  "playlistName" : "Other"
+  "playlistName" : "Other",
+  "liked" : true
 }, {
   "authorName" : "Ілля Найда",
   "songName" : "А ти була",
@@ -24,22 +25,8 @@
     "coupletString" : "Хтось малює дороги,\nХтось намалює мости,\nНазиває життя наше долею\nІ не кажи куди нам іти...\nНе знала ти,\nЩо біль буває солодкою...\nНе знав і я,\nЩо будеш ти самотньою...\n"
   } ],
   "mp3" : "file:/Users/admin-kv/IdeaProjects/testfx/src/main/resources/com/example/testfx/songs/illia_naida_a_ty_bula.mp3",
-  "playlistName" : "Other"
-}, {
-  "authorName" : "Ілля Найда",
-  "songName" : "Білі квіти",
-  "couplets" : [ {
-    "id" : 1,
-    "coupletString" : "Знову день на дворі\nІ сонце світить,\nЗнову я принесу\nСніжно-білі квіти,\nТа не знаю,\nЯк подарувати,\nТа не знаю я,\nПро що розказати...\n"
-  }, {
-    "id" : 2,
-    "coupletString" : "Білі квіти навесні,\nЯ принесу їх тобі,\nАле очі мої сумні\nБез тебе...\nБілі квіти навесні,\nПодарую їх тобі,\nТо є серце моє\nДля тебе...\n"
-  }, {
-    "id" : 3,
-    "coupletString" : "Все та ж картинка твоя\nУ мене в уяві\nІ усмішка твоя,\nМов сонце яскраве.\nТа не можу тобі\nПро це розказати,\nБо не знаю я -\nЧи будеш кохати?.."
-  } ],
-  "mp3" : "file:/Users/admin-kv/IdeaProjects/testfx/src/main/resources/com/example/testfx/songs/illia_naida_bili_kviti.mp3",
-  "playlistName" : "Other"
+  "playlistName" : "Other",
+  "liked" : true
 }, {
   "authorName" : "Ілля Найда",
   "songName" : "Дівчинка осінь",
@@ -54,7 +41,8 @@
     "coupletString" : "Сонячний промінь\nВ ранковім тумані і біла трава,\nЗахмарене небо плаче дощами ,\nБо скоро зима...\nЯк я тебе люблю,\nМені наймиліша хоча й сумна\nВ жовтому платті дівчинка осінь,\nТвій плач - моя вина...\n"
   } ],
   "mp3" : "file:/Users/admin-kv/IdeaProjects/testfx/src/main/resources/com/example/testfx/songs/illia_naida_divchinka_osin.mp3",
-  "playlistName" : "Other"
+  "playlistName" : null,
+  "liked" : false
 }, {
   "authorName" : "Ілля Найда",
   "songName" : "Не залишу тебе",
@@ -69,7 +57,8 @@
     "coupletString" : "Хмуро там за вікном, я зроблю каву з молоком.\nТи приготуєш сніданок і засумуєш раптом.\nЗапитаєш мене: Любиш сьогодні, як колись,\nТільки правду скажи, прошу не злись!.."
   } ],
   "mp3" : "file:/Users/admin-kv/IdeaProjects/testfx/src/main/resources/com/example/testfx/songs/illia_naida_ja_ne_zalishu_tebe.mp3",
-  "playlistName" : "Other"
+  "playlistName" : "Other",
+  "liked" : false
 }, {
   "authorName" : "Ілля Найда",
   "songName" : "Вже не той",
@@ -84,7 +73,8 @@
     "coupletString" : "Може, я вже не той,\nМоже, й ти вже не та,\nМоже, й немає у нас того кохання?..\nПитаю знову і знов -\nДе знайти ту любов?\nЩо я дарував, тобі дарував\nІз ночі до рання...\n"
   } ],
   "mp3" : "file:/Users/admin-kv/IdeaProjects/testfx/src/main/resources/com/example/testfx/songs/illia_naida_ja_vzhe_ne_toi.mp3",
-  "playlistName" : "Other"
+  "playlistName" : "Other",
+  "liked" : false
 }, {
   "authorName" : "Ілля Найда",
   "songName" : "Не хочу того снігу",
@@ -102,7 +92,8 @@
     "coupletString" : "Любила, не любила,\nЦе зовсім не важливо,\nТепер вже не важливо,\nМені вже байдуже.\nРоби тепер, що хочеш,\nРоби тепер, що хочеш,\nМене ти більше не побачиш. \n"
   } ],
   "mp3" : "file:/Users/admin-kv/IdeaProjects/testfx/src/main/resources/com/example/testfx/songs/illia_naida_ne_hochu_togo_snigy.mp3",
-  "playlistName" : "Illia Nayda"
+  "playlistName" : "Illia Nayda",
+  "liked" : false
 }, {
   "authorName" : "Ілля Найда",
   "songName" : "Нова весна",
@@ -117,7 +108,8 @@
     "coupletString" : "А ти все мрієш, як листя ти грієш,\nКоли на дворі буя весна,\nА вітер гуляє і вже не кохає,\nБо зеленого листя вже більш нема...\n"
   } ],
   "mp3" : "file:/Users/admin-kv/IdeaProjects/testfx/src/main/resources/com/example/testfx/songs/illia_naida_nova_vesna.mp3",
-  "playlistName" : "Illia Nayda"
+  "playlistName" : "Illia Nayda",
+  "liked" : false
 }, {
   "authorName" : "Ілля Найда",
   "songName" : "Осінь",
@@ -132,7 +124,8 @@
     "coupletString" : "Бажаю щастя я тобі,\nІ, незважаючи на біль,\nЯ буду жити, як тоді, що був без тебе.\nА літа мало так було,\nЯ не хотів - та все пройшло,\nТа біль лишилась назавжди в моєму серці...\n"
   } ],
   "mp3" : "file:/Users/admin-kv/IdeaProjects/testfx/src/main/resources/com/example/testfx/songs/illia_naida_osin.mp3",
-  "playlistName" : "Illia Nayda"
+  "playlistName" : "Illia Nayda",
+  "liked" : false
 }, {
   "authorName" : "Ілля Найда",
   "songName" : "Ти одна така",
@@ -147,7 +140,8 @@
     "coupletString" : "Ти - гроза і цунамі\nВ душі моїй.\nНе втікай!\nЗалишати мене не смій!\nНе пали за собою усі мости!\nХай дочка моя буде\nТочно така, як ти!"
   } ],
   "mp3" : "file:/Users/admin-kv/IdeaProjects/testfx/src/main/resources/com/example/testfx/songs/illia_naida_ti_odna_taka.mp3",
-  "playlistName" : "Illia Nayda"
+  "playlistName" : "Illia Nayda",
+  "liked" : false
 }, {
   "authorName" : "Ілля Найда",
   "songName" : "Твої очі",
@@ -162,7 +156,8 @@
     "coupletString" : "Ти тепер для мене - світло в небі,\nСвітиш, як ясна зоря,\nВсе життя шукав одну тебе я,\nЗнаю, ти тепер моя!\nБільше я не зможу просто жити,\nВкрала серце ти моє,\nДав Всевишній полюбити,\nТи - усе, що в мене є, в мене є...\n"
   } ],
   "mp3" : "file:/Users/admin-kv/IdeaProjects/testfx/src/main/resources/com/example/testfx/songs/illia_naida_tvo_ochi.mp3",
-  "playlistName" : "Illia Nayda"
+  "playlistName" : "Illia Nayda",
+  "liked" : false
 }, {
   "authorName" : "Ілля Найда",
   "songName" : "Жаль не знала вона",
@@ -177,7 +172,8 @@
     "coupletString" : "Встало сонце чуже,\nСтало небо не те,\nНіжне серденько ромашки,\nРозбивалось від болю.\nТа вона, розцвіте,\nІ забуде тебе,\nНе роби так, як не хочеш,\nЩоб зробили з тобою.\n"
   } ],
   "mp3" : "file:/Users/admin-kv/IdeaProjects/testfx/src/main/resources/com/example/testfx/songs/illia_naida_zhal_ne_znala_vona.mp3",
-  "playlistName" : "Illia Nayda"
+  "playlistName" : "Illia Nayda",
+  "liked" : false
 }, {
   "authorName" : "Ілля Найда",
   "songName" : "Золотава осінь",
@@ -192,7 +188,8 @@
     "coupletString" : "І знову жовтий лист -\nВід осені сюрприз -\nДарує усміх золотий,\nКажу слова не ті,\nГублюсь на самоті,\nЛиш на прощання погляд твій.\nІ марно не кажи,\nІ не тривож душі,\nМені лишилися пісні,\nБо знаю я сама,\nЩо йде до нас зима\nІ так далеко до весни...\n"
   } ],
   "mp3" : "file:/Users/admin-kv/IdeaProjects/testfx/src/main/resources/com/example/testfx/songs/illia_naida_zolotava_osin.mp3",
-  "playlistName" : "Illia Nayda"
+  "playlistName" : "Illia Nayda",
+  "liked" : false
 }, {
   "authorName" : "Ілля Найда",
   "songName" : "Тебе одну",
@@ -207,7 +204,8 @@
     "coupletString" : "Давно тебе на бачу,\nЯ з розуму зійду,\nВ душі я тихо плачу,\nА може за все плачу:\nЗа те, що не змінився,\nЗа те, що відпустив,\nКоли сказала ти мені,\nЩоб я тебе забув...\nА я не забув!\nТебе я не забув!\n"
   } ],
   "mp3" : "file:/Users/admin-kv/IdeaProjects/testfx/src/main/resources/com/example/testfx/songs/illja_najda_-_tebe_odnu.mp3",
-  "playlistName" : "Illia Nayda"
+  "playlistName" : "Illia Nayda",
+  "liked" : false
 }, {
   "authorName" : "Ілля Найда",
   "songName" : "Не зімкнути очей",
@@ -225,7 +223,8 @@
     "coupletString" : "Який у неї голос?\nТа я ж її і не чув...\nЧому не підійшов?\nЧого не привітався?\nБуло б хоч запитатись,\nЯк її зовуть...\nА я як завжди просто забоявся...\n"
   } ],
   "mp3" : "file:/Users/admin-kv/IdeaProjects/testfx/src/main/resources/com/example/testfx/songs/illja_najda_ne_zimknuti_ochej_2016.mp3",
-  "playlistName" : "Illia Nayda"
+  "playlistName" : "Illia Nayda",
+  "liked" : false
 }, {
   "authorName" : "Ілля Найда",
   "songName" : "Більше не приходи",
@@ -240,7 +239,8 @@
     "coupletString" : "Так боляче знати - без нього прожити\nІ вже не почути цілющі три слова:\nЯ люблю тебе!\nБоятись кохати, як боятися жити,\nКохання - це дар, кохання - талант,\nЩо треба заслужити."
   } ],
   "mp3" : "file:/Users/admin-kv/IdeaProjects/testfx/src/main/resources/com/example/testfx/songs/naida_illia_bilshe_ne_prihodi.mp3",
-  "playlistName" : "Illia Nayda"
+  "playlistName" : "Illia Nayda",
+  "liked" : false
 }, {
   "authorName" : "Ілля Найда",
   "songName" : "Моє серце",
@@ -255,7 +255,8 @@
     "coupletString" : "Щоб не сталось в твоєму житті\nНе журись, не плач.\nМоже я щось зроблю не так,\nТи мені пробач.\nЯ горджусь, що зі мною ти,\nДобра і смішна.\nІ не треба ніяких висот,\nТільки будь моя!\n"
   } ],
   "mp3" : "file:/Users/admin-kv/IdeaProjects/testfx/src/main/resources/com/example/testfx/songs/naida_illia_mo_serce.mp3",
-  "playlistName" : "Illia Nayda"
+  "playlistName" : "Illia Nayda",
+  "liked" : false
 }, {
   "authorName" : "Ілля Найда",
   "songName" : "Просто не забувай",
@@ -270,7 +271,8 @@
     "coupletString" : "Для щастя часто достатньо лиш зустріти\nОдну людину, що десь далеко в світі,\nЄдине місце, де я хочу зараз бути,\nЦе твоє серце, бо воно мене так жде"
   } ],
   "mp3" : "file:/Users/admin-kv/IdeaProjects/testfx/src/main/resources/com/example/testfx/songs/naida_illia_prosto_ne_zabuvaj.mp3",
-  "playlistName" : "Illia Nayda"
+  "playlistName" : "Illia Nayda",
+  "liked" : false
 }, {
   "authorName" : "Ілля Найда",
   "songName" : "Ти моє небо",
@@ -285,7 +287,8 @@
     "coupletString" : "Я тебе так сильно покохав,\nДвічі не закохуються так,\nЯ на тебе довго так чекав,\nДо щастя залишається ще крок."
   } ],
   "mp3" : "file:/Users/admin-kv/IdeaProjects/testfx/src/main/resources/com/example/testfx/songs/naida_illia_ti_mo_nebo.mp3",
-  "playlistName" : "Illia Nayda"
+  "playlistName" : "Illia Nayda",
+  "liked" : false
 }, {
   "authorName" : "Ілля Найда",
   "songName" : "Запах квітів",
@@ -300,5 +303,27 @@
     "coupletString" : "Хоч роки, як вода, пропливуть і дощ пройде,\nХоч багато в житті я зроблю - та все мине,\nТільки ти не забудь, як люблю одну тебе,\nІ кохання у серці моїм не пройде, не пройде...\n"
   } ],
   "mp3" : "file:/Users/admin-kv/IdeaProjects/testfx/src/main/resources/com/example/testfx/songs/naida_illia_zapah_kvitiv.mp3",
-  "playlistName" : "Illia Nayda"
-}]
+  "playlistName" : "Other",
+  "liked" : true
+},
+  {
+    "authorName": "Ілля Найда",
+    "songName": "Білі квіти",
+    "couplets": [
+      {
+        "id": 1,
+        "coupletString":"Знову день на дворі\nІ сонце світить,\nЗнову я принесу\nСніжно-білі квіти,\nТа не знаю,\nЯк подарувати,\nТа не знаю я,\nПро що розказати...\n"
+      },
+      {
+        "id": 2,
+        "coupletString": "Білі квіти навесні,\nЯ принесу їх тобі,\nАле очі мої сумні\nБез тебе...\nБілі квіти навесні,\nПодарую їх тобі,\nТо є серце моє\nДля тебе...\n"
+      },
+      {
+        "id": 3,
+        "coupletString": "Все та ж картинка твоя\nУ мене в уяві\nІ усмішка твоя,\nМов сонце яскраве.\nТа не можу тобі\nПро це розказати,\nБо не знаю я -\nЧи будеш кохати?.."
+      }
+    ],
+    "mp3": "file:/Users/admin-kv/IdeaProjects/testfx/src/main/resources/com/example/testfx/songs/illia_naida_bili_kviti.mp3",
+    "playlistName" : null,
+    "liked" : true
+  } ]

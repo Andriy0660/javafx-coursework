@@ -16,10 +16,12 @@ import javafx.scene.layout.*;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.SVGPath;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
 import java.io.File;
@@ -36,6 +38,7 @@ public class Controller {
     private ObservableList<String> playlistNamesObsList;
     private int currentSongBoxIndex;
     private VBoxCustom currentSongBox;
+    private final int INVISIBLE = 1000;
 
 
     @FXML
@@ -59,21 +62,20 @@ public class Controller {
     @FXML
     private TextField searchSongTextField;
     @FXML
-    private HBox mediaPlayerBox;
-    @FXML
     private Button searchSongCancelButton;
 
     // playlist
     @FXML
     private ComboBox<String> playlistsComboBox;
+
     @FXML
-    private Pane addPlaylistPane;
+    private Pane createPlaylistPane;
     @FXML
-    private Button addPlaylistButton;
+    private Button createPlaylistButton;
     @FXML
-    private Button addPlaylistOKButton;
+    private Button createPlaylistOKButton;
     @FXML
-    private TextField addPlaylistName;
+    private TextField createPlaylistNameOfPlaylist;
 
     // search word
     @FXML
@@ -81,17 +83,19 @@ public class Controller {
     @FXML
     private Button searchWordButton;
     @FXML
-    private Label searchWordResultLabel;
-    @FXML
-    private TextField searchWordField;
+    private TextField searchWordTargetField;
     @FXML
     private ComboBox<String> searchWordTypeComboBox;
     @FXML
-    private TextField coupletNumberTextField;
+    private TextField searchWordNumberOfCoupletTextField;
 
     // other functionality
     @FXML
     private Pane paneWithOtherFunctionality;
+    @FXML
+    private Pane changeRowPane;
+    @FXML
+    private Label changeRowResultLabel;
     @FXML
     private Button changeRowOKButton;
     @FXML
@@ -104,13 +108,11 @@ public class Controller {
     private Button sonnetButton;
     @FXML
     private Label otherFunctionalityResultLabel;
-    @FXML
-    private Pane changeRowPane;
-    @FXML
-    private Label newRowResultLabel;
 
     // media player
     private MediaPlayer mediaPlayer;
+    @FXML
+    private HBox mediaPlayerBox;
     @FXML
     private JFXSlider slider;
     private boolean isSliderBeingDragged = false;
@@ -130,6 +132,7 @@ public class Controller {
     private Button nextSongButton;
     @FXML
     private Button previousSongButton;
+
 
     // add song
     @FXML
@@ -153,35 +156,28 @@ public class Controller {
     //song settings
     @FXML
     private Pane songSettingsPane;
-    @FXML
-    private Button settingsCancelButton;
-    @FXML
-    private Button toPlaylistButton;
 
         //add song to playlist
     @FXML
-    private Pane toPlaylistPane;
+    private Button addSongToPlaylistButton;
     @FXML
-    private Button toPlaylistOKButton;
+    private Pane addSongToPlaylistPane;
     @FXML
-    private Button toPlaylistCancelButton;
+    private Button addSongToPlaylistOKButton;
     @FXML
-    private ComboBox<String> toPlaylistComboBox;
+    private Button addSongToPlaylistCancelButton;
     @FXML
-    private Label toPlaylistErrorLabel;
+    private ComboBox<String> addSongToPlaylistComboBox;
+    @FXML
+    private Label addSongToPlaylistErrorLabel;
         //delete song
     @FXML
     private Pane deleteSongPane;
     @FXML
-    private Button deleteSongButton;
-    @FXML
     private Label deleteSongInformLabel;
-    @FXML
-    private Button deleteSongCancelButton;
-    @FXML
-    private Button deleteSongOKButton;
 
 
+    private List<Song> likedSongs = new ArrayList<>();
 
     public void initialize() {
         //initialize songs and playlists
@@ -202,10 +198,13 @@ public class Controller {
 
         playlistNamesObsList = FXCollections.observableArrayList(allSongsByPlaylists.keySet());
         playlistNamesObsList.add(0,"Всі плейлисти");
+        playlistNamesObsList.add(1,"Вподобані");
 
 
         for (int i = 0; i < allSongs.size(); i++) {
             Song song = allSongs.get(i);
+            if(song.isLiked())
+                likedSongs.add(song);
             HBox songBlock = createSongBlock(song,i);
             songContainer.getChildren().add(songBlock);
         }
@@ -213,7 +212,10 @@ public class Controller {
 
         currentSongBoxIndex = 0;
         HBox initHBox = (HBox)songContainer.getChildren().get(0);
+        //settings button
         initHBox.getChildren().get(1).setVisible(true);
+        //heart button
+        initHBox.getChildren().get(2).setVisible(true);
         currentSongBox = (VBoxCustom) initHBox.getChildren().get(0);
 
         Label currentAuthorLabel = (Label) currentSongBox.getChildren().get(0);
@@ -239,16 +241,21 @@ public class Controller {
 
             String currentPlaylist = playlistsComboBox.getValue();
             songContainer.getChildren().clear();
-
-            if(!currentPlaylist.equals("Всі плейлисти")){
-                List<Song> listOfSongsInCurrentPlaylist = allSongsByPlaylists.get(currentPlaylist);
-                foundedSongs = foundedSongs.stream()
-                        .filter(listOfSongsInCurrentPlaylist::contains)
-                        .toList();
+            List<Song> listOfSongsInCurrentPlaylist;
+            if(currentPlaylist.equals("Вподобані")){
+                listOfSongsInCurrentPlaylist = likedSongs;
             }
+            else if(!currentPlaylist.equals("Всі плейлисти")){
+                listOfSongsInCurrentPlaylist = allSongsByPlaylists.get(currentPlaylist);
+            } else
+                listOfSongsInCurrentPlaylist = allSongs;
+
+            foundedSongs = foundedSongs.stream()
+                    .filter(listOfSongsInCurrentPlaylist::contains)
+                    .toList();
+
             for (int i = 0; i < foundedSongs.size(); i++) {
                 Song song = foundedSongs.get(i);
-                //VBoxCustom songBlock = createSongBlock(song,i);
                 HBox songBlock = createSongBlock(song,i);
                 songContainer.getChildren().add(songBlock);
             }
@@ -259,12 +266,25 @@ public class Controller {
         searchWordTypeComboBox.setItems(FXCollections.observableArrayList("Пісня", "Куплет"));
         searchWordTypeComboBox.getSelectionModel().select(0);
         searchWordTypeComboBox.setVisibleRowCount(2);
-        searchWordField.textProperty().addListener((observable, oldValue, newValue) -> {
+        searchWordTargetField.textProperty().addListener((observable, oldValue, newValue) -> {
             searchWordButton.setDisable(newValue.length() == 0);
         });
 
+        //initialize change row pane
+        BooleanBinding isChangeRowButtonActive = Bindings.createBooleanBinding(() ->
+
+                        !numberOfCoupletToBeReplaced.getText().trim().isEmpty() &&
+                                !numberOfRowToBeReplaced.getText().trim().isEmpty() &&
+                                !newRowToBeInserted.getText().trim().isEmpty() ,
+
+                numberOfCoupletToBeReplaced.textProperty(),
+                numberOfRowToBeReplaced.textProperty(),
+                newRowToBeInserted.textProperty());
+
+        changeRowOKButton.disableProperty().bind(isChangeRowButtonActive.not());
+
         //initialize index text fields
-        utils.setSingleDigitIntegerListenerForTextField(coupletNumberTextField);
+        utils.setSingleDigitIntegerListenerForTextField(searchWordNumberOfCoupletTextField);
         utils.setSingleDigitIntegerListenerForTextField(numberOfCoupletToBeReplaced);
         utils.setSingleDigitIntegerListenerForTextField(numberOfRowToBeReplaced);
 
@@ -290,7 +310,6 @@ public class Controller {
         previousSongButton.setFocusTraversable(false);
 
         //initialize add song
-
         BooleanBinding isAddSongButtonActive = Bindings.createBooleanBinding(() ->
 
                                 !addSongAuthorName.getText().trim().isEmpty() &&
@@ -304,9 +323,8 @@ public class Controller {
         addSongOKButton.disableProperty().bind(isAddSongButtonActive.not());
 
         //initialize playlist
-
-        addPlaylistName.textProperty().addListener((observable, oldValue, newValue) -> {
-            addPlaylistOKButton.setDisable(newValue.isEmpty());
+        createPlaylistNameOfPlaylist.textProperty().addListener((observable, oldValue, newValue) -> {
+            createPlaylistOKButton.setDisable(newValue.isEmpty());
         });
 
         playlistsComboBox.setItems(playlistNamesObsList);
@@ -324,106 +342,44 @@ public class Controller {
             List<Song> newListOfSongs;
             if(value.equals("Всі плейлисти")){
                 newListOfSongs = allSongs;
-            } else {
+            } else if(value.equals("Вподобані")){
+                newListOfSongs = likedSongs;
+            }else {
                 newListOfSongs = allSongsByPlaylists.get(value);
             }
 
             for (int i = 0; i < newListOfSongs.size(); i++) {
                 Song song = newListOfSongs.get(i);
-                //VBoxCustom songBlock = createSongBlock(song,i);
                 HBox songBlock = createSongBlock(song,i);
                 songContainer.getChildren().add(songBlock);
             }
         });
 
-        //initialize change row pane
-        BooleanBinding isChangeRowButtonActive = Bindings.createBooleanBinding(() ->
-
-                        !numberOfCoupletToBeReplaced.getText().trim().isEmpty() &&
-                                !numberOfRowToBeReplaced.getText().trim().isEmpty() &&
-                                !newRowToBeInserted.getText().trim().isEmpty() ,
-
-                numberOfCoupletToBeReplaced.textProperty(),
-                numberOfRowToBeReplaced.textProperty(),
-                newRowToBeInserted.textProperty());
-
-        changeRowOKButton.disableProperty().bind(isChangeRowButtonActive.not());
-
-        //settings pane
-        settingsCancelButton.setOnAction(e -> {
-            disableAllBackElements(false);
-            songSettingsPane.setLayoutY(600);
-        });
-
-        toPlaylistComboBox.setItems(playlistNamesObsList);
-        toPlaylistComboBox.getSelectionModel().select(0);
+        //initialize settings pane
+        addSongToPlaylistComboBox.setItems(playlistNamesObsList);
+        addSongToPlaylistComboBox.getSelectionModel().select(0);
         int sizeOfComboBox = Math.min(4, playlistNamesObsList.size());
-        toPlaylistComboBox.setVisibleRowCount(sizeOfComboBox);
+        addSongToPlaylistComboBox.setVisibleRowCount(sizeOfComboBox);
 
-        toPlaylistComboBox.setOnShowing(e -> {
-            toPlaylistPane.setPrefHeight(toPlaylistPane.getHeight()+sizeOfComboBox*25);
-            toPlaylistCancelButton.setLayoutY(toPlaylistCancelButton.getLayoutY()+sizeOfComboBox*25);
-            toPlaylistOKButton.setLayoutY(toPlaylistOKButton.getLayoutY()+sizeOfComboBox*25);
+        addSongToPlaylistComboBox.setOnShowing(e -> {
+            addSongToPlaylistPane.setPrefHeight(addSongToPlaylistPane.getHeight()+sizeOfComboBox*25);
+            addSongToPlaylistCancelButton.setLayoutY(addSongToPlaylistCancelButton.getLayoutY()+sizeOfComboBox*25);
+            addSongToPlaylistOKButton.setLayoutY(addSongToPlaylistOKButton.getLayoutY()+sizeOfComboBox*25);
         });
-        toPlaylistComboBox.setOnHiding(e -> {
-            toPlaylistPane.setPrefHeight(toPlaylistPane.getHeight()-sizeOfComboBox*25);
-            toPlaylistCancelButton.setLayoutY(toPlaylistCancelButton.getLayoutY()-sizeOfComboBox*25);
-            toPlaylistOKButton.setLayoutY(toPlaylistOKButton.getLayoutY()-sizeOfComboBox*25);
+        addSongToPlaylistComboBox.setOnHiding(e -> {
+            addSongToPlaylistPane.setPrefHeight(addSongToPlaylistPane.getHeight()-sizeOfComboBox*25);
+            addSongToPlaylistCancelButton.setLayoutY(addSongToPlaylistCancelButton.getLayoutY()-sizeOfComboBox*25);
+            addSongToPlaylistOKButton.setLayoutY(addSongToPlaylistOKButton.getLayoutY()-sizeOfComboBox*25);
         });
-        toPlaylistComboBox.valueProperty().addListener((observable, oldValue, newValue) -> {
-            String value = toPlaylistComboBox.getValue();
+
+        addSongToPlaylistComboBox.valueProperty().addListener((observable, oldValue, newValue) -> {
+            String value = addSongToPlaylistComboBox.getValue();
             if(value == null) return;
-            if(value.equals("Всі плейлисти")){
-                toPlaylistOKButton.setDisable(true);
-            }
-            else {
-                toPlaylistOKButton.setDisable(false);
-            }
-        });
-        toPlaylistButton.setOnAction(e -> {
-            toPlaylistPane.setLayoutY(150);
-            songSettingsPane.setVisible(false);
-            disableAllBackElements(true);
-        });
-        toPlaylistCancelButton.setOnAction(e -> {
-            toPlaylistPane.setLayoutY(700);
-            songSettingsPane.setVisible(true);
-        });
-        toPlaylistOKButton.setOnAction(e -> {
-
-            String playlistName = toPlaylistComboBox.getValue();
-            Song currentSong = currentSongBox.getSong();
-            if(currentSong.getPlaylistName()!=null){
-                toPlaylistErrorLabel.setText("Ця пісня вже знаходиться в плейлисті " + currentSong.getPlaylistName());
-                toPlaylistPane.setPrefHeight(toPlaylistPane.getHeight()+30);
-                toPlaylistOKButton.setDisable(true);
-                Timeline timelineDisableButton = new Timeline(new KeyFrame(Duration.seconds(2), e2 -> {
-                    toPlaylistErrorLabel.setText("");
-                    toPlaylistPane.setPrefHeight(toPlaylistPane.getHeight()-30);
-                    toPlaylistComboBox.getSelectionModel().select(0);
-                }));
-                timelineDisableButton.setCycleCount(1);
-                timelineDisableButton.play();
-            } else{
-                allSongsByPlaylists.get(playlistName).add(currentSong);
-                toPlaylistPane.setLayoutY(700);
-                songSettingsPane.setLayoutY(600);
-                songSettingsPane.setVisible(true);
-                disableAllBackElements(false);
-                currentSong.setPlaylistName(playlistName);
-                //writing changes
-                ObjectMapper objectMapper = new ObjectMapper();
-                ObjectWriter objectWriter = objectMapper.writer().withDefaultPrettyPrinter();
-                try {
-                    objectWriter.writeValue(new File("src/main/resources/com/example/testfx/data.json"), allSongs);
-                } catch (IOException ex) {
-                    throw new RuntimeException(ex);
-                }
-            }
-
+            addSongToPlaylistOKButton.setDisable(value.equals("Всі плейлисти"));
         });
 
     }
+
     private HBox createSongBlock(Song song, int id) {
         HBox currentHBox = new HBox();
         VBoxCustom songBox = new VBoxCustom(id,song);
@@ -448,17 +404,41 @@ public class Controller {
         songBox.getChildren().addAll(authorLabel, songLabel);
 
         Button songSettingsButton = new Button("⋮");
-        songSettingsButton.setStyle("-fx-font-size:20;");
-        songSettingsButton.setPadding(new Insets(-1,0,-1,0));
+        songSettingsButton.setStyle("-fx-font-size:30;");
+        songSettingsButton.setPadding(new Insets(-10,0,-10,0));
         HBox.setMargin(songSettingsButton,new Insets(13,10,0,0));
         songSettingsButton.setVisible(false);
         songSettingsButton.setOnMouseClicked(e -> {
             disableAllBackElements(true);
-            if (songSettingsPane.getLayoutY()!=180){
-                songSettingsPane.setLayoutY(180);
+            if (songSettingsPane.getLayoutY()!=90){
+                songSettingsPane.setLayoutY(90);
             }
             else {
-                songSettingsPane.setLayoutY(600);
+                songSettingsPane.setLayoutY(INVISIBLE);
+            }
+        });
+
+        Song currentSong = songBox.getSong();
+        Button heartButton;
+        if(currentSong.isLiked())
+            heartButton = new Button("♥");
+        else
+            heartButton = new Button("♡");
+        heartButton.setVisible(false);
+        heartButton.setStyle("-fx-font-size: 25");
+        heartButton.setPadding(new Insets(-6,-6,-5,-3));
+        heartButton.setMinSize(25, 25);
+        heartButton.setMaxSize(25, 25);
+        HBox.setMargin(heartButton,new Insets(13,10,0,0));
+        heartButton.setOnAction(e ->{
+            if(heartButton.getText().equals("♡")) {
+                heartButton.setText("♥");
+                currentSong.setLiked(true);
+                likedSongs.add(currentSong);
+            } else {
+                heartButton.setText("♡");
+               currentSong.setLiked(false);
+                likedSongs.remove(currentSong);
             }
         });
 
@@ -466,12 +446,14 @@ public class Controller {
             try {
                 HBox oldCurHBox = (HBox) songContainer.getChildren().get(currentSongBoxIndex);
                 oldCurHBox.getChildren().get(1).setVisible(false);
+                oldCurHBox.getChildren().get(2).setVisible(false);
             } catch (Exception ignored) {
             }
             changingVisibilityOfSongSettingsButton(currentHBox);
+
             songBoxOnClick(currentHBox);
         });
-        currentHBox.getChildren().addAll(songBox,songSettingsButton);
+        currentHBox.getChildren().addAll(songBox,songSettingsButton,heartButton);
         return currentHBox;
     }
     private void songBoxOnClick(HBox hbox){
@@ -503,7 +485,6 @@ public class Controller {
         searchWordPane.setLayoutX(264);
     }
     public void rightArrowButtonOnAction(){
-        searchWordResultLabel.setVisible(false);
         rightArrowButton.setDisable(true);
         leftArrowButton.setDisable(false);
         searchWordPane.setLayoutY(-100);
@@ -520,15 +501,14 @@ public class Controller {
     public void searchTypeComboBoxOnAction(){
         String selectedValue = searchWordTypeComboBox.getValue();
         if(selectedValue.equals("Куплет")) {
-            coupletNumberTextField.setVisible(true);
-            searchWordField.setPrefWidth(70);
+            searchWordNumberOfCoupletTextField.setVisible(true);
+            searchWordTargetField.setPrefWidth(70);
         } else {
-            coupletNumberTextField.setVisible(false);
-            searchWordField.setPrefWidth(102);
+            searchWordNumberOfCoupletTextField.setVisible(false);
+            searchWordTargetField.setPrefWidth(102);
         }
     }
     public void searchWordButtonOnAction(){
-        addPlaylistButton.setVisible(false);
         searchWordButton.setDisable(true);
 
         Song currentSong = currentSongBox.getSong();
@@ -539,25 +519,30 @@ public class Controller {
         timelineDisableButton.setCycleCount(1);
         timelineDisableButton.play();
         
-        String searchFor = searchWordField.getText().toLowerCase();
+        String searchFor = searchWordTargetField.getText().toLowerCase();
         String resOfSearching = highlightTextAndReturnResultOfSearching(searchFor);
 
-        searchWordResultLabel.setText(resOfSearching);
-        if(resOfSearching.equals("Знайдено")) {
-            searchWordResultLabel.setTextFill(Color.GREEN);
-        }
-        else
-            searchWordResultLabel.setTextFill(Color.RED);
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Andrii`s Song App");;
+        alert.getDialogPane().setHeaderText("Результат пошуку у пісні");
+        alert.getDialogPane().setContent(new Label(resOfSearching));
+        alert.getDialogPane().getStylesheets().add(
+                getClass().getResource("styles.css").toExternalForm());
+        alert.getDialogPane().getStyleClass().add("myDialog");
 
-        searchWordResultLabel.setVisible(true);
+        if(resOfSearching.equals("Знайдено"))
+            alert.getDialogPane().getContent().getStyleClass().add("green");
+
+        else
+            alert.getDialogPane().getContent().getStyleClass().add("red");
+
+        alert.showAndWait();
+
         Timeline timelineSetTextBeforeSearching = new Timeline(
                 new KeyFrame(Duration.seconds(2), event -> {
                     lyricsTextArea.getChildren().clear();
                     //removing red text
                     lyricsTextArea.getChildren().add(new Text(utils.getTextForSong(currentSong)));
-                    searchWordResultLabel.setVisible(false);
-                    addPlaylistButton.setVisible(true);
-
                 })
         );
         timelineSetTextBeforeSearching.setCycleCount(1);
@@ -611,7 +596,7 @@ public class Controller {
         if(searchWordTypeComboBox.getSelectionModel().isSelected(0)){
             return utils.getTextForSong(currentSong);
         } else {
-            int numberOfCouplet = Integer.parseInt(coupletNumberTextField.getText()) - 1;
+            int numberOfCouplet = Integer.parseInt(searchWordNumberOfCoupletTextField.getText()) - 1;
             Song.Couplet couplet = currentSong.getCouplets()[numberOfCouplet];
             return couplet.getCoupletString();
         }
@@ -707,7 +692,7 @@ public class Controller {
     }
     public void changeRowCancelButtonOnAction(){
         disableAllBackElements(false);
-        changeRowPane.setLayoutY(1200);
+        changeRowPane.setLayoutY(INVISIBLE);
     }
     public void changeRowOKButtonOnAction() {
         Song currentSong = currentSongBox.getSong();
@@ -729,11 +714,11 @@ public class Controller {
             Text text = new Text(newSongText);
             lyricsTextArea.getChildren().add(text);
 
-            newRowResultLabel.setText("Змінено успішно");
-            newRowResultLabel.setTextFill(Color.GREEN);
+            changeRowResultLabel.setText("Змінено успішно");
+            changeRowResultLabel.setTextFill(Color.GREEN);
         }catch (IndexOutOfBoundsException | NumberFormatException e){
-            newRowResultLabel.setText("Некоректний індекс");
-            newRowResultLabel.setTextFill(Color.RED);
+            changeRowResultLabel.setText("Некоректний індекс");
+            changeRowResultLabel.setTextFill(Color.RED);
         }
 
         changeRowPane.setPrefHeight(107);
@@ -744,7 +729,7 @@ public class Controller {
 
         Timeline timelineSetTextBeforeSearching = new Timeline(
                 new KeyFrame(Duration.seconds(2), event -> {
-                    newRowResultLabel.setText("");
+                    changeRowResultLabel.setText("");
                     changeRowPane.setPrefHeight(92);
                 })
         );
@@ -825,6 +810,7 @@ public class Controller {
         try {
             HBox oldCurHBox = (HBox) songContainer.getChildren().get(currentSongBoxIndex);
             oldCurHBox.getChildren().get(1).setVisible(false);
+            oldCurHBox.getChildren().get(2).setVisible(false);
         } catch (Exception ignored) {
         }
         currentSongBoxIndex = newIndex;
@@ -941,7 +927,7 @@ public class Controller {
         resetValueInAddSongBox();
     }
     public void addSongCancelButtonOnAction(){
-        addSongPane.setLayoutY(600);
+        addSongPane.setLayoutY(INVISIBLE);
         addSongSuccessLabel.setVisible(false);
         resetValueInAddSongBox();
         disableAllBackElements(false);
@@ -975,24 +961,22 @@ public class Controller {
     // playlist
     public void addPlaylistButtonOnAction(){
         scrollPaneWithTextOfSong.setDisable(true);
-        addPlaylistPane.setLayoutY(150);
+        createPlaylistPane.setLayoutY(150);
         disableAllBackElements(true);
     }
     public void addPlaylistCancelButtonOnAction(){
-//        scrollPaneWithTextOfSong.setDisable(false);
-        addPlaylistPane.setLayoutY(900);
-        addPlaylistName.setText("");
+        createPlaylistPane.setLayoutY(INVISIBLE);
+        createPlaylistNameOfPlaylist.setText("");
         disableAllBackElements(false);
     }
     public void addPlaylistOKButtonOnAction(){
-        String playlistName = addPlaylistName.getText();
+        String playlistName = createPlaylistNameOfPlaylist.getText();
         if(!playlistNamesObsList.contains(playlistName)){
             playlistNamesObsList.add(playlistName);
             allSongsByPlaylists.put(playlistName, new ArrayList<>());
         }
-//        scrollPaneWithTextOfSong.setDisable(false);
-        addPlaylistPane.setLayoutY(900);
-        addPlaylistName.setText("");
+        createPlaylistPane.setLayoutY(INVISIBLE);
+        createPlaylistNameOfPlaylist.setText("");
         disableAllBackElements(false);
     }
     private void disableAllBackElements(boolean isDisabled){
@@ -1005,8 +989,56 @@ public class Controller {
         mediaPlayerBox.setDisable(isDisabled);
     }
 
+    // settings pane
+    public void settingsCancelButtonOnAction(){
+        disableAllBackElements(false);
+        songSettingsPane.setLayoutY(INVISIBLE);
+    }
+                     // add song to playlist
+    public void addSongToPlaylistButtonOnAction(){
+        addSongToPlaylistPane.setLayoutY(150);
+        songSettingsPane.setVisible(false);
+        disableAllBackElements(true);
+    }
+    public void addSongToPlaylistCancelButtonOnAction(){
+        addSongToPlaylistPane.setLayoutY(INVISIBLE);
+        songSettingsPane.setVisible(true);
+    }
+    public void addSongToPlaylistOKButtonOnAction(){
+        String playlistName = addSongToPlaylistComboBox.getValue();
+        Song currentSong = currentSongBox.getSong();
+        if(currentSong.getPlaylistName()!=null){
+            addSongToPlaylistErrorLabel.setText("Ця пісня вже знаходиться в плейлисті " + currentSong.getPlaylistName());
+            addSongToPlaylistPane.setPrefHeight(addSongToPlaylistPane.getHeight()+30);
+            addSongToPlaylistOKButton.setDisable(true);
+            Timeline timelineDisableButton = new Timeline(new KeyFrame(Duration.seconds(2), e2 -> {
+                addSongToPlaylistErrorLabel.setText("");
+                addSongToPlaylistPane.setPrefHeight(addSongToPlaylistPane.getHeight()-30);
+                addSongToPlaylistComboBox.getSelectionModel().select(0);
+            }));
+            timelineDisableButton.setCycleCount(1);
+            timelineDisableButton.play();
+        } else{
+            allSongsByPlaylists.get(playlistName).add(currentSong);
+            addSongToPlaylistPane.setLayoutY(INVISIBLE);
+            songSettingsPane.setLayoutY(INVISIBLE);
+            songSettingsPane.setVisible(true);
+            disableAllBackElements(false);
+            currentSong.setPlaylistName(playlistName);
 
-    // delete song
+            //writing changes
+            ObjectMapper objectMapper = new ObjectMapper();
+            ObjectWriter objectWriter = objectMapper.writer().withDefaultPrettyPrinter();
+            try {
+                objectWriter.writeValue(new File("src/main/resources/com/example/testfx/data.json"), allSongs);
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+        }
+    }
+
+
+                    // delete song
     public void deleteSongButtonOnAction(){
         String currentPlayListName = playlistsComboBox.getValue();
         if(currentPlayListName.equals("Всі плейлисти")){
@@ -1021,13 +1053,13 @@ public class Controller {
     }
     public void deleteSongCancelButtonOnAction(){
         songSettingsPane.setVisible(true);
-        deleteSongPane.setLayoutY(1300);
+        deleteSongPane.setLayoutY(INVISIBLE);
     }
     public void deleteSongOKButtonOnAction(){
         disableAllBackElements(false);
         songSettingsPane.setVisible(true);
-        songSettingsPane.setLayoutY(600);
-        deleteSongPane.setLayoutY(1300);
+        songSettingsPane.setLayoutY(INVISIBLE);
+        deleteSongPane.setLayoutY(INVISIBLE);
 
         String currentPlayListName = playlistsComboBox.getValue();
         Song songToBeDeleted = currentSongBox.getSong();
@@ -1085,22 +1117,28 @@ public class Controller {
             currentSongBoxIndex--;
         }
 
-//        currentSongBox = (VBoxCustom) songContainer.getChildren().get(currentSongBoxIndex);
         HBox currentHBox = (HBox)songContainer.getChildren().get(currentSongBoxIndex);
         changingVisibilityOfSongSettingsButton(currentHBox);
         songBoxOnClick(currentHBox);
     }
 
     private void changingVisibilityOfSongSettingsButton(HBox currentHBox) {
-        toPlaylistButton.setVisible(false);
+        if(playlistsComboBox.getValue().equals("Вподобані")){
+            currentHBox.getChildren().get(1).setVisible(false);
+            currentHBox.getChildren().get(2).setVisible(true);
+            return;
+        }
+        addSongToPlaylistButton.setVisible(false);
         if(playlistsComboBox.getValue().equals("Всі плейлисти")) {
-            toPlaylistButton.setVisible(true);
+            addSongToPlaylistButton.setVisible(true);
             currentHBox.getChildren().get(1).setVisible(true);
+            currentHBox.getChildren().get(2).setVisible(true);
             songSettingsPane.setPrefHeight(112);
 
         } else {
             currentHBox.getChildren().get(1).setVisible(true);
-            toPlaylistButton.setVisible(false);
+            currentHBox.getChildren().get(2).setVisible(true);
+            addSongToPlaylistButton.setVisible(false);
             songSettingsPane.setPrefHeight(78);
         }
     }
