@@ -4,6 +4,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.HBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
@@ -39,5 +40,6 @@ public class Utils {
         ((Label)oldCurrentSongBox.getChildren().get(1)).setTextFill(Color.BLACK);
         ((Label)newCurrentSongBox.getChildren().get(0)).setTextFill(Color.RED);
         ((Label)newCurrentSongBox.getChildren().get(1)).setTextFill(Color.RED);
+
     }
 }
