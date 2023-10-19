@@ -108,7 +108,7 @@
     "coupletString" : "А ти все мрієш, як листя ти грієш,\nКоли на дворі буя весна,\nА вітер гуляє і вже не кохає,\nБо зеленого листя вже більш нема...\n"
   } ],
   "mp3" : "file:/Users/admin-kv/IdeaProjects/testfx/src/main/resources/com/example/testfx/songs/illia_naida_nova_vesna.mp3",
-  "playlistName" : "Illia Nayda",
+  "playlistName" : "Other",
   "liked" : false
 }, {
   "authorName" : "Ілля Найда",
@@ -305,25 +305,20 @@
   "mp3" : "file:/Users/admin-kv/IdeaProjects/testfx/src/main/resources/com/example/testfx/songs/naida_illia_zapah_kvitiv.mp3",
   "playlistName" : "Other",
   "liked" : true
-},
-  {
-    "authorName": "Ілля Найда",
-    "songName": "Білі квіти",
-    "couplets": [
-      {
-        "id": 1,
-        "coupletString":"Знову день на дворі\nІ сонце світить,\nЗнову я принесу\nСніжно-білі квіти,\nТа не знаю,\nЯк подарувати,\nТа не знаю я,\nПро що розказати...\n"
-      },
-      {
-        "id": 2,
-        "coupletString": "Білі квіти навесні,\nЯ принесу їх тобі,\nАле очі мої сумні\nБез тебе...\nБілі квіти навесні,\nПодарую їх тобі,\nТо є серце моє\nДля тебе...\n"
-      },
-      {
-        "id": 3,
-        "coupletString": "Все та ж картинка твоя\nУ мене в уяві\nІ усмішка твоя,\nМов сонце яскраве.\nТа не можу тобі\nПро це розказати,\nБо не знаю я -\nЧи будеш кохати?.."
-      }
-    ],
-    "mp3": "file:/Users/admin-kv/IdeaProjects/testfx/src/main/resources/com/example/testfx/songs/illia_naida_bili_kviti.mp3",
-    "playlistName" : null,
-    "liked" : true
-  } ]
+}, {
+  "authorName" : "Ілля Найда",
+  "songName" : "Білі квіти",
+  "couplets" : [ {
+    "id" : 1,
+    "coupletString" : "Знову день на дворі\nІ сонце світить,\nЗнову я принесу\nСніжно-білі квіти,\nТа не знаю,\nЯк подарувати,\nТа не знаю я,\nПро що розказати...\n"
+  }, {
+    "id" : 2,
+    "coupletString" : "Білі квіти навесні,\nЯ принесу їх тобі,\nАле очі мої сумні\nБез тебе...\nБілі квіти навесні,\nПодарую їх тобі,\nТо є серце моє\nДля тебе...\n"
+  }, {
+    "id" : 3,
+    "coupletString" : "Все та ж картинка твоя\nУ мене в уяві\nІ усмішка твоя,\nМов сонце яскраве.\nТа не можу тобі\nПро це розказати,\nБо не знаю я -\nЧи будеш кохати?.."
+  } ],
+  "mp3" : "file:/Users/admin-kv/IdeaProjects/testfx/src/main/resources/com/example/testfx/songs/illia_naida_bili_kviti.mp3",
+  "playlistName" : null,
+  "liked" : true
+} ]

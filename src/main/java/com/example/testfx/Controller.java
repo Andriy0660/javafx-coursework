@@ -16,12 +16,10 @@ import javafx.scene.layout.*;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.SVGPath;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
 import java.io.File;
@@ -35,14 +33,18 @@ public class Controller {
 
     private List<Song> allSongs = new ArrayList<>();
     private Map<String, List<Song>> allSongsByPlaylists = new HashMap<>();
-    private ObservableList<String> playlistNamesObsList;
+    private List<Song> likedSongs = new ArrayList<>();
+    private ObservableList<String> allPlaylistNamesObsList;
+    private ObservableList<String> playlistNamesForAddingSongToPlaylistObsList;
     private int currentSongBoxIndex;
     private VBoxCustom currentSongBox;
+    private String realTimePlayingPlaylist;
     private final int INVISIBLE = 1000;
 
 
     @FXML
     private VBox songContainer;
+    private VBox realTimePlayingSongContainer = new VBox();
     @FXML
     private Pane leftRightButtonsPane;
     @FXML
@@ -176,9 +178,6 @@ public class Controller {
     @FXML
     private Label deleteSongInformLabel;
 
-
-    private List<Song> likedSongs = new ArrayList<>();
-
     public void initialize() {
         //initialize songs and playlists
         try {
@@ -196,9 +195,9 @@ public class Controller {
                 .filter(i -> i.getPlaylistName() != null)
                 .collect(Collectors.groupingBy(Song::getPlaylistName));
 
-        playlistNamesObsList = FXCollections.observableArrayList(allSongsByPlaylists.keySet());
-        playlistNamesObsList.add(0,"Всі плейлисти");
-        playlistNamesObsList.add(1,"Вподобані");
+        allPlaylistNamesObsList = FXCollections.observableArrayList(allSongsByPlaylists.keySet());
+        allPlaylistNamesObsList.add(0,"Всі плейлисти");
+        allPlaylistNamesObsList.add(1,"Вподобані");
 
 
         for (int i = 0; i < allSongs.size(); i++) {
@@ -208,6 +207,13 @@ public class Controller {
             HBox songBlock = createSongBlock(song,i);
             songContainer.getChildren().add(songBlock);
         }
+        realTimePlayingSongContainer = songContainer;
+//        realTimePlayingSongContainer.getChildren().clear();
+//        for (int i = 0; i < songContainer.getChildren().size(); i++) {
+//            Song song = ((VBoxCustom)((HBox)songContainer.getChildren().get(i)).getChildren().get(0)).getSong();
+//            HBox songBlock = createSongBlock(song,i);
+//            realTimePlayingSongContainer.getChildren().add(songBlock);
+//        }
         Song initialSong = allSongs.get(0);
 
         currentSongBoxIndex = 0;
@@ -327,15 +333,26 @@ public class Controller {
             createPlaylistOKButton.setDisable(newValue.isEmpty());
         });
 
-        playlistsComboBox.setItems(playlistNamesObsList);
+        playlistsComboBox.setItems(allPlaylistNamesObsList);
         playlistsComboBox.getSelectionModel().select(0);
         playlistsComboBox.setVisibleRowCount(7);
 
         playlistsComboBox.valueProperty().addListener((observable, oldValue, newValue) -> {
-            nextSongButton.setDisable(true);
-            previousSongButton.setDisable(true);
-            searchSongTextField.setText("");
+//            nextSongButton.setDisable(true);
+//            previousSongButton.setDisable(true);
+
             String value = playlistsComboBox.getValue();
+            if(value.equals(realTimePlayingPlaylist)) {
+                realTimePlayingSongContainer = songContainer;
+            } else{
+                realTimePlayingSongContainer = new VBox();
+                for (int i = 0; i < songContainer.getChildren().size(); i++) {
+                    Song song = ((VBoxCustom)((HBox)songContainer.getChildren().get(i)).getChildren().get(0)).getSong();
+                    HBox songBlock = createSongBlock(song,i);
+                    realTimePlayingSongContainer.getChildren().add(songBlock);
+                }
+            }
+            searchSongTextField.setText("");
             songContainer.getChildren().clear();
             if(value == null) return;
 
@@ -353,12 +370,43 @@ public class Controller {
                 HBox songBlock = createSongBlock(song,i);
                 songContainer.getChildren().add(songBlock);
             }
+            if(value.equals(realTimePlayingPlaylist)){
+                HBox currentHBox = ((HBox)songContainer.getChildren().get(currentSongBoxIndex));
+                currentSongBox = (VBoxCustom) currentHBox.getChildren().get(0);
+                ((Label)currentSongBox.getChildren().get(0)).setTextFill(Color.RED);
+                ((Label)currentSongBox.getChildren().get(1)).setTextFill(Color.RED);
+
+                currentHBox.getChildren().get(1).setVisible(true);
+                currentHBox.getChildren().get(2).setVisible(true);
+                if(value.equals("Вподобані")){
+                    currentHBox.getChildren().get(1).setVisible(false);
+                }
+                if(value.equals("Всі плейлисти")) {
+                    addSongToPlaylistButton.setVisible(true);
+                    songSettingsPane.setPrefHeight(112);
+
+                } else {
+                    addSongToPlaylistButton.setVisible(false);
+                    songSettingsPane.setPrefHeight(78);
+                }
+
+                previousSongButton.setDisable(false);
+                nextSongButton.setDisable(false);
+
+                if(currentSongBoxIndex==0)
+                    previousSongButton.setDisable(true);
+                if(currentSongBoxIndex+1==songContainer.getChildren().size())
+                    nextSongButton.setDisable(true);
+            }
         });
 
+        playlistNamesForAddingSongToPlaylistObsList = FXCollections.observableArrayList(allPlaylistNamesObsList);
+        playlistNamesForAddingSongToPlaylistObsList.remove("Вподобані");
         //initialize settings pane
-        addSongToPlaylistComboBox.setItems(playlistNamesObsList);
+        addSongToPlaylistComboBox.setItems(playlistNamesForAddingSongToPlaylistObsList);
+
         addSongToPlaylistComboBox.getSelectionModel().select(0);
-        int sizeOfComboBox = Math.min(4, playlistNamesObsList.size());
+        int sizeOfComboBox = Math.min(4, allPlaylistNamesObsList.size());
         addSongToPlaylistComboBox.setVisibleRowCount(sizeOfComboBox);
 
         addSongToPlaylistComboBox.setOnShowing(e -> {
@@ -377,7 +425,6 @@ public class Controller {
             if(value == null) return;
             addSongToPlaylistOKButton.setDisable(value.equals("Всі плейлисти"));
         });
-
     }
 
     private HBox createSongBlock(Song song, int id) {
@@ -449,14 +496,21 @@ public class Controller {
                 oldCurHBox.getChildren().get(2).setVisible(false);
             } catch (Exception ignored) {
             }
-            changingVisibilityOfSongSettingsButton(currentHBox);
-
+            configureVisibilityOfSongAdditionalButtons(currentHBox);
             songBoxOnClick(currentHBox);
         });
         currentHBox.getChildren().addAll(songBox,songSettingsButton,heartButton);
         return currentHBox;
     }
     private void songBoxOnClick(HBox hbox){
+        realTimePlayingPlaylist = playlistsComboBox.getValue();
+//        realTimePlayingSongContainer.getChildren().clear();
+//        for (int i = 0; i < songContainer.getChildren().size(); i++) {
+//            Song song = ((VBoxCustom)((HBox)songContainer.getChildren().get(i)).getChildren().get(0)).getSong();
+//            HBox songBlock = createSongBlock(song,i);
+//            realTimePlayingSongContainer.getChildren().add(songBlock);
+//        }
+        realTimePlayingSongContainer = songContainer;
         VBoxCustom songBox = (VBoxCustom) hbox.getChildren().get(0);
         Song song = songBox.getSong();
         previousSongButton.setDisable(false);
@@ -465,6 +519,7 @@ public class Controller {
         int index = songBox.getCustomId();
         currentSongBoxIndex  = index;
         utils.configureAuthorAndSongLabelsForNewSong(currentSongBox,songBox);
+
         currentSongBox = songBox;
 
         if(index == 0){
@@ -803,19 +858,21 @@ public class Controller {
             previousSongButton.setDisable(true);
         }
 
-        if(newIndex + 1 == songContainer.getChildren().size()){
+        VBox curSongCont;
+
+        if(newIndex + 1 == realTimePlayingSongContainer.getChildren().size()){
             nextSongButton.setDisable(true);
         }
 
         try {
-            HBox oldCurHBox = (HBox) songContainer.getChildren().get(currentSongBoxIndex);
+            HBox oldCurHBox = (HBox) realTimePlayingSongContainer.getChildren().get(currentSongBoxIndex);
             oldCurHBox.getChildren().get(1).setVisible(false);
             oldCurHBox.getChildren().get(2).setVisible(false);
         } catch (Exception ignored) {
         }
         currentSongBoxIndex = newIndex;
-        HBox currentHBox = (HBox)songContainer.getChildren().get(currentSongBoxIndex);
-        changingVisibilityOfSongSettingsButton(currentHBox);
+        HBox currentHBox = (HBox)realTimePlayingSongContainer.getChildren().get(currentSongBoxIndex);
+        configureVisibilityOfSongAdditionalButtons(currentHBox);
 
         VBoxCustom newCurrentSongBox = (VBoxCustom) currentHBox.getChildren().get(0);
 
@@ -868,7 +925,11 @@ public class Controller {
             String formattedTime = String.format("%02d:%02d", minutes, seconds);
             endTimeOfMediaLabel.setText(formattedTime);
         });
-        mediaPlayer.setOnEndOfMedia(this::nextSongButtonOnAction);
+        mediaPlayer.setOnEndOfMedia(() -> {
+            if (!nextSongButton.isDisabled()){
+                nextSongButtonOnAction();
+            }
+        });
         return mediaPlayer;
     }
 
@@ -971,8 +1032,8 @@ public class Controller {
     }
     public void addPlaylistOKButtonOnAction(){
         String playlistName = createPlaylistNameOfPlaylist.getText();
-        if(!playlistNamesObsList.contains(playlistName)){
-            playlistNamesObsList.add(playlistName);
+        if(!allPlaylistNamesObsList.contains(playlistName)){
+            allPlaylistNamesObsList.add(playlistName);
             allSongsByPlaylists.put(playlistName, new ArrayList<>());
         }
         createPlaylistPane.setLayoutY(INVISIBLE);
@@ -1118,11 +1179,11 @@ public class Controller {
         }
 
         HBox currentHBox = (HBox)songContainer.getChildren().get(currentSongBoxIndex);
-        changingVisibilityOfSongSettingsButton(currentHBox);
+        configureVisibilityOfSongAdditionalButtons(currentHBox);
         songBoxOnClick(currentHBox);
     }
 
-    private void changingVisibilityOfSongSettingsButton(HBox currentHBox) {
+    private void configureVisibilityOfSongAdditionalButtons(HBox currentHBox) {
         if(playlistsComboBox.getValue().equals("Вподобані")){
             currentHBox.getChildren().get(1).setVisible(false);
             currentHBox.getChildren().get(2).setVisible(true);
