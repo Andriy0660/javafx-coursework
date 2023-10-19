@@ -261,7 +261,7 @@
       <children>
          <ComboBox fx:id="addSongToPlaylistComboBox" layoutX="18.0" layoutY="9.0" prefHeight="25.0" prefWidth="143.0" promptText="Вибрати плейлист" />
          <Button fx:id="addSongToPlaylistCancelButton" layoutX="17.0" layoutY="41.0" mnemonicParsing="false" onAction="#addSongToPlaylistCancelButtonOnAction" prefHeight="25.0" prefWidth="70.0" text="Назад" />
-         <Button fx:id="addSongToPlaylistOKButton" disable="true" layoutX="91.0" layoutY="41.0" mnemonicParsing="false" onAction="#addSongToPlaylistOKButtonOnAction" prefHeight="25.0" prefWidth="70.0" text="Додати" />
+         <Button fx:id="addSongToPlaylistOKButton" layoutX="91.0" layoutY="41.0" mnemonicParsing="false" onAction="#addSongToPlaylistOKButtonOnAction" prefHeight="25.0" prefWidth="70.0" text="Додати" />
          <Label fx:id="addSongToPlaylistErrorLabel" layoutX="19.0" layoutY="70.0" prefWidth="143.0" textFill="RED" wrapText="true" />
       </children>
    </Pane>

@@ -6,9 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="e45bf0ad-58c1-45ed-bc61-57a03735f682" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/testfx/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/testfx/Application.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/testfx/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/testfx/Controller.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/testfx/data.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/testfx/data.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/testfx/main-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/testfx/main-view.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -96,6 +96,7 @@
       <workItem from="1697654263638" duration="9338000" />
       <workItem from="1697702945017" duration="4708000" />
       <workItem from="1697708397089" duration="6729000" />
+      <workItem from="1697719698312" duration="2792000" />
     </task>
     <servers />
   </component>
@@ -114,15 +115,6 @@
     </option>
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/example/testfx/Controller.java</url>
-          <line>879</line>
-          <option name="timeStamp" value="5" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
     <watches-manager>
       <configuration name="Application">
         <watch expression="playlistNamesObsList" language="JAVA" />

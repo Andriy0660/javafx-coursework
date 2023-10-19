@@ -108,7 +108,7 @@
     "coupletString" : "А ти все мрієш, як листя ти грієш,\nКоли на дворі буя весна,\nА вітер гуляє і вже не кохає,\nБо зеленого листя вже більш нема...\n"
   } ],
   "mp3" : "file:/Users/admin-kv/IdeaProjects/testfx/src/main/resources/com/example/testfx/songs/illia_naida_nova_vesna.mp3",
-  "playlistName" : "Other",
+  "playlistName" : null,
   "liked" : false
 }, {
   "authorName" : "Ілля Найда",
@@ -156,7 +156,7 @@
     "coupletString" : "Ти тепер для мене - світло в небі,\nСвітиш, як ясна зоря,\nВсе життя шукав одну тебе я,\nЗнаю, ти тепер моя!\nБільше я не зможу просто жити,\nВкрала серце ти моє,\nДав Всевишній полюбити,\nТи - усе, що в мене є, в мене є...\n"
   } ],
   "mp3" : "file:/Users/admin-kv/IdeaProjects/testfx/src/main/resources/com/example/testfx/songs/illia_naida_tvo_ochi.mp3",
-  "playlistName" : "Illia Nayda",
+  "playlistName" : null,
   "liked" : false
 }, {
   "authorName" : "Ілля Найда",
