@@ -478,6 +478,7 @@ public class Controller {
                 heartButton.getStyleClass().add("red");
                 song.setLiked(true);
                 likedSongs.add(song);
+                writeChanges();
             } else {
                 heartButton.setText("♡");
                 heartButton.getStyleClass().remove("red");
@@ -957,8 +958,8 @@ public class Controller {
         trie.insertSong(newSong);
 
         //updating songs
-        songContainer.getChildren().clear();
         if(playlistsComboBox.getValue().equals("Всі плейлисти")){
+            songContainer.getChildren().clear();
             for (int i = 0; i < allSongs.size(); i++) {
                 Song song = allSongs.get(i);
                 HBox songBlock = createSongBlock(song,i);
@@ -966,14 +967,7 @@ public class Controller {
             }
         }
 
-        //writing changes
-        ObjectMapper objectMapper = new ObjectMapper();
-        ObjectWriter objectWriter = objectMapper.writer().withDefaultPrettyPrinter();
-        try {
-            objectWriter.writeValue(new File("src/main/resources/com/example/testfx/data.json"), allSongs);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        writeChanges();
 
         addSongChooseSongLabel.setVisible(false);
         addSongSuccessLabel.setVisible(true);
@@ -1096,15 +1090,7 @@ public class Controller {
             songSettingsPane.setVisible(true);
             disableAllBackElements(false);
             currentSong.setPlaylistName(playlistName);
-
-            //writing changes
-            ObjectMapper objectMapper = new ObjectMapper();
-            ObjectWriter objectWriter = objectMapper.writer().withDefaultPrettyPrinter();
-            try {
-                objectWriter.writeValue(new File("src/main/resources/com/example/testfx/data.json"), allSongs);
-            } catch (IOException ex) {
-                throw new RuntimeException(ex);
-            }
+            writeChanges();
         }
     }
 
@@ -1162,14 +1148,7 @@ public class Controller {
             songContainer.getChildren().add(songBlock);
         }
 
-        //writing changes
-        ObjectMapper objectMapper = new ObjectMapper();
-        ObjectWriter objectWriter = objectMapper.writer().withDefaultPrettyPrinter();
-        try {
-            objectWriter.writeValue(new File("src/main/resources/com/example/testfx/data.json"), allSongs);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        writeChanges();
 
         if(songContainer.getChildren().size() == 0) {
             playlistsComboBox.getSelectionModel().select(0);
@@ -1204,6 +1183,15 @@ public class Controller {
         } else {
             addSongToPlaylistButton.setVisible(false);
             songSettingsPane.setPrefHeight(78);
+        }
+    }
+    private void writeChanges(){
+        ObjectMapper objectMapper = new ObjectMapper();
+        ObjectWriter objectWriter = objectMapper.writer().withDefaultPrettyPrinter();
+        try {
+            objectWriter.writeValue(new File("src/main/resources/com/example/testfx/data.json"), allSongs);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 }

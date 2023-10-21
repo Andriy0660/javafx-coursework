@@ -5,21 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e45bf0ad-58c1-45ed-bc61-57a03735f682" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/testfx/fonts/PlaypenSans-Bold.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/testfx/fonts/PlaypenSans-ExtraBold.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/testfx/fonts/PlaypenSans-ExtraLight.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/testfx/fonts/PlaypenSans-Light.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/testfx/fonts/PlaypenSans-Medium.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/testfx/fonts/PlaypenSans-Regular.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/testfx/fonts/PlaypenSans-SemiBold.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/testfx/fonts/PlaypenSans-Thin.ttf" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/testfx/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/testfx/Application.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/testfx/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/testfx/Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/testfx/Utils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/testfx/Utils.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/testfx/data.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/testfx/data.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/testfx/main-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/testfx/main-view.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/testfx/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/testfx/styles.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -112,7 +100,8 @@
       <workItem from="1697732890103" duration="1296000" />
       <workItem from="1697796753667" duration="11037000" />
       <workItem from="1697828190268" duration="11878000" />
-      <workItem from="1697881882897" duration="1132000" />
+      <workItem from="1697881882897" duration="1338000" />
+      <workItem from="1697883954664" duration="2475000" />
     </task>
     <servers />
   </component>
@@ -131,6 +120,20 @@
     </option>
   </component>
   <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/example/testfx/Controller.java</url>
+          <line>843</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/example/testfx/Controller.java</url>
+          <line>896</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
     <watches-manager>
       <configuration name="Application">
         <watch expression="playlistNamesObsList" language="JAVA" />
