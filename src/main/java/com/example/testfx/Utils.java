@@ -38,8 +38,8 @@ public class Utils {
     public void configureAuthorAndSongLabelsForNewSong(VBoxCustom oldCurrentSongBox, VBoxCustom newCurrentSongBox) {
         ((Label)oldCurrentSongBox.getChildren().get(0)).setTextFill(Color.BLACK);
         ((Label)oldCurrentSongBox.getChildren().get(1)).setTextFill(Color.BLACK);
-        ((Label)newCurrentSongBox.getChildren().get(0)).setTextFill(Color.RED);
-        ((Label)newCurrentSongBox.getChildren().get(1)).setTextFill(Color.RED);
+        ((Label)newCurrentSongBox.getChildren().get(0)).setTextFill(Color.MEDIUMPURPLE);
+        ((Label)newCurrentSongBox.getChildren().get(1)).setTextFill(Color.MEDIUMPURPLE);
 
     }
 }

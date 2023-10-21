@@ -3,13 +3,13 @@
   "songName" : "Як я маю тебе не любити",
   "couplets" : [ {
     "id" : 1,
-    "coupletString" : "Надоїло усе, вітер небом несе\nПро кохання слова,\nЩо ночами пишу для тебе.\nТак чекаю той день над усе,\nКоли небо до мене тебе поверне!\n"
-  }, {
-    "id" : 2,
     "coupletString" : "Я не зможу без тебе прожити ніяк!\nЯк я маю тебе не любити?..\nЯ без тебе лечу, як безкрилий літак,\nБоже, дай мені з нею летіти!\nХай ангели на крилах тебе принесуть,\nАбо скажуть як маю забути.\nХай ангели на небі тебе бережуть!\nЯк я маю тебе не любити?..\n"
   }, {
-    "id" : 3,
+    "id" : 2,
     "coupletString" : "Понеділок, вівторок і так кожен день,\nМені треба тебе,\nМені треба пісень про тебе.\nПишу нашій* любові пісні,\nЯ до тебе тулюся у кожному сні!\n"
+  }, {
+    "id" : 3,
+    "coupletString" : "Надоїло усе, вітер небом несе\nПро кохання слова,\nЩо ночами пишу для тебе.\nТак чекаю той день над усе,\nКоли небо до мене тебе поверне!\n"
   } ],
   "mp3" : "file:/Users/admin-kv/IdeaProjects/testfx/src/main/resources/com/example/testfx/songs/illia_naida_2017_jak_ja_maju_tebe_ne_ljubiti.mp3",
   "playlistName" : "Other",
@@ -19,14 +19,14 @@
   "songName" : "А ти була",
   "couplets" : [ {
     "id" : 1,
-    "coupletString" : "мама\nТакою солодкою\nЯк та весна, як небеса... \nТи - для мене принцеса,\nА я знаю, я - твій Аладдін\nТа ніколи не буде, як хочем ми,\nВ нашій казці в кінці я один... \nНе знала ти,\nЧи маєш бути гордою...\nНе знав і я,\nЩо стану твоїм Іудою..."
+    "coupletString" : "прівєт\nТакою солодкою\nЯк та весна, як небеса... \nТи - для мене принцеса,\nА я знаю, я - твій Аладдін\nТа ніколи не буде, як хочем ми,\nВ нашій казці в кінці я один... \nНе знала ти,\nЧи маєш бути гордою...\nНе знав і я,\nЩо стану твоїм Іудою..."
   }, {
     "id" : 2,
     "coupletString" : "Хтось малює дороги,\nХтось намалює мости,\nНазиває життя наше долею\nІ не кажи куди нам іти...\nНе знала ти,\nЩо біль буває солодкою...\nНе знав і я,\nЩо будеш ти самотньою...\n"
   } ],
   "mp3" : "file:/Users/admin-kv/IdeaProjects/testfx/src/main/resources/com/example/testfx/songs/illia_naida_a_ty_bula.mp3",
   "playlistName" : "Other",
-  "liked" : true
+  "liked" : false
 }, {
   "authorName" : "Ілля Найда",
   "songName" : "Дівчинка осінь",
@@ -41,8 +41,8 @@
     "coupletString" : "Сонячний промінь\nВ ранковім тумані і біла трава,\nЗахмарене небо плаче дощами ,\nБо скоро зима...\nЯк я тебе люблю,\nМені наймиліша хоча й сумна\nВ жовтому платті дівчинка осінь,\nТвій плач - моя вина...\n"
   } ],
   "mp3" : "file:/Users/admin-kv/IdeaProjects/testfx/src/main/resources/com/example/testfx/songs/illia_naida_divchinka_osin.mp3",
-  "playlistName" : null,
-  "liked" : false
+  "playlistName" : "Other",
+  "liked" : true
 }, {
   "authorName" : "Ілля Найда",
   "songName" : "Не залишу тебе",
@@ -272,7 +272,7 @@
   } ],
   "mp3" : "file:/Users/admin-kv/IdeaProjects/testfx/src/main/resources/com/example/testfx/songs/naida_illia_prosto_ne_zabuvaj.mp3",
   "playlistName" : "Illia Nayda",
-  "liked" : false
+  "liked" : true
 }, {
   "authorName" : "Ілля Найда",
   "songName" : "Ти моє небо",
@@ -319,6 +319,16 @@
     "coupletString" : "Все та ж картинка твоя\nУ мене в уяві\nІ усмішка твоя,\nМов сонце яскраве.\nТа не можу тобі\nПро це розказати,\nБо не знаю я -\nЧи будеш кохати?.."
   } ],
   "mp3" : "file:/Users/admin-kv/IdeaProjects/testfx/src/main/resources/com/example/testfx/songs/illia_naida_bili_kviti.mp3",
+  "playlistName" : null,
+  "liked" : true
+}, {
+  "authorName" : "Михайло Хома",
+  "songName" : "Листопад",
+  "couplets" : [ {
+    "id" : 1,
+    "coupletString" : "муамуамуамм"
+  } ],
+  "mp3" : "file:/Users/admin-kv/Downloads/listopad.mp3",
   "playlistName" : null,
   "liked" : true
 } ]

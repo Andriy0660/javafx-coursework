@@ -5,10 +5,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e45bf0ad-58c1-45ed-bc61-57a03735f682" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/testfx/fonts/PlaypenSans-Bold.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/testfx/fonts/PlaypenSans-ExtraBold.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/testfx/fonts/PlaypenSans-ExtraLight.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/testfx/fonts/PlaypenSans-Light.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/testfx/fonts/PlaypenSans-Medium.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/testfx/fonts/PlaypenSans-Regular.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/testfx/fonts/PlaypenSans-SemiBold.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/testfx/fonts/PlaypenSans-Thin.ttf" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/testfx/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/testfx/Application.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/testfx/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/testfx/Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/testfx/Utils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/testfx/Utils.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/testfx/data.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/testfx/data.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/testfx/main-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/testfx/main-view.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/testfx/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/testfx/styles.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,7 +48,7 @@
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;extract.method.default.visibility&quot;: &quot;private&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/admin-kv/IdeaProjects/testfx/src/main/resources/com/example/testfx&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/admin-kv/IdeaProjects/testfx/src/main/resources/com/example/testfx/fonts&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -52,6 +63,7 @@
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\admin-kv\IdeaProjects\testfx\src\main\resources\com\example\testfx\fonts" />
       <recent name="C:\Users\admin-kv\IdeaProjects\testfx\src\main\resources\com\example\testfx" />
       <recent name="C:\Users\admin-kv\IdeaProjects\testfx\src\main\java\com\example\testfx" />
     </key>
@@ -96,7 +108,11 @@
       <workItem from="1697654263638" duration="9338000" />
       <workItem from="1697702945017" duration="4708000" />
       <workItem from="1697708397089" duration="6729000" />
-      <workItem from="1697719698312" duration="2792000" />
+      <workItem from="1697719698312" duration="2961000" />
+      <workItem from="1697732890103" duration="1296000" />
+      <workItem from="1697796753667" duration="11037000" />
+      <workItem from="1697828190268" duration="11878000" />
+      <workItem from="1697881882897" duration="1132000" />
     </task>
     <servers />
   </component>

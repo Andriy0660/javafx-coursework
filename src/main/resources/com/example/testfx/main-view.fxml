@@ -11,17 +11,17 @@
 <Pane prefHeight="1338.0" prefWidth="951.0" style="-fx-border-radius: 10;" styleClass="transparentFocus" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.testfx.Controller">
     <stylesheets>
         <URL value="@styles.css" />
-        
+
     </stylesheets>
 
-    <ScrollPane fx:id="scrollPaneWithListOfSongs" hbarPolicy="NEVER" layoutY="77.0" prefHeight="283.0" prefWidth="263.0" vbarPolicy="ALWAYS" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml">
-        <VBox fx:id="songContainer" prefHeight="285.0" prefWidth="248.0">
+    <ScrollPane fx:id="scrollPaneWithListOfSongs" hbarPolicy="NEVER" layoutX="-2.0" layoutY="77.0" prefHeight="283.0" prefWidth="263.0" style="-fx-border-color: #242b8b; -fx-border-width: 1 0 0 0;" vbarPolicy="ALWAYS" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml">
+        <VBox fx:id="songContainer" prefHeight="285.0" prefWidth="248.0" style="-fx-background-color: #dce9ff;">
 
         </VBox>
     </ScrollPane>
 
-    <ScrollPane fx:id="scrollPaneWithTextOfSong" hbarPolicy="NEVER" layoutX="263.0" layoutY="75.0" prefHeight="285.0" prefWidth="345.0">
-        <TextFlow fx:id="lyricsTextArea" maxWidth="330.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="260.0" prefWidth="330.0" style="-fx-border-width: 2;">
+    <ScrollPane fx:id="scrollPaneWithTextOfSong" hbarPolicy="NEVER" layoutX="260.0" layoutY="77.0" prefHeight="283.0" prefWidth="345.0" style="-fx-background-color: #dce9ff; -fx-border-width: 1 0 0 0; -fx-border-color: #242b8b;">
+        <TextFlow fx:id="lyricsTextArea" maxWidth="330.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="258.0" prefWidth="330.0" style="-fx-background-color: #dce9ff;">
             <padding>
                 <Insets bottom="15.0" left="30.0" right="15.0" top="15.0" />
             </padding>
@@ -31,35 +31,37 @@
       </padding>
     </ScrollPane>
 
-    <Pane fx:id="searchWordPane" layoutX="264.0" prefHeight="73.0" prefWidth="345.0">
-        <ComboBox fx:id="searchWordTypeComboBox" layoutX="78.0" layoutY="7.0" onAction="#searchTypeComboBoxOnAction" prefHeight="25.0" prefWidth="84.0" />
-        <TextField fx:id="searchWordNumberOfCoupletTextField" layoutX="247.0" layoutY="7.0" prefHeight="25.0" prefWidth="28.0" promptText="id" visible="false" />
-        <Label fx:id="searchWordResultLabel" layoutX="220.0" layoutY="47.0" nodeOrientation="LEFT_TO_RIGHT" text="некоректний індекс" visible="false" />
+    <Pane fx:id="searchWordPane" layoutX="260.0" layoutY="1.0" prefHeight="75.0" prefWidth="345.0" style="-fx-background-color: #dce9ff;">
+        <TextField fx:id="searchWordNumberOfCoupletTextField" layoutX="252.0" layoutY="6.0" prefHeight="25.0" prefWidth="28.0" promptText="id" style="-fx-background-radius: 5;" visible="false" />
 
-        <Button fx:id="searchWordButton" disable="true" layoutX="289.0" layoutY="7.0" onAction="#searchWordButtonOnAction" prefHeight="16.0" prefWidth="39.0" text="🔍" />
-        <TextField fx:id="searchWordTargetField" layoutX="172.0" layoutY="7.0" prefHeight="25.0" prefWidth="102.0" promptText="пошук" />
-      <Button layoutX="6.0" layoutY="43.0" mnemonicParsing="false" onAction="#addSongButtonOnAction" prefHeight="26.0" prefWidth="157.0" text="Додати пісню" />
-      <Button fx:id="createPlaylistButton" layoutX="172.0" layoutY="43.0" mnemonicParsing="false" onAction="#addPlaylistButtonOnAction" prefHeight="26.0" prefWidth="157.0" text="Додати плейлист" />
+        <Button fx:id="searchWordButton" disable="true" layoutX="289.0" layoutY="5.0" onAction="#searchWordButtonOnAction" prefHeight="27.0" prefWidth="39.0" styleClass="button1" text="🔍" />
+        <TextField fx:id="searchWordTargetField" layoutX="175.0" layoutY="5.0" prefHeight="27.0" prefWidth="102.0" promptText="пошук" />
+      <Button layoutX="8.0" layoutY="42.0" mnemonicParsing="false" onAction="#addSongButtonOnAction" prefHeight="26.0" prefWidth="157.0" styleClass="button1" text="Додати пісню" />
+      <Button fx:id="createPlaylistButton" layoutX="172.0" layoutY="42.0" mnemonicParsing="false" onAction="#addPlaylistButtonOnAction" prefHeight="26.0" prefWidth="157.0" styleClass="button1" text="Створити плейлист" />
+      <ComboBox fx:id="searchWordTypeComboBox" layoutX="77.0" layoutY="5.0" onAction="#searchTypeComboBoxOnAction" prefHeight="27.0" prefWidth="90.0" styleClass="button1" />
     </Pane>
 
-    <Line endX="-79.0" layoutX="341.0" layoutY="75.0" startX="-79.0" startY="-80.0" stroke="#9e9e9e" strokeWidth="2.0" />
+    <Line endX="-79.0" layoutX="341.0" layoutY="75.0" startX="-79.0" startY="-80.0" stroke="#9e9e9e" strokeWidth="2.0" visible="false" />
 
-    <Pane fx:id="paneWithOtherFunctionality" layoutX="264.0" layoutY="450.0" prefHeight="73.0" prefWidth="329.0">
-        <Button layoutX="4.0" layoutY="43.0" mnemonicParsing="false" onAction="#shuffleButtonOnAction" prefHeight="25.0" prefWidth="65.0" text="Шафл" />
-        <Button layoutX="228.0" layoutY="7.0" mnemonicParsing="false" onAction="#sortWordsButtonOnAction" prefHeight="25.0" prefWidth="96.0" text="Сортувати" />
-        <Button layoutX="79.0" layoutY="8.0" mnemonicParsing="false" onAction="#lastRowsButtonOnAction" prefHeight="25.0" prefWidth="140.0" text="Останні рядки" />
-        <Button layoutX="79.0" layoutY="43.0" mnemonicParsing="false" onAction="#changeRowButtonOnAction" prefHeight="25.0" prefWidth="140.0" text="Замінити рядки" />
-        <Button fx:id="sonnetButton" layoutX="228.0" layoutY="43.0" mnemonicParsing="false" onAction="#isSonnetButtonOnAction" prefHeight="25.0" prefWidth="97.0" text="Тип сонету" />
-      <Label fx:id="otherFunctionalityResultLabel" layoutX="235.0" layoutY="47.0" visible="false" />
+    <Pane fx:id="paneWithOtherFunctionality" layoutX="264.0" layoutY="450.0" prefHeight="76.0" prefWidth="345.0" style="-fx-background-color: #dce9ff;">
+        <Button layoutX="8.0" layoutY="43.0" mnemonicParsing="false" onAction="#shuffleButtonOnAction" prefHeight="25.0" prefWidth="65.0" styleClass="button1" text="Шафл" />
+        <Button layoutX="228.0" layoutY="6.0" mnemonicParsing="false" onAction="#sortWordsButtonOnAction" prefHeight="25.0" prefWidth="96.0" styleClass="button1" text="Сортувати" />
+        <Button layoutX="83.0" layoutY="6.0" mnemonicParsing="false" onAction="#lastRowsButtonOnAction" prefHeight="25.0" prefWidth="135.0" styleClass="button1" text="Останні рядки" />
+        <Button layoutX="83.0" layoutY="43.0" mnemonicParsing="false" onAction="#changeRowButtonOnAction" prefHeight="25.0" prefWidth="135.0" styleClass="button1" text="Замінити рядки" />
+        <Button fx:id="sonnetButton" layoutX="228.0" layoutY="43.0" mnemonicParsing="false" onAction="#isSonnetButtonOnAction" prefHeight="25.0" prefWidth="97.0" styleClass="button1" text="Тип сонету" />
+      <Label fx:id="otherFunctionalityResultLabel" layoutX="232.0" layoutY="43.0" text="Spencerian" visible="false">
+         <font>
+            <Font size="16.0" />
+         </font></Label>
     </Pane>
 
     <Pane fx:id="leftRightButtonsPane" prefHeight="32.0" prefWidth="50.0">
-    <Button fx:id="leftArrowButton" disable="true" layoutX="269.0" layoutY="7.0" mnemonicParsing="false" onAction="#leftArrowButtonOnAction" prefHeight="25.0" prefWidth="28.0" text="⮜" />
-    <Button fx:id="rightArrowButton" layoutX="304.0" layoutY="7.0" mnemonicParsing="false" onAction="#rightArrowButtonOnAction" prefHeight="25.0" prefWidth="28.0" text="⮞" />
+    <Button fx:id="leftArrowButton" disable="true" layoutX="268.0" layoutY="6.0" mnemonicParsing="false" onAction="#leftArrowButtonOnAction" prefHeight="27.0" prefWidth="28.0" styleClass="button1" text="⮜" />
+    <Button fx:id="rightArrowButton" layoutX="303.0" layoutY="6.0" mnemonicParsing="false" onAction="#rightArrowButtonOnAction" prefHeight="27.0" prefWidth="28.0" styleClass="button1" text="⮞" />
     </Pane>
 
     <!--        media player -->
-    <HBox fx:id="mediaPlayerBox" layoutY="360.0" prefHeight="70.0" prefWidth="608.0">
+    <HBox fx:id="mediaPlayerBox" layoutY="360.0" prefHeight="70.0" prefWidth="605.0" style="-fx-background-color: #dce9ff; -fx-border-color: #242b8b; -fx-border-width: 1 0 0 0;">
 
         <!--        current time -->
         <VBox prefHeight="200.0" prefWidth="50.0">
@@ -124,7 +126,7 @@
 
         <!--        buttons -->
         <HBox prefHeight="100.0" prefWidth="150.0">
-            <Button fx:id="previousSongButton" mnemonicParsing="false" onAction="#previousSongButtonOnAction" prefHeight="36.0" prefWidth="45.0" text="⏪">
+            <Button fx:id="previousSongButton" mnemonicParsing="false" onAction="#previousSongButtonOnAction" prefHeight="36.0" prefWidth="45.0" styleClass="button1" text="⏪">
                 <font>
                     <Font size="30.0" />
                 </font>
@@ -136,31 +138,31 @@
                 </HBox.margin>
             </Button>
 
-            <Button fx:id="playButton" mnemonicParsing="false" onAction="#playButtonOnAction" prefHeight="36.0" prefWidth="36.0" text="▶">
+            <Button fx:id="playButton" mnemonicParsing="false" onAction="#playButtonOnAction" prefHeight="36.0" prefWidth="36.0" styleClass="button1" text="▶">
                 <font>
                     <Font size="30.0" />
                 </font>
                 <padding>
-                    <Insets bottom="-5.0" left="-5.0" right="-5.0" top="-5.0" />
+                    <Insets bottom="-6.0" left="-5.0" right="-7.0" top="-4.0" />
                 </padding>
                 <HBox.margin>
                     <Insets left="10.0" top="15.0" />
                 </HBox.margin>
             </Button>
 
-            <Button fx:id="pauseButton" mnemonicParsing="false" onAction="#pauseButtonOnAction" prefHeight="36.0" prefWidth="36.0" text="⏸" visible="false">
+            <Button fx:id="pauseButton" mnemonicParsing="false" onAction="#pauseButtonOnAction" prefHeight="37.2" prefWidth="36.0" styleClass="button1" text="⏸" visible="false">
                 <font>
                     <Font size="25.0" />
                 </font>
                 <padding>
-                    <Insets bottom="-2.0" left="-5.0" right="-5.0" top="-5.0" />
+                    <Insets bottom="-2.0" left="-4.0" right="-5.0" top="-5.0" />
                 </padding>
                 <HBox.margin>
                     <Insets left="-36.0" top="15.0" />
                 </HBox.margin>
             </Button>
 
-            <Button fx:id="nextSongButton" mnemonicParsing="false" onAction="#nextSongButtonOnAction" prefHeight="36.0" prefWidth="45.0" text="⏩">
+            <Button fx:id="nextSongButton" mnemonicParsing="false" onAction="#nextSongButtonOnAction" prefHeight="36.0" prefWidth="45.0" styleClass="button1" text="⏩">
                 <font>
                     <Font size="30.0" />
                 </font>
@@ -174,7 +176,7 @@
         </HBox>
     </HBox>
 
-    <VBox fx:id="searchSongBox" prefHeight="75.0" prefWidth="263.0">
+    <VBox fx:id="searchSongBox" layoutY="1.0" prefHeight="75.0" prefWidth="260.0" style="-fx-background-color: #dce9ff; -fx-border-width: 0 1 0 0; -fx-border-color: #242b8b;">
         <HBox prefHeight="100.0" prefWidth="200.0">
             <Label layoutY="2.0" text="Плейлист:">
                 <font>
@@ -186,7 +188,7 @@
             </Label>
 
             <!--        current playlist -->
-            <ComboBox fx:id="playlistsComboBox" prefHeight="26.0" prefWidth="134.0">
+            <ComboBox fx:id="playlistsComboBox" prefHeight="26.0" prefWidth="134.0" styleClass="button1">
                 <HBox.margin>
                     <Insets left="10.0" top="7.0" />
                 </HBox.margin>
@@ -200,71 +202,75 @@
                 </HBox.margin>
             </TextField>
 
-            <Button fx:id="searchSongCancelButton" mnemonicParsing="false" onAction="#searchSongCancelOnAction" prefWidth="25.0" text="x">
+            <Button fx:id="searchSongCancelButton" mnemonicParsing="false" onAction="#searchSongCancelOnAction" prefWidth="25.0" styleClass="button1" text="x">
                 <font>
-                    <Font name="System Bold" size="12.0" />
+                    <Font name="System Bold" size="18.0" />
                 </font>
                 <HBox.margin>
-                    <Insets left="10.0" top="5.0" />
+                    <Insets left="8.0" top="6.0" />
                 </HBox.margin>
+            <padding>
+               <Insets bottom="-1.0" left="-7.0" right="-7.0" top="-3.0" />
+            </padding>
             </Button>
         </HBox>
     </VBox>
 
-    <Pane fx:id="addSongPane" layoutX="150.0" layoutY="601.0" prefHeight="195.0" prefWidth="338.0" style="-fx-border-color: black; -fx-border-radius: 20; -fx-background-color: #8a9196; -fx-background-radius: 20;">
+    <Pane fx:id="addSongPane" layoutX="150.0" layoutY="601.0" prefHeight="185.0" prefWidth="338.0" style="-fx-border-color: #242b8b; -fx-border-radius: 20; -fx-background-color: #dce9ff; -fx-background-radius: 20;">
         <TextField fx:id="addSongAuthorName" layoutX="179.0" layoutY="10.0" prefHeight="25.0" prefWidth="143.0" promptText="Введіть ім'я автора" />
         <TextField fx:id="addSongSongName" layoutX="179.0" layoutY="50.0" prefHeight="25.0" prefWidth="143.0" promptText="Введіть назву пісні" />
-        <Button fx:id="addSongOKButton" disable="true" layoutX="257.0" layoutY="141.0" mnemonicParsing="false" onAction="#addSongOKButtonOnAction" prefHeight="25.0" prefWidth="65.0" text="OK" />
+        <Button fx:id="addSongOKButton" disable="true" layoutX="257.0" layoutY="141.0" mnemonicParsing="false" onAction="#addSongOKButtonOnAction" prefHeight="25.0" prefWidth="65.0" styleClass="button1" text="OK" />
         <Label fx:id="addSongChooseSongLabel" contentDisplay="TOP" layoutX="180.0" layoutY="111.0" prefHeight="25.0" prefWidth="143.0" text="Виберіть пісню" textFill="RED" wrapText="true" />
-        <TextArea fx:id="addSongTextOfSong" layoutX="10.0" layoutY="10.0" prefHeight="161.0" prefWidth="150.0" promptText="Введіть текст пісні" style="-fx-border-radius: 20; -fx-border-color: black; -fx-background-radius: 20;">
+        <TextArea fx:id="addSongTextOfSong" layoutX="16.0" layoutY="10.0" prefHeight="161.0" prefWidth="150.0" promptText="Введіть текст пісні">
            <padding>
                <Insets left="7.0" top="7.0" />
            </padding>
         </TextArea>
-        <Button layoutX="180.0" layoutY="141.0" mnemonicParsing="false" onAction="#addSongCancelButtonOnAction" prefWidth="65.0" text="Назад" />
-        <Button layoutX="180.0" layoutY="88.0" mnemonicParsing="false" onAction="#addSongChooseFileButtonOnAction" prefHeight="25.0" prefWidth="143.0" text="Вибрати пісню" />
+        <Button layoutX="180.0" layoutY="141.0" mnemonicParsing="false" onAction="#addSongCancelButtonOnAction" prefWidth="65.0" styleClass="button1" text="Назад" />
+        <Button layoutX="180.0" layoutY="88.0" mnemonicParsing="false" onAction="#addSongChooseFileButtonOnAction" prefHeight="25.0" prefWidth="143.0" styleClass="button1" text="Вибрати пісню" />
         <Label fx:id="addSongSuccessLabel" layoutX="181.0" layoutY="173.0" text="Пісню успішно додано" textFill="GREEN" visible="false" />
     </Pane>
 
-    <Pane fx:id="createPlaylistPane" layoutX="211.0" layoutY="869.0" prefHeight="92.0" prefWidth="179.0" style="-fx-border-color: black; -fx-border-radius: 20; -fx-background-color: #8a9196; -fx-background-radius: 20;">
+    <Pane fx:id="createPlaylistPane" layoutX="211.0" layoutY="869.0" prefHeight="92.0" prefWidth="179.0" style="-fx-border-color: #242b8b; -fx-border-radius: 20; -fx-background-color: #dce9ff; -fx-background-radius: 20;">
         <TextField fx:id="createPlaylistNameOfPlaylist" layoutX="13.0" layoutY="13.0" prefHeight="25.0" prefWidth="151.0" promptText="Введіть назву плейлиста" />
-        <Button layoutX="14.0" layoutY="50.0" mnemonicParsing="false" onAction="#addPlaylistCancelButtonOnAction" prefHeight="25.0" prefWidth="70.0" text="Назад" />
-        <Button fx:id="createPlaylistOKButton" disable="true" layoutX="96.0" layoutY="50.0" mnemonicParsing="false" onAction="#addPlaylistOKButtonOnAction" prefHeight="25.0" prefWidth="70.0" text="Створити" />
+        <Button layoutX="14.0" layoutY="50.0" mnemonicParsing="false" onAction="#addPlaylistCancelButtonOnAction" prefHeight="25.0" prefWidth="70.0" styleClass="button1" text="Назад" />
+        <Button fx:id="createPlaylistOKButton" disable="true" layoutX="96.0" layoutY="50.0" mnemonicParsing="false" onAction="#addPlaylistOKButtonOnAction" prefHeight="25.0" prefWidth="70.0" styleClass="button1" text="Створити" />
     </Pane>
 
-   <Line endX="500.0" layoutX="203.0" layoutY="76.0" startX="-230.0" stroke="#9e9e9e" strokeWidth="2.0" />
+   <Line endX="500.0" layoutX="203.0" layoutY="76.0" startX="-230.0" stroke="#9e9e9e" strokeWidth="2.0" visible="false" />
 
-   <Pane fx:id="changeRowPane" layoutX="177.0" layoutY="1085.0" prefHeight="92.0" prefWidth="250.0" style="-fx-border-color: black; -fx-border-radius: 20; -fx-background-radius: 20; -fx-background-color: #8a9196;">
+   <Pane fx:id="changeRowPane" layoutX="177.0" layoutY="1085.0" prefHeight="92.0" prefWidth="250.0" style="-fx-border-color: #242b8b; -fx-border-radius: 20; -fx-background-radius: 20; -fx-background-color: #dce9ff;">
        <TextField fx:id="numberOfCoupletToBeReplaced" layoutX="24.0" layoutY="17.0" prefHeight="25.0" prefWidth="28.0" promptText="id" />
        <TextField fx:id="numberOfRowToBeReplaced" layoutX="59.0" layoutY="17.0" prefHeight="25.0" prefWidth="28.0" promptText="id" />
        <TextField fx:id="newRowToBeInserted" layoutX="94.0" layoutY="17.0" prefHeight="25.0" prefWidth="134.0" promptText="стрічка" />
-       <Button layoutX="24.0" layoutY="53.0" mnemonicParsing="false" onAction="#changeRowCancelButtonOnAction" prefHeight="25.0" prefWidth="96.0" text="Назад" />
-      <Button fx:id="changeRowOKButton" layoutX="132.0" layoutY="53.0" mnemonicParsing="false" onAction="#changeRowOKButtonOnAction" prefHeight="25.0" prefWidth="96.0" text="OK" />
+       <Button layoutX="24.0" layoutY="53.0" mnemonicParsing="false" onAction="#changeRowCancelButtonOnAction" prefHeight="25.0" prefWidth="96.0" styleClass="button1" text="Назад" />
+      <Button fx:id="changeRowOKButton" layoutX="132.0" layoutY="53.0" mnemonicParsing="false" onAction="#changeRowOKButtonOnAction" prefHeight="25.0" prefWidth="96.0" styleClass="button1" text="OK" />
       <Label fx:id="changeRowResultLabel" layoutX="75.0" layoutY="83.0" textFill="WHITE" />
 
    </Pane>
-   <Pane fx:id="deleteSongPane" layoutX="172.0" layoutY="1194.0" prefHeight="92.0" prefWidth="277.0" style="-fx-border-color: black; -fx-border-radius: 20; -fx-background-radius: 20; -fx-background-color: #8a9196;">
+   <Pane fx:id="deleteSongPane" layoutX="172.0" layoutY="1194.0" prefHeight="92.0" prefWidth="277.0" style="-fx-border-color: #242b8b; -fx-border-radius: 20; -fx-background-radius: 20; -fx-background-color: #dce9ff;">
       <children>
-         <Button fx:id="deleteSongCancelButton" layoutX="24.0" layoutY="53.0" mnemonicParsing="false" onAction="#deleteSongCancelButtonOnAction" prefHeight="25.0" prefWidth="109.0" text="Назад" />
-         <Button fx:id="deleteSongOKButton" layoutX="145.0" layoutY="53.0" mnemonicParsing="false" onAction="#deleteSongOKButtonOnAction" prefHeight="25.0" prefWidth="109.0" text="Видалити" />
+         <Button fx:id="deleteSongCancelButton" layoutX="24.0" layoutY="53.0" mnemonicParsing="false" onAction="#deleteSongCancelButtonOnAction" prefHeight="25.0" prefWidth="109.0" styleClass="button1" text="Назад" />
+         <Button fx:id="deleteSongOKButton" layoutX="145.0" layoutY="53.0" mnemonicParsing="false" onAction="#deleteSongOKButtonOnAction" prefHeight="25.0" prefWidth="109.0" styleClass="button1" text="Видалити" />
          <Label fx:id="newRowResultLabel1" layoutX="75.0" layoutY="83.0" textFill="WHITE" />
          <Label fx:id="deleteSongInformLabel" layoutX="24.0" layoutY="10.0" prefWidth="230.0" text="Ви впевнені що хочете видалити поточну пісню з плейлисту Ілля Нацда?" wrapText="true" />
       </children>
    </Pane>
-   <Pane fx:id="songSettingsPane" layoutX="13.0" layoutY="459.0" prefHeight="112.0" prefWidth="125.0" style="-fx-border-color: black; -fx-border-radius: 15; -fx-background-color: #8a9196; -fx-background-radius: 15;">
+   <Pane fx:id="songSettingsPane" layoutX="13.0" layoutY="459.0" prefHeight="112.0" prefWidth="125.0" style="-fx-border-color: #242b8b; -fx-border-radius: 15; -fx-background-color: #dce9ff; -fx-background-radius: 15;">
       <children>
-         <Button fx:id="deleteSongButton" layoutX="9.0" layoutY="42.0" mnemonicParsing="false" onAction="#deleteSongButtonOnAction" prefWidth="105.0" style="-fx-background-color: #8a9196; -fx-border-color: black; -fx-border-radius: 10;" text="Видалити пісню" />
-         <Button fx:id="addSongToPlaylistButton" layoutX="10.0" layoutY="77.0" mnemonicParsing="false" onAction="#addSongToPlaylistButtonOnAction" prefWidth="105.0" style="-fx-background-color: #8a9196; -fx-border-color: black; -fx-border-radius: 10;" text="В плейлист" />
-         <Button fx:id="settingsCancelButton" layoutX="9.0" layoutY="6.0" mnemonicParsing="false" onAction="#settingsCancelButtonOnAction" prefWidth="105.0" style="-fx-background-color: #8a9196; -fx-border-color: black; -fx-border-radius: 10;" text="Назад" />
+         <Button fx:id="deleteSongButton" layoutX="9.0" layoutY="42.0" mnemonicParsing="false" onAction="#deleteSongButtonOnAction" prefWidth="105.0" styleClass="button1" text="Видалити пісню" />
+         <Button fx:id="addSongToPlaylistButton" layoutX="10.0" layoutY="77.0" mnemonicParsing="false" onAction="#addSongToPlaylistButtonOnAction" prefWidth="105.0" styleClass="button1" text="В плейлист" />
+         <Button fx:id="settingsCancelButton" layoutX="9.0" layoutY="6.0" mnemonicParsing="false" onAction="#settingsCancelButtonOnAction" prefWidth="105.0" styleClass="button1" text="Назад" />
       </children></Pane>
-   <Pane fx:id="addSongToPlaylistPane" layoutX="221.0" layoutY="970.0" prefHeight="78.0" prefWidth="179.0" style="-fx-border-color: black; -fx-border-radius: 20; -fx-background-color: #8a9196; -fx-background-radius: 20;">
+   <Pane fx:id="addSongToPlaylistPane" layoutX="221.0" layoutY="970.0" prefHeight="78.0" prefWidth="179.0" style="-fx-border-color: #242b8b; -fx-border-radius: 20; -fx-background-color: #dce9ff; -fx-background-radius: 20;">
       <children>
-         <ComboBox fx:id="addSongToPlaylistComboBox" layoutX="18.0" layoutY="9.0" prefHeight="25.0" prefWidth="143.0" promptText="Вибрати плейлист" />
-         <Button fx:id="addSongToPlaylistCancelButton" layoutX="17.0" layoutY="41.0" mnemonicParsing="false" onAction="#addSongToPlaylistCancelButtonOnAction" prefHeight="25.0" prefWidth="70.0" text="Назад" />
-         <Button fx:id="addSongToPlaylistOKButton" layoutX="91.0" layoutY="41.0" mnemonicParsing="false" onAction="#addSongToPlaylistOKButtonOnAction" prefHeight="25.0" prefWidth="70.0" text="Додати" />
+         <ComboBox fx:id="addSongToPlaylistComboBox" layoutX="18.0" layoutY="9.0" prefHeight="25.0" prefWidth="143.0" promptText="Вибрати плейлист" styleClass="button1" />
+         <Button fx:id="addSongToPlaylistCancelButton" layoutX="17.0" layoutY="41.0" mnemonicParsing="false" onAction="#addSongToPlaylistCancelButtonOnAction" prefHeight="25.0" prefWidth="70.0" styleClass="button1" text="Назад" />
+         <Button fx:id="addSongToPlaylistOKButton" layoutX="91.0" layoutY="41.0" mnemonicParsing="false" onAction="#addSongToPlaylistOKButtonOnAction" prefHeight="25.0" prefWidth="70.0" styleClass="button1" text="Додати" />
          <Label fx:id="addSongToPlaylistErrorLabel" layoutX="19.0" layoutY="70.0" prefWidth="143.0" textFill="RED" wrapText="true" />
       </children>
    </Pane>
+     <ComboBox layoutX="460.0" layoutY="-37.0" prefHeight="25.0" prefWidth="84.0" style="-fx-background-radius: 8; -fx-border-radius: 8; -fx-border-width: 1; -fx-border-color: #242b8b;" styleClass="button1" />
 
 
 

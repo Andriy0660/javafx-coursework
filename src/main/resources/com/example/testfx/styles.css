@@ -4,6 +4,116 @@
     -fx-focus-traversable: false;
 }
 
+/* Styling the slider track */
+.jfx-slider > .track {
+    -fx-background-color: white;
+}
+
+/* Styling the slider thumb */
+.jfx-slider > .thumb {
+    -fx-background-color: #778eb5;
+}
+
+/* Styling the filled track */
+.jfx-slider > .colored-track {
+    -fx-background-color: #778eb5;
+}
+
+/* Styling the animated thumb */
+.jfx-slider > .animated-thumb {
+    visibility: false;
+}
+
+/* Styling the slider value text inside animated thumb */
+.jfx-slider .slider-value {
+    -fx-fill: white;
+    -fx-stroke: white;
+}
+
+
+.myDialog {
+    -fx-background-color: #dce9ff;
+}
+.myDialog:header .header-panel {
+    -fx-background-color: #dce9ff;
+}
+.myDialog > *.label.content{
+    -fx-font-size: 20px;
+}
+
+.myDialog *.header-panel *.label{
+    -fx-font-size: 30px;
+}
+
+.combo-box .list-cell {
+    -fx-text-fill: black;
+    -fx-background-color: transparent;
+    -fx-background-radius: 8;
+}
+.combo-box .list-cell:hover {
+    -fx-text-fill: black;
+    -fx-background-color: #adbedb;
+    -fx-background-radius: 8;
+}
+
+.combo-box .list-view {
+    -fx-background-color: #dce9ff;
+}
+
+
+.button1:hover {
+    -fx-background-color: #adbedb;
+}
+.button1:pressed {
+    -fx-background-color: #778eb5;
+}
+.button1 {
+    -fx-background-color: transparent;
+    -fx-border-color: #242b8b;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-text-fill: #242b8b;
+}
+.heart {
+    -fx-background-color: transparent;
+    -fx-font-size: 35
+}
+.red {
+    -fx-text-fill: red;
+}
+.grey {
+    -fx-text-fill: grey;
+}
+.black {
+    -fx-text-fill: black;
+}
+
+.settingsButton:hover {
+    -fx-background-color: #adbedb;
+}
+.settingsButton:pressed {
+    -fx-background-color: #778eb5;
+}
+.settingsButton {
+    -fx-background-color: #dce9ff;
+    -fx-border-color: #242b8b;
+    -fx-border-radius: 4;
+    -fx-background-radius: 4;
+    -fx-text-fill: #242b8b;
+}
+
+.text-field {
+    -fx-background-radius: 5;
+    -fx-background-color: #e8effa;
+    -fx-border-color: #242b8b;
+    -fx-border-radius: 5;
+}
+.text-area{
+    -fx-background-radius: 5;
+    -fx-background-color: #e8effa;
+    -fx-border-color: #242b8b;
+    -fx-border-radius: 5;
+}
 .text-area .scroll-pane {
     -fx-background-color: transparent;
 }
@@ -12,50 +122,4 @@
 }
 .text-area .scroll-pane .content{
     -fx-background-color: transparent;
-}
-/* Styling the slider track */
-.jfx-slider > .track {
-    -fx-background-color: white;
-}
-
-/* Styling the slider thumb */
-.jfx-slider > .thumb {
-    -fx-background-color: black;
-}
-
-/* Styling the filled track */
-.jfx-slider > .colored-track {
-    -fx-background-color: black;
-}
-
-/* Styling the animated thumb */
-.jfx-slider > .animated-thumb {
-    visibility: false;
-
-    -fx-background-color: green;
-}
-
-/* Styling the slider value text inside animated thumb */
-.jfx-slider .slider-value {
-    -fx-fill: white;
-    -fx-stroke: white;
-}
-/*.textflow {*/
-/*    -fx-background-image: url("istockphoto-670055748-612x612.jpg")*/
-/*}*/
-
-
-
-.myDialog > *.label.content{
-    -fx-font-size: 20px;
-}
-
-.myDialog *.header-panel *.label{
-    -fx-font-size: 30px;
-}
-.red {
-    -fx-text-fill: red;
-}
-.green {
-    -fx-text-fill: green;
 }
